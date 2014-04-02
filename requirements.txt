@@ -1,3 +1,8 @@
 Django==1.6.2
+PyYAML==3.11
 South==0.8.4
+argh==0.24.1
+django-static-precompiler==0.4
+pathtools==0.1.2
+watchdog==0.7.1
 wsgiref==0.1.2

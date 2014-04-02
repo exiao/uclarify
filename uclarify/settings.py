@@ -29,16 +29,21 @@ ALLOWED_HOSTS = []
 
 # Application definition
 
-INSTALLED_APPS = (
+DEFAULT_APPS = (
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+)
+
+THIRD_PARTY_APPS = (
     'static_precompiler',
     'south',
 )
+
+INSTALLED_APPS = DEFAULT_APPS + THIRD_PARTY_APPS
 
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -84,14 +89,21 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 STATIC_ROOT = BASE_DIR + '/static/'
-STATIC_PRECOMPILER_ROOT = BASE_DIR + "/static/"
-STATIC_PRECOMPILER_OUTPUT_DIR = "COMPILED"
+#STATIC_PRECOMPILER_ROOT = BASE_DIR + "/static/"
+#STATIC_PRECOMPILER_OUTPUT_DIR = "COMPILED"
 
 STATIC_PRECOMPILER_COMPILERS = (
   #"static_precompiler.compilers.CoffeeScript",
   #"static_precompiler.compilers.SASS",
   "static_precompiler.compilers.SCSS",
   #"static_precompiler.compilers.LESS",
+)
+
+STATICFILES_FINDERS = (
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    # other finders..
+    'static_precompiler.finders.StaticPrecompilerFinder',
 )
 
 TEMPLATE_DIRS = (
