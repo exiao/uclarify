@@ -43,7 +43,11 @@ THIRD_PARTY_APPS = (
     'south',
 )
 
-INSTALLED_APPS = DEFAULT_APPS + THIRD_PARTY_APPS
+LOCAL_APPS = (
+    'ucapp',
+)
+
+INSTALLED_APPS = DEFAULT_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
