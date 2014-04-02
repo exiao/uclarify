@@ -1,2 +1,7 @@
 body {
   font-family: 'Source Sans Pro', sans-serif; }
+
+.btn.btn-primary {
+  background-color: #2DA1FF; }
+  .btn.btn-primary:hover {
+    background-color: #2892e8; }

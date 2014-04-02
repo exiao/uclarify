@@ -1,0 +1,29 @@
+$footerHeight: 80px;
+
+html,
+body {
+   margin:0;
+   padding:0;
+   height:100%;
+}
+#wrapper {
+   min-height:100%;
+   position:relative;
+}
+#body {
+   padding-bottom:$footerHeight;   /* Height of the footer */
+}
+#footer {
+   position:absolute;
+   bottom:0;
+   width:100%;
+   height:$footerHeight;   /* Height of the footer */
+   background: #383838;
+  line-height: $footerHeight;
+  font-size: 14px;
+  color: white;
+  .element {
+    padding: 0 15px;
+    display: inline-block;
+  }
+}

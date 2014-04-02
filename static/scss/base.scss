@@ -1,3 +1,10 @@
 body {
   font-family: 'Source Sans Pro', sans-serif;
 }
+
+.btn.btn-primary {
+  background-color: #2DA1FF;
+  &:hover {
+    background-color: #2892e8;
+  }
+}

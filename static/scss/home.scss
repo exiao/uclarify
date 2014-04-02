@@ -3,6 +3,13 @@
   background-image: url("/static/images/skyline2.jpg");
   background-size: cover;
   background-position: center 30%;
+
+  .hero-layer {
+    background: rgba(0,0,0, 0.25);
+    min-height: 400px;
+    width: inherit;
+  }
+
   .main-text {
     margin-top: 100px;
     color: white;
@@ -28,6 +35,11 @@
         border-color: #6d6d6d;
         font-size: 20px;
         display: inline-block;
+        &:focus {
+          -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(0,0,0,1);
+          -moz-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(0,0,0,1);
+          box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(0, 0, 0,1);
+        }
       }
       button {
         height: $height;
@@ -35,5 +47,31 @@
         border-radius: 2px;
       }
     }
+  }
+}
+
+.section1 {
+  background: rgba(45,161,255, 0.1);
+  //background-color: #EEEEEE;
+  .columns {
+    padding-top: 70px;
+    padding-bottom: 70px;
+    .title {
+      font-size: 24px;
+      color: #2DA1FF;
+    }
+    .sub-text {
+      font-size: 16px;
+      color: rgb(93, 93, 93);
+    }
+    .description {
+      margin-top: 25px;
+      font-size: 16px;
+      line-height: 26px;
+    }
+  }
+  .col-img {
+    font-size: 120px;
+    line-height: 300px;
   }
 }
