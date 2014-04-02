@@ -2,6 +2,8 @@
 
 function runserver {
     source ./env/bin/activate
+    #windows version below
+    source ./env/Scripts/activate
     echo "yes" | python manage.py collectstatic
     python manage.py validate
     python manage.py syncdb

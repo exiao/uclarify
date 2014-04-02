@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block head %}
+  {% load scss %}
+  <link href="{{ STATIC_URL }}{% scss 'scss/home.scss' %}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+  <div class="hero">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-10 col-md-offset-2">
+          <div class="main-text">Something text here.</div>
+          <div class="sub-text">Revolutionizing some garbage</div>
+          <div class="row search-row">
+            <form>
+              <div class="col-md-6">
+                <input class="form-control" placeholder="Find an Analyst"/>
+              </div>
+              <div class="col-md-2">
+                <button class="btn btn-primary btn-block">Search</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
