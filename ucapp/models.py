@@ -26,7 +26,7 @@ class Review(models.Model):
         (FORMER, 'Former'),
     )
     relationship = models.CharField(choices=RELATIONSHIP_CHOICES,
-                                    default=CURRENT)
+                                    default=CURRENT, max_length=50)
     content = models.TextField()
     last_interaction = models.DateField()
 
@@ -45,11 +45,11 @@ class AnalystReview(Review):
         (WP, WP),
     )
 
-    strength1 = models.CharField(choices=STRENGTH_CHOICES)
-    strength2 = models.CharField(choices=STRENGTH_CHOICES)
-    strength3 = models.CharField(choices=STRENGTH_CHOICES)
-    strength4 = models.CharField(choices=STRENGTH_CHOICES)
-    strength5 = models.CharField(choices=STRENGTH_CHOICES)
+    strength1 = models.CharField(choices=STRENGTH_CHOICES, max_length=50)
+    strength2 = models.CharField(choices=STRENGTH_CHOICES, max_length=50)
+    strength3 = models.CharField(choices=STRENGTH_CHOICES, max_length=50)
+    strength4 = models.CharField(choices=STRENGTH_CHOICES, max_length=50)
+    strength5 = models.CharField(choices=STRENGTH_CHOICES, max_length=50)
     analyst = models.ForeignKey(Analyst)
 
 class Rating(models.Model):
