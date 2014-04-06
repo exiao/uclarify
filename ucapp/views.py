@@ -40,12 +40,12 @@ def ajax_search(request):
 
 def analyst(request):
     analysts = Analyst.objects.all()
-	return render(request, "analyst.html", {'analysts': analysts})
+    return render(request, "analyst.html", {'analysts': analysts})
 
 def analyst_firm(request):
-	analysts = Analyst.objects.all()
-	return render(request, "analyst_firm.html", {'analysts': analysts})
+    analysts = Analyst.objects.all()
+    return render(request, "analyst_firm.html", {'analysts': analysts})
 
 def pr_agency(request):
-	analysts = Analyst.objects.all()
-	return render(request, "pr_agency.html", {'analysts': analysts})
+    analysts = Analyst.objects.all()
+    return render(request, "pr_agency.html", {'analysts': analysts})
