@@ -10,13 +10,9 @@ from haystack.models import SearchResult
 from models import Analyst
 import json
 
-
 # Create your views here.
 def home(request):
     return render(request, "home.html", {})
-
-def analyst(request):
-    return render(request, "analyst.html", {})
 
 def analyst_details(request, analyst_id):
     analyst = Analyst.objects.get(pk=analyst_id)
@@ -42,3 +38,14 @@ def ajax_search(request):
     data = json.dumps(pages)
     return HttpResponse(data, content_type='application/json')
 
+def analyst(request):
+    analysts = Analyst.objects.all()
+	return render(request, "analyst.html", {'analysts': analysts})
+
+def analyst_firm(request):
+	analysts = Analyst.objects.all()
+	return render(request, "analyst_firm.html", {'analysts': analysts})
+
+def pr_agency(request):
+	analysts = Analyst.objects.all()
+	return render(request, "pr_agency.html", {'analysts': analysts})

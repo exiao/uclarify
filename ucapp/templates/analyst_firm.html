@@ -2,7 +2,7 @@
 
 {% block head %}
   {% load scss %}
-  <link href="{{ STATIC_URL }}{% scss 'scss/analyst.scss' %}" rel="stylesheet">
+  <link href="{{ STATIC_URL }}{% scss 'scss/analyst_firm.scss' %}" rel="stylesheet">
 {% endblock %}
 
 {% block content %}
@@ -11,7 +11,7 @@
       <div class="container">
         <div class="row">
           <div class="col-md-10 col-md-offset-2">
-            <div class="main-text">Analyst</div>
+            <div class="main-text">Analyst Firm</div>
             <div class="sub-text">Help you decide which garbage to recycle</div>
             <div class="row search-row">
               <form>
@@ -31,7 +31,7 @@
 
   <div class="section1">
     <div class="container">
-      <div class="contentHeader border">Analyst Reviews</div>
+      <div class="contentHeader border">Analyst Firm Reviews</div>
       {% for analyst in analysts %}
         <div class="row border">
           <div class="col-md-2 columns">
