@@ -1,0 +1,19 @@
+#!/bin/bash
+
+function runserver {
+    ./elasticsearch/bin/service/elasticsearch start
+    source ./env/bin/activate
+    #windows version below
+    source ./env/Scripts/activate
+    echo "yes" | python manage.py collectstatic
+    python manage.py validate
+    python manage.py syncdb
+    python manage.py migrate
+
+    #python manage.py evolve --hint
+    #python manage.py evolve --hint --execute
+    
+    python manage.py runserver
+}
+
+runserver

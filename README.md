@@ -13,3 +13,4 @@ source ./env/bin/activate
 pip install -r requirements.txt
 
 ./dev
+./manage.py schemamigration ucapp --auto
