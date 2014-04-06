@@ -2,7 +2,7 @@
 
 {% block head %}
   {% load scss %}
-  <link href="{{ STATIC_URL }}{% scss 'scss/home.scss' %}" rel="stylesheet">
+  <link href="{{ STATIC_URL }}{% scss 'scss/analyst.scss' %}" rel="stylesheet">
 {% endblock %}
 
 {% block content %}
@@ -31,23 +31,25 @@
 
   <div class="section1">
     <div class="container">
-        <div class="row">
-          <div class="col-md-5 col-md-offset-1 columns">
-            <div class="title">Need an easy way to do garbage?</div>
-            <div class="sub-text">Revolutionizing some garbage your way.</div>
-            <div class="description">
-              Whether you want to fill this paragraph with some text like I'm doing right now,
-              this place is perfect to describe some features or anything you want. I like to eat burgers and fries
-              together.
-            </div>
-
+      <div class="contentHeader border">Analyst Reviews</div>
+      {% for analyst in analysts %}
+        <div class="row border">
+          <div class="col-md-2 columns">
+            Insert Picture
           </div>
-          <div class="col-md-6 col-img">
-            <center>
-            <i class="fa fa-trash-o"></i>
-            </center>
+
+          <div class="col-md-3 columns">
+            <div class="name">{{analyst.first_name}} {{analyst.last_name}}</div>
+            <div class="rating"></div>
+            <div class="firm">{{analyst.analyst_firm.name}}</div>
+          </div>
+
+          <div class="col-md-7 columns">
+            <div class="review">" Doge is a great garbage recycler! "</div>
           </div>
         </div>
-      </div>
+      {% endfor %}
+      <div class="seeMore">See All Analyst Reviews</div>
+    </div>
   </div>
 {% endblock %}
