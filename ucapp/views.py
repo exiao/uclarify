@@ -10,10 +10,10 @@ def analyst(request):
 	analysts = Analyst.objects.all()
 	return render_to_response("analyst.html", {'analysts': analysts}, context_instance=RequestContext(request))
 
-def analystFirm(request):
+def analyst_firm(request):
 	analysts = Analyst.objects.all()
-	return render_to_response("analyst-firm.html", {'analysts': analysts}, context_instance=RequestContext(request))
+	return render_to_response("analyst_firm.html", {'analysts': analysts}, context_instance=RequestContext(request))
 
-def prAgency(request):
+def pr_agency(request):
 	analysts = Analyst.objects.all()
-	return render_to_response("pr-agency.html", {'analysts': analysts}, context_instance=RequestContext(request))
+	return render_to_response("pr_agency.html", {'analysts': analysts}, context_instance=RequestContext(request))
