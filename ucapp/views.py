@@ -9,3 +9,11 @@ def home(request):
 def analyst(request):
 	analysts = Analyst.objects.all()
 	return render_to_response("analyst.html", {'analysts': analysts}, context_instance=RequestContext(request))
+
+def analystFirm(request):
+	analysts = Analyst.objects.all()
+	return render_to_response("analyst-firm.html", {'analysts': analysts}, context_instance=RequestContext(request))
+
+def prAgency(request):
+	analysts = Analyst.objects.all()
+	return render_to_response("pr-agency.html", {'analysts': analysts}, context_instance=RequestContext(request))

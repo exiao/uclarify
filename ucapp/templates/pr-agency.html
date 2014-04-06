@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% block head %}
+  {% load scss %}
+  <link href="{{ STATIC_URL }}{% scss 'scss/pr-agency.scss' %}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+  <div class="hero">
+    <div class="hero-layer">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-10 col-md-offset-2">
+            <div class="main-text">PR Agency</div>
+            <div class="sub-text">Help you decide which garbage to recycle</div>
+            <div class="row search-row">
+              <form>
+                <div class="col-md-6">
+                  <input class="form-control" placeholder="Find an Analyst"/>
+                </div>
+                <div class="col-md-2">
+                  <button class="btn btn-primary btn-block">Search</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section1">
+    <div class="container">
+      <div class="contentHeader border">PR Agency Reviews</div>
+      {% for analyst in analysts %}
+        <div class="row border">
+          <div class="col-md-2 columns">
+            Insert Picture
+          </div>
+
+          <div class="col-md-3 columns">
+            <div class="name">{{analyst.first_name}} {{analyst.last_name}}</div>
+            <div class="rating"></div>
+            <div class="firm">{{analyst.analyst_firm.name}}</div>
+          </div>
+
+          <div class="col-md-7 columns">
+            <div class="review">" Doge is a great garbage recycler! "</div>
+          </div>
+        </div>
+      {% endfor %}
+      <div class="seeMore">See All Analyst Reviews</div>
+    </div>
+  </div>
+{% endblock %}
