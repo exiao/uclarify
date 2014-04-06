@@ -41,6 +41,7 @@ DEFAULT_APPS = (
 THIRD_PARTY_APPS = (
     'static_precompiler',
     'south',
+    'haystack',
 )
 
 LOCAL_APPS = (
@@ -99,7 +100,7 @@ STATIC_ROOT = BASE_DIR + '/static/'
 STATIC_PRECOMPILER_COMPILERS = (
   #"static_precompiler.compilers.CoffeeScript",
   #"static_precompiler.compilers.SASS",
-  "static_precompiler.compilers.SCSS",
+  'static_precompiler.compilers.SCSS',
   #"static_precompiler.compilers.LESS",
 )
 
@@ -111,9 +112,16 @@ STATICFILES_FINDERS = (
 )
 
 TEMPLATE_DIRS = (
-    BASE_DIR + "/templates/",
+    BASE_DIR + '/templates/',
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
 )
 
+HAYSTACK_CONNECTIONS = {
+    'default': {
+        'ENGINE': 'haystack.backends.elasticsearch_backend.ElasticsearchSearchEngine',
+        'URL': 'http://127.0.0.1:9200/',
+        'INDEX_NAME': 'haystack_uclarify',
+    },
+}
