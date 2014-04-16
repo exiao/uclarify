@@ -28,7 +28,6 @@ else
     JAVA=`which java`
 fi
 
-# this is a poor mans getopt replacement
 # real getopt cannot be used because we need to hand options over to the PluginManager
 while [ $# -gt 0 ]; do
   case $1 in
@@ -47,4 +46,3 @@ while [ $# -gt 0 ]; do
 done
 
 exec $JAVA $JAVA_OPTS -Xmx64m -Xms16m -Delasticsearch -Des.path.home="$ES_HOME" $properties -cp "$ES_HOME/lib/*" org.elasticsearch.plugins.PluginManager $args
-

@@ -1,7 +1,7 @@
 #!/bin/bash
 
 function runserver {
-    ./elasticsearch/bin/service/elasticsearch start
+    ./elasticsearch/bin/elasticsearch start
     source ./env/bin/activate
     #windows version below
     source ./env/Scripts/activate
