@@ -22,8 +22,8 @@ def ajax_search(request):
     #if request.is_ajax():
     search_data = {}
     found_entries = SearchQuerySet()
-    if ('searchText' in request.GET) and request.GET['searchText'].strip():
-        query_string = request.GET['searchText']
+    if ('query' in request.GET) and request.GET['query'].strip():
+        query_string = request.GET['query']
         found_entries = SearchQuerySet().filter(
             content=AutoQuery(query_string)
         )
