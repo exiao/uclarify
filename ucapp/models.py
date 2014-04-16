@@ -4,11 +4,14 @@ from django.db import models
 class AnalystFirm(models.Model):
     name = models.CharField(max_length=100)
     description = models.TextField()
+    def __unicode__(self):
+        return self.name
 
 class Analyst(models.Model):
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
     analyst_firm = models.ForeignKey(AnalystFirm)
+    years_experience = models.IntegerField(default=1)
 
     @property
     def full_name(self):

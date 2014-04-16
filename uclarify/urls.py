@@ -12,4 +12,6 @@ urlpatterns = patterns('ucapp.views',
     url(r'^pr-agency/$', 'pr_agency', name='pr_agency'),
     url(r'^search/$', 'search', name='search'),
     url(r'^admin/', include(admin.site.urls)),
+    #url(r'^search/', include('haystack.urls')),
+    url(r'^search/', 'ajax_search', name='ajax_search'),
 )
