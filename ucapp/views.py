@@ -38,10 +38,12 @@ def ajax_search(request):
 
     # Creating HTML Templates for each search
     analyst_page = render(request, 'search/analysts.html', search_data)
-    analyst_firm_page = render(request, 'ajax_analyst_firm.html', search_data)
+    analyst_firm_page = render(request, 'search/analyst_firms.html', search_data)
 
     pages['analyst_page'] = str(analyst_page.content)
     pages['analyst_firm_page'] = str(analyst_firm_page.content)
+    pages['analyst_number'] = analysts.count()
+    pages['analyst_firm_number'] = analyst_firms.count()
 
     data = json.dumps(pages)
     return HttpResponse(data, content_type='application/json')
@@ -51,7 +53,10 @@ def analyst(request):
     return render(request, "analyst.html", {'analysts': analysts})
 
 def search(request):
-    return render(request, "search/search.html", {})
+    data = {}
+    if "query" in request.GET:
+        data["query"] = request.GET["query"];
+    return render(request, "search/search.html", data)
 
 def analyst_firm(request):
     analysts = Analyst.objects.all()

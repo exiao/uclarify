@@ -1,58 +1,75 @@
 {% extends "base.html" %}
 
+{% block title %}uClarify - Search{% endblock %}
+
 {% block head %}
   {% load scss %}
   <link href="{{ STATIC_URL }}{% scss 'scss/search.scss' %}" rel="stylesheet">
 {% endblock %}
 
 {% block javascript %}
-    <script src="{{ STATIC_URL }}js/search.js"></script>
+  <script src="{{ STATIC_URL }}js/search.js"></script>
 {% endblock %}
 
 {% block content %}
-<div class="container">
+  <div class="container">
     <div id="type-row" class="row">
-        <div class="col-md-12">
-            <div class="type-btn active">
-                <i class="fa fa-user fa-lg"></i>
-                Analysts (7)
-            </div>
-            <div class="type-btn">
-                <i class="fa fa-building-o fa-lg"></i>
-                Analyst Firms (2)
-            </div>
-            <div class="type-btn">
-                <i class="fa fa-bullhorn fa-lg"></i>
-                PR Firms (1)
-            </div>
+      <div class="col-md-12">
+        <div id="analyst-type" class="type-btn active">
+          <i class="fa fa-user fa-lg"></i>
+          Analysts (<span class="analyst-number"></span>)
         </div>
+        <div id="analyst-firm-type" class="type-btn">
+          <i class="fa fa-building-o fa-lg"></i>
+          Analyst Firms (<span class="analyst-firm-number"></span>)
+        </div>
+        <div class="type-btn">
+          <i class="fa fa-bullhorn fa-lg"></i>
+          PR Firms (1)
+        </div>
+      </div>
     </div>
 
     <div class="row">
-        <div class="col-md-12">
-            <div id="results-wrapper">
-                <div class="col-md-3 same-col side-col">
-                    {% include "search/sidebar.html" %}
+      <div class="col-md-12">
+        <div id="results-wrapper">
+          <div class="col-md-3 same-col side-col">
+            {% include "search/sidebar.html" %}
+          </div>
+          <div class="col-md-9 same-col results-col">
+            <div id="results-header">
+              <div id="sort" class="pull-left">
+                <span id="title">
+                    SORT BY
+                </span>
+
+                <div class="sort-option">
+                  Best Rating
                 </div>
-                <div class="col-md-9 same-col results-col">
-                    <div id="sort">
-                        <span id="title">
-                            SORT BY
-                        </span>
-                        <div class="sort-option">
-                            Best Rating
-                        </div>
-                        <div class="sort-option">
-                            Most Reviewed
-                        </div>
-                    </div>
-                    <div id="analysts">
-                    {% include "search/analysts_stub.html" %}
-                    </div>
+                <div class="sort-option">
+                  Most Reviewed
                 </div>
+              </div>
+              <div id="results-for" class="pull-right">
+                Search results for "<span id="results-for-query"></span>"
+              </div>
             </div>
+
+            <div id="analysts" class="type analyst-type">
+              <!-- this gets injected from js -->
+            </div>
+
+            <div id="analyst-firms" class="type analyst-firm-type">
+              <!-- this gets injected from js -->
+            </div>
+
+            <div id="loading-screen"></div>
+          </div>
         </div>
+      </div>
 
     </div>
-</div>
+  </div>
+
+  <div id="ajax-loader"><img src="{{ STATIC_URL }}images/ajax-loader.gif"/></div>
 {% endblock %}

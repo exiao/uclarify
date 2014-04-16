@@ -14,9 +14,9 @@
             <div class="main-text">Discover your marketing mojo</div>
             <div class="sub-text">Find the best marketing solutions for your company</div>
             <div class="row search-row">
-              <form>
+              <form action="{% url "search" %}">
                 <div class="col-md-6">
-                  <input class="form-control" placeholder="Find an Analyst"/>
+                  <input name="query" class="form-control" placeholder="Find an Analyst, Analyst Firm, etc."/>
                 </div>
                 <div class="col-md-2">
                   <button class="btn btn-primary btn-block">Search</button>
@@ -31,22 +31,23 @@
 
   <div class="section1">
     <div class="container">
-        <div class="row">
-          <div class="col-md-5 col-md-offset-1 columns">
-            <div class="title">Take your marketing to the next level</div>
-            <!--div class="sub-text">Revolutionizing some garbage your way.</div-->
-            <div class="description">
-              Companies use reviews on uClarify to raise their PR above their competitors. Leverage the marketing community
-                to find the best one for your business.
-            </div>
+      <div class="row">
+        <div class="col-md-5 col-md-offset-1 columns">
+          <div class="title">Take your marketing to the next level</div>
+          <!--div class="sub-text">Revolutionizing some garbage your way.</div-->
+          <div class="description">
+            Companies use reviews on uClarify to raise their PR above their competitors. Leverage the marketing
+            community
+            to find the best one for your business.
+          </div>
 
-          </div>
-          <div class="col-md-6 col-img">
-            <center>
+        </div>
+        <div class="col-md-6 col-img">
+          <center>
             <i class="fa fa-comment-o"></i>
-            </center>
-          </div>
+          </center>
         </div>
       </div>
+    </div>
   </div>
 {% endblock %}
