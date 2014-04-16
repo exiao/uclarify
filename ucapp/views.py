@@ -29,6 +29,7 @@ def ajax_search(request):
         )
     search_data['found_entries'] = found_entries
 
+    print(found_entries)
     pages = {}
     analyst_page = render(request, 'ajax_analyst.html', search_data)
     #analyst_firm_page = render(request, 'ajax_analyst_firm.html', search_data)
@@ -40,18 +41,18 @@ def ajax_search(request):
 
 def analyst(request):
     analysts = Analyst.objects.all()
-    return render("analyst.html", {'analysts': analysts})
+    return render(request, "analyst.html", {'analysts': analysts})
 
 def search(request):
-    return render("search/search.html", {})
+    return render(request, "search/search.html", {})
 
 def analyst_firm(request):
     analysts = Analyst.objects.all()
-    return render("analyst_firm.html", {'analysts': analysts})
+    return render(request, "analyst_firm.html", {'analysts': analysts})
 
 def pr_agency(request):
     analysts = Analyst.objects.all()
-    return render("pr_agency.html", {'analysts': analysts})
+    return render(request, "pr_agency.html", {'analysts': analysts})
 
 def analyst_firm(request):
     analysts = Analyst.objects.all()
