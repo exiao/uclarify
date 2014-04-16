@@ -37,7 +37,7 @@ def ajax_search(request):
     pages = {}
 
     # Creating HTML Templates for each search
-    analyst_page = render(request, 'ajax_analyst.html', search_data)
+    analyst_page = render(request, 'search/analysts.html', search_data)
     analyst_firm_page = render(request, 'ajax_analyst_firm.html', search_data)
 
     pages['analyst_page'] = str(analyst_page.content)

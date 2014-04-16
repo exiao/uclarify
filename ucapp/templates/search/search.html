@@ -5,6 +5,10 @@
   <link href="{{ STATIC_URL }}{% scss 'scss/search.scss' %}" rel="stylesheet">
 {% endblock %}
 
+{% block javascript %}
+    <script src="{{ STATIC_URL }}js/search.js"></script>
+{% endblock %}
+
 {% block content %}
 <div class="container">
     <div id="type-row" class="row">
@@ -43,7 +47,7 @@
                         </div>
                     </div>
                     <div id="analysts">
-                    {% include "search/analysts.html" %}
+                    {% include "search/analysts_stub.html" %}
                     </div>
                 </div>
             </div>
