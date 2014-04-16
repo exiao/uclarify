@@ -1,0 +1,126 @@
+#type-row {
+  margin-top: 30px;
+  .type-btn {
+    padding: 15px 30px;
+    margin-right: 20px;
+    border: 1px solid #d0d0d0;
+    display: inline-block;
+    font-size: 16px;
+    font-weight: 600;
+    -webkit-box-shadow:  0px 2px 2px rgba(0, 0, 0, 0.2);
+    -moz-box-shadow:  0px 2px 2px rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.2);
+    background-color: white;
+    color: rgb(88, 88, 88);
+    &:last-child {
+      margin-right: 0;
+    }
+    &:hover {
+      cursor: pointer;
+      border: 1px solid #a6a6a6;
+      color: rgb(51, 51, 51);
+    }
+    &.active {
+      border: 1px solid rgb(107, 211, 255);
+      -webkit-box-shadow:  0px 0px 2px rgb(107, 211, 255);
+      -moz-box-shadow:  0px 0px 2px rgb(107, 211, 255);
+      box-shadow: 0px 2px 2px rgba(107, 211, 255, 0.4);
+    }
+    .fa {
+      display: inline-block;
+      margin-right: 7px;
+    }
+  }
+}
+
+#results-wrapper {
+  overflow: hidden; /* overflow hidden needed for bstrap col same heights */
+  margin-top: 30px;
+  margin-bottom: 30px;
+  border: 1px solid rgb(220, 220, 220);
+  border-radius: 2px;
+  .same-col {
+    /* this margin stuff is needed for same height bootstrap cols*/
+    margin-bottom: -99999px;
+    padding-bottom: 99999px;
+    &.side-col {
+      border-right: 1px solid rgb(220, 220, 220);
+      background-color: rgb(248, 248, 248);
+    }
+  }
+  #sidebar {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    padding-top: 10px;
+    padding-bottom: 15px;
+    #refine-results {
+      font-size: 18px;
+      font-weight: 600;
+    }
+    #specialization {
+      select {
+        margin-top: 10px;
+      }
+    }
+    .section {
+      margin-top: 15px;
+      .title {
+        font-size: 13px;
+        font-weight: 600;
+        text-transform: uppercase;
+      }
+    }
+  }
+
+  #sort {
+    margin-top: 10px;
+    margin-bottom: 20px;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    #title {
+      font-size: 12px;
+      font-weight: 600;
+    }
+    .sort-option {
+      font-size: 12px;
+      display: inline-block;
+      margin-left: 10px;
+      color: #428bca;
+      &:hover {
+        cursor: pointer;
+        text-decoration: underline;
+      }
+    }
+  }
+
+  #analysts {
+    .analyst {
+      margin-bottom: 20px;
+      img {
+        height: 100px;
+        width: 100px;
+      }
+      .description-col {
+        margin-left: -20px;
+        .name {
+          color: rgb(45, 161, 255);
+          font-size: 20px;
+        }
+        .company {
+          margin-top: 5px;
+          font-size: 16px;
+        }
+      }
+      .review-col {
+        .recent-title {
+          font-weight: 600;
+          font-size: 16px;
+        }
+      }
+    } /* end .analyst */
+
+    .divider {
+      margin-bottom: 20px;
+      border-bottom: 1px solid rgb(220, 220, 220);
+    }
+
+  } /*end #analysts */
+}

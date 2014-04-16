@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block head %}
+  {% load scss %}
+  <link href="{{ STATIC_URL }}{% scss 'scss/search.scss' %}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div id="type-row" class="row">
+        <div class="col-md-12">
+            <div class="type-btn active">
+                <i class="fa fa-user fa-lg"></i>
+                Analysts (7)
+            </div>
+            <div class="type-btn">
+                <i class="fa fa-building-o fa-lg"></i>
+                Analyst Firms (2)
+            </div>
+            <div class="type-btn">
+                <i class="fa fa-bullhorn fa-lg"></i>
+                PR Firms (1)
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div id="results-wrapper">
+                <div class="col-md-3 same-col side-col">
+                    {% include "search/sidebar.html" %}
+                </div>
+                <div class="col-md-9 same-col results-col">
+                    <div id="sort">
+                        <span id="title">
+                            SORT BY
+                        </span>
+                        <div class="sort-option">
+                            Best Rating
+                        </div>
+                        <div class="sort-option">
+                            Most Reviewed
+                        </div>
+                    </div>
+                    <div id="analysts">
+                    {% include "search/analysts.html" %}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+{% endblock %}
