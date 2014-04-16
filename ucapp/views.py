@@ -7,7 +7,7 @@ from haystack.query import SearchQuerySet
 from haystack.inputs import AutoQuery, Clean
 from haystack.models import SearchResult
 
-from models import Analyst
+from models import Analyst, AnalystFirm
 import json
 
 # Create your views here.
@@ -27,15 +27,22 @@ def ajax_search(request):
         found_entries = SearchQuerySet().filter(
             content=AutoQuery(query_string)
         )
-    search_data['found_entries'] = found_entries
+    # Sorting Results by Model
+    analysts = found_entries.models(Analyst)
+    analyst_firms = found_entries.models(AnalystFirm)
 
-    print(found_entries)
+    search_data['analysts'] = analysts
+    search_data['analyst_firms'] = analyst_firms
+
     pages = {}
+
+    # Creating HTML Templates for each search
     analyst_page = render(request, 'ajax_analyst.html', search_data)
-    #analyst_firm_page = render(request, 'ajax_analyst_firm.html', search_data)
-    print(analyst_page)
+    analyst_firm_page = render(request, 'ajax_analyst_firm.html', search_data)
+
     pages['analyst_page'] = str(analyst_page.content)
-    #pages['analyst_firm_page'] = analyst_firm_page
+    pages['analyst_firm_page'] = str(analyst_firm_page.content)
+
     data = json.dumps(pages)
     return HttpResponse(data, content_type='application/json')
 

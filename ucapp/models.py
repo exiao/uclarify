@@ -10,7 +10,7 @@ class AnalystFirm(models.Model):
 class Analyst(models.Model):
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
-    analyst_firm = models.ForeignKey(AnalystFirm)
+    analyst_firm = models.ForeignKey(AnalystFirm, related_name='analysts')
     years_experience = models.IntegerField(default=1)
 
     @property
