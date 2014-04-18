@@ -1,12 +1,22 @@
 Django==1.6.2
+Pillow==2.4.0
 PyYAML==3.11
 South==0.8.4
 argh==0.24.1
 django-haystack==2.1.0
+django-registration==1.0
+-e git://github.com/bitmazk/django-registration-email@ab5276dd70eb29a21b02eb65ede7c0fb28853663#egg=django_registration_email-master
+django-resized==0.2.4
 django-static-precompiler==0.4
+httplib2==0.9
+oauth2==1.5.211
+oauthlib==0.6.1
 pathtools==0.1.2
 pyelasticsearch==0.6.1
+python-openid==2.2.5
+python-social-auth==0.1.23
 requests==2.2.1
+requests-oauthlib==0.4.0
 simplejson==3.4.0
 six==1.6.1
 wsgiref==0.1.2

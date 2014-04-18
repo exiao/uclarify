@@ -57,7 +57,7 @@ class AnalystReview(Review):
 
 class Rating(models.Model):
     SCORE_CHOICES = zip( range(1,6), range(1,6) )
-    stars = models.IntegerField(choices=SCORE_CHOICES, blank=True)
+    stars = models.IntegerField(choices=SCORE_CHOICES)
     text = models.CharField(max_length=200)
 
 class AnalystRating(Rating):

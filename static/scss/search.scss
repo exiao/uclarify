@@ -39,7 +39,7 @@ body {
 }
 
 #results-wrapper {
-  $results-border: 2px solid #d0d8dc;
+  $results-border: 3px solid #d0d8dc;
   overflow: hidden; /* overflow hidden needed for bstrap col same heights */
   margin-top: 30px;
   margin-bottom: 30px;
@@ -62,7 +62,7 @@ body {
     min-height: 250px;
     input, select {
       border-radius: 2px;
-      border: 2px solid #d0d8dc;
+      border: 3px solid #d0d8dc;
       &:focus, &:hover {
         $input-box-shadow: none;
         -webkit-box-shadow:  $input-box-shadow;

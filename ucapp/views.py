@@ -1,6 +1,5 @@
 from django.core import serializers
 from django.shortcuts import render
-from django.template import RequestContext
 from django.http import HttpResponse
 
 from haystack.query import SearchQuerySet
@@ -74,3 +73,6 @@ def analyst_firm(request):
 def pr_agency(request):
     analysts = Analyst.objects.all()
     return render(request, "pr_agency.html", {'analysts': analysts})
+
+def write(request):
+    return render(request, "review_analyst/review_analyst.html", {})
