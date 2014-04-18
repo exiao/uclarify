@@ -32,8 +32,13 @@
 
 
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="#">Login</a></li>
-        <li><a href="#">Sign Up</a></li>
+        {% if user and not user.is_anonymous %}
+            <li><a href="#">Profile</a></li>
+            <li><a href="{% url 'logout' %}?next={{ request.path }}">Logout</a></li>
+        {% else %}
+          <li><a href="#">Login</a></li>
+          <li><a href="{% url "social:begin" "linkedin" %}">Sign Up</a></li>
+        {% endif %}
       </ul>
     </div>
 
