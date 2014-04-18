@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+
+{% block title %}uClarify - Search{% endblock %}
+
+{% block head %}
+  {% load scss %}
+  <link href="{{ STATIC_URL }}{% scss 'scss/review_analyst.scss' %}" rel="stylesheet">
+  <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+{% endblock %}
+
+{% block content %}
+  <div id="header">
+    <div id="title">Write a Review</div>
+    <div id="sub">Provide some feedback to the community.</div>
+  </div>
+
+  <div class="container">
+    <div id="profile">
+      <div id="photo">
+        <img src="http://thelightboxdesigns.com/wp-content/uploads/2013/12/Business-Guy-Cropped.jpg" class="img-circle">
+      </div>
+      <div id="info">
+        <div id="name">John David</div>
+        <div id="company">Douche and co</div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-4 section-label">
+        <div class="title">Rating</div>
+        <div class="description">How would you rate this analyst?</div>
+      </div>
+      <div class="col-md-8 section-input">
+        {% include "review_analyst/rating-table.html" %}
+      </div>
+    </div>
+
+    <hr>
+
+    <div class="row">
+      <div class="col-md-4 section-label">
+        <div class="title">Feedback</div>
+        <div class="description">Provide a description of your experience.</div>
+      </div>
+      <div class="col-md-8 section-input">
+        <textarea class="form-control" rows="5" placeholder="Comments about your experience."></textarea>
+      </div>
+    </div>
+
+    <div class="spacing"></div>
+
+  </div>
+{% endblock %}
+
+{% block javascript %}
+  <script type="text/javascript">
+    var STATIC_URL = "{{ STATIC_URL }}";
+  </script>
+
+  <script type="text/javascript" src="{{ STATIC_URL }}plugins/raty-2.5.2/lib/jquery.raty.min.js"></script>
+  <script type="text/javascript" src="{{ STATIC_URL }}js/review_analyst.js"></script>
+{% endblock %}

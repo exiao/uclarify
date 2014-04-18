@@ -1,0 +1,25 @@
+{% if analyst_firms %}
+  {% for analyst_firm in analyst_firms %}
+    <div class="row element">
+      <div class="col-md-2">
+        <img src="http://bit.ly/NIhdeX" class="img-rounded">
+      </div>
+      <div class="col-md-3 description-col">
+        <div class="name">{{ analyst_firm.name }}</div>
+        <div class="rating">insert rating</div>
+      </div>
+      <div class="col-md-7 review-col">
+        <div class="description-title">Description</div>
+        <div class="description">
+          {{ analyst_firm.description|truncatechars:280 }}
+        </div>
+      </div>
+    </div>
+
+    {% if not forloop.last %}
+      <div class="divider"></div>
+    {% endif %}
+  {% endfor %}
+{% else %}
+  <div class="no-results">Sorry, no results were found.</div>
+{% endif %}

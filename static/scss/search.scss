@@ -1,3 +1,8 @@
+body {
+  //background-color: #FAFDFE;
+  background-color: #F6F6F6;
+}
+
 #type-row {
   margin-top: 30px;
   .type-btn {
@@ -7,9 +12,9 @@
     display: inline-block;
     font-size: 16px;
     font-weight: 600;
-    -webkit-box-shadow:  0px 2px 2px rgba(0, 0, 0, 0.2);
-    -moz-box-shadow:  0px 2px 2px rgba(0, 0, 0, 0.2);
-    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.2);
+    -webkit-box-shadow:  0px 1px 1px rgba(0, 0, 0, 0.2);
+    -moz-box-shadow:  0px 1px 1px rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.2);
     background-color: white;
     color: rgb(88, 88, 88);
     &:last-child {
@@ -22,9 +27,9 @@
     }
     &.active {
       border: 1px solid rgb(107, 211, 255);
-      -webkit-box-shadow:  0px 0px 2px rgb(107, 211, 255);
-      -moz-box-shadow:  0px 0px 2px rgb(107, 211, 255);
-      box-shadow: 0px 2px 2px rgba(107, 211, 255, 0.4);
+      -webkit-box-shadow:  0px 0px 2px rgba(107, 211, 255, 0.4);
+      -moz-box-shadow:  0px 0px 2px rgba(107, 211, 255, 0.4);
+      box-shadow: 0px 0px 2px rgba(107, 211, 255, 0.4);
     }
     .fa {
       display: inline-block;
@@ -34,93 +39,160 @@
 }
 
 #results-wrapper {
+  $results-border: 3px solid #d0d8dc;
   overflow: hidden; /* overflow hidden needed for bstrap col same heights */
   margin-top: 30px;
   margin-bottom: 30px;
-  border: 1px solid rgb(220, 220, 220);
+  border: $results-border;
   border-radius: 2px;
+  background-color: white;
   .same-col {
     /* this margin stuff is needed for same height bootstrap cols*/
     margin-bottom: -99999px;
     padding-bottom: 99999px;
     &.side-col {
-      border-right: 1px solid rgb(220, 220, 220);
-      background-color: rgb(248, 248, 248);
+      border-right: $results-border;
+      background-color: #FBFBFB;
     }
   }
   #sidebar {
-    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    //font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
     padding-top: 10px;
     padding-bottom: 15px;
+    min-height: 250px;
+    input, select {
+      border-radius: 2px;
+      border: 3px solid #d0d8dc;
+      &:focus, &:hover {
+        $input-box-shadow: none;
+        -webkit-box-shadow:  $input-box-shadow;
+        -moz-box-shadow:  $input-box-shadow;
+        box-shadow: $input-box-shadow;
+        border-color: rgb(107, 211, 255);
+      }
+    }
     #refine-results {
       font-size: 18px;
       font-weight: 600;
+      color: #2da1ff;
+      text-transform: uppercase;
     }
     #specialization {
       select {
-        margin-top: 10px;
+        margin-top: 5px;
       }
     }
     .section {
       margin-top: 15px;
       .title {
-        font-size: 13px;
+        color: #2da1ff;
+        font-size: 14px;
         font-weight: 600;
         text-transform: uppercase;
       }
     }
-  }
-
-  #sort {
-    margin-top: 10px;
-    margin-bottom: 20px;
-    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    #title {
-      font-size: 12px;
-      font-weight: 600;
-    }
-    .sort-option {
-      font-size: 12px;
-      display: inline-block;
-      margin-left: 10px;
-      color: #428bca;
+    #cancel-query {
+      float: right;
+      margin-top: -25px;
+      margin-right: 10px;
+      font-size: 18px;
+      cursor: pointer;
+      display: none;
       &:hover {
-        cursor: pointer;
-        text-decoration: underline;
+        color: #2da1ff;
       }
     }
   }
 
-  #analysts {
-    .analyst {
+  #results-header{
+    position: relative;
+    overflow: hidden;
+    #sort {
+      margin-top: 10px;
       margin-bottom: 20px;
-      img {
-        height: 100px;
-        width: 100px;
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      #title {
+        font-size: 12px;
+        font-weight: bold;
       }
-      .description-col {
-        margin-left: -20px;
-        .name {
-          color: rgb(45, 161, 255);
-          font-size: 20px;
-        }
-        .company {
-          margin-top: 5px;
-          font-size: 16px;
-        }
-      }
-      .review-col {
-        .recent-title {
-          font-weight: 600;
-          font-size: 16px;
+      .sort-option {
+        font-size: 12px;
+        display: inline-block;
+        margin-left: 10px;
+        color: #428bca;
+        &:hover {
+          cursor: pointer;
+          text-decoration: underline;
         }
       }
-    } /* end .analyst */
-
-    .divider {
-      margin-bottom: 20px;
-      border-bottom: 1px solid rgb(220, 220, 220);
     }
+    #results-for {
+      margin-top: 10px;
+      color: #616161;
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-size: 14px;
+      display: none;
+      #results-for-query {
+        font-weight: bold;
+      }
+    }
+  }
 
-  } /*end #analysts */
+
+  .element {
+    margin-bottom: 20px;
+    img {
+      height: 100px;
+      width: 100px;
+    }
+    .description-col {
+      margin-left: -20px;
+      .name {
+        color: rgb(45, 161, 255);
+        font-size: 20px;
+      }
+      .company {
+        margin-top: 5px;
+        font-size: 16px;
+      }
+    }
+    .review-col {
+      .description-title {
+        font-weight: 600;
+        font-size: 16px;
+      }
+    }
+  } /* end .element */
+
+  .divider {
+    margin-bottom: 20px;
+    border-bottom: 1px solid rgb(220, 220, 220);
+  }
+
+  .no-results {
+    text-align: center;
+    font-size: 24px;
+  }
+
+  #loading-screen {
+    background-color: rgba(255,255,255, 0.7);
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    display: none;
+  }
+} // end #results-wrapper
+
+.type {
+  display: none;
+}
+
+#ajax-loader {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  display: none;
+  z-index: 1000;
 }

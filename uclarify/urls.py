@@ -17,7 +17,7 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
     #url(r'^search/', include('haystack.urls')),
     url(r'^ajax/search/$', 'ucapp.views.ajax_search', name='ajax_search'),
-
+    url(r'^trash/write$', 'ucapp.views.write'),
 
     ##### REGISTRATION CODE #####
     url(r'', include('social.apps.django_app.urls', namespace='social')),
@@ -28,4 +28,5 @@ urlpatterns = patterns('',
         name="registration_register",
     ),
     url(r"^profile/", include("registration_email.backends.default.urls")),
+
 )

@@ -1,9 +1,0 @@
-<div id="yes">
-    {% for analyst_firm in analyst_firms %}
-        <p>{{ analyst_firm.name }}</p>
-        {% for analyst in analyst_firm.analysts.all %}
-            <p>{{ analyst.first_name }}</p>
-        {% endfor %}
-        <p>{{ analyst_firm.analysts }}</p>
-    {% endfor %}
-</div>
