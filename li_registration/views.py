@@ -21,3 +21,7 @@ def error(request):
     """Error view"""
     messages = get_messages(request)
     return render(request, 'auth/error.html', {'messages': messages})
+
+@login_required
+def account_profile(request):
+    return render(request, 'profile/account_profile.html', {})

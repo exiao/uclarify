@@ -27,6 +27,7 @@ urlpatterns = patterns('',
         RegistrationView.as_view(form_class=NewEmailRegistrationForm),
         name="registration_register",
     ),
+    url(r'^profile/account/$', 'li_registration.views.account_profile', name='account_profile'),
     url(r"^profile/", include("registration_email.backends.default.urls")),
 
 )

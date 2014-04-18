@@ -59,16 +59,8 @@ def search(request):
     return render(request, "search/search.html", data)
 
 def analyst_firm(request):
-    analysts = Analyst.objects.all()
-    return render(request, "analyst_firm.html", {'analysts': analysts})
-
-def pr_agency(request):
-    analysts = Analyst.objects.all()
-    return render(request, "pr_agency.html", {'analysts': analysts})
-
-def analyst_firm(request):
-    analysts = Analyst.objects.all()
-    return render(request, "analyst_firm.html", {'analysts': analysts})
+    analyst_firms = AnalystFirm.objects.all()
+    return render(request, "analyst_firm.html", {'analyst_firms': analyst_firms})
 
 def pr_agency(request):
     analysts = Analyst.objects.all()
