@@ -25,6 +25,7 @@
           <li class="active"><a href="#reviews">Reviews</a></li>
           <li class=""><a href="#reports">Reports</a></li>
         </ul> -->
+        <div class="reviews-title">Client Reviews</div>
         <div id="sort">
             <div class="sort-option active">
               Most Helpful
@@ -41,16 +42,33 @@
             {% for review in reviews %}
               <div class="row review">
                 <div class="col-md-2">
-                  <img src="http://bit.ly/NIhdeX" class="img-rounded">
-                </div>
-                <div class="col-md-10 description-col">
-                  <div class="rating"></div>
-                  <div class="strength-wrapper">Best used for 
-                    <span class="strength">{{ review.strength1 }}</span>
+                  <div class="star-rating"></div>
+                  <div class="rating-wrapper">
+                    <div class="description">Insight and Vision</div>
+                    <div class="rating-bar"></div>
+                    <div class="description">Customer Insight</div>
+                    <div class="rating-bar" style="width: 80px"></div>
+                    <div class="description">Quality of Content</div>
+                    <div class="rating-bar" style="width: 40px"></div>
                   </div>
-                  <div class="description">
+                </div>
+                <div class="col-md-10">
+                  <div class="review-headline">
+                    <img src="http://bit.ly/NIhdeX" class="img-rounded">
+                    <div class="review-title">
+                      <div class="strength-wrapper">Best used for 
+                        <span class="strength">{{ review.strength1 }}</span>
+                      </div>
+                      <div>Reviewed by anonymous</div>
+                    </div>
+                  </div>
+                  <div class="review-content">
                     <i class="fa fa-quote-left fa-border"></i>
                     {{review.content}}
+                  </div>
+                  <div class="helpful">
+                    <span>Was this review helpful?</span>
+                    <span class="helpful-feedback"><a>Yes</a> | <a>No</a></span>
                   </div>
                 </div>
               </div>
@@ -60,7 +78,7 @@
               {% endif %}
             {% endfor %}
           {% else %}
-            <div class="no-results">Sorry, no results were found.</div>
+            <div class="no-reviews">There are currently no reviews.</div>
           {% endif %}
         </div>
 
