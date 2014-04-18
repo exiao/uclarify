@@ -10,7 +10,7 @@ urlpatterns = patterns('',
     # Examples:
     url(r'^$', 'ucapp.views.home', name='home'),
     url(r'^analyst/$', 'ucapp.views.analyst', name='analyst'),
-    # url(r'^analyst/(?P<analyst_id>\d+)/$', 'ucapp.views.analyst_details', name='analyst_details'),
+    url(r'^analyst/(?P<analyst_id>\d+)/$', 'ucapp.views.analyst_details', name='analyst_details'),
     url(r'^analyst-firm/$', 'ucapp.views.analyst_firm', name='analyst_firm'),
     url(r'^pr-agency/$', 'ucapp.views.pr_agency', name='pr_agency'),
     url(r'^search/$', 'ucapp.views.search', name='search'),

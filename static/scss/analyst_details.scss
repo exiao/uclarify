@@ -1,0 +1,135 @@
+.profile-container {
+
+  margin-top: 20px;
+  border: 1px solid #dfdfdf;
+  border-radius: 10px;
+
+  .rating {
+    font-size: 16px;
+    width: 22px;
+    height: 22px;
+    background-image: url("/static/images/star.png");
+    background-size: contain;
+  }
+
+  .profile {
+
+    height: 800px;
+    background-color: #f7f7f7;
+    border-right: 1px solid #dfdfdf;
+
+    .profile-pic {
+
+      margin-top: 20px;
+
+      img {
+        height: 220px;
+        width: 220px;
+      }
+    }
+
+    .basic-info {
+
+      .name {
+        font-size: 20px;
+        font-weight: bold;
+      }
+
+      .firm {
+        font-size: 16px;
+        color: #999999;
+        font-weight: bold;
+      }
+
+      .review-button {
+
+        &:hover {
+          background-color: #2DA1FF;
+        }
+
+        text-align: center;
+        margin: auto;
+        width: 125px;
+        cursor: pointer;
+        border-radius: 10px;
+        background-color: #428bca;
+
+        .button-content {
+          color: white;
+          padding: 10px;
+        }
+      }
+
+    }
+  }
+
+  .reviews-container {
+
+    .nav {
+      margin-top: 20px;
+      font-size: 18px;
+
+      .active {
+        font-weight: bold;
+      }
+    }
+
+    #sort {
+      margin-top: 20px;
+      margin-bottom: 20px;
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      .active.sort-option {
+        color: black;
+        font-size: 13px;
+        font-weight: bold;
+        &:hover {
+          cursor: auto;
+          text-decoration: none;
+        }
+      }
+      .sort-option {
+        font-size: 12px;
+        display: inline-block;
+        margin-left: 10px;
+        color: #428bca;
+        &:hover {
+          cursor: pointer;
+          text-decoration: underline;
+        }
+      }
+    }
+
+    .reviews-list {
+      img {
+        height: 100px;
+        width: 100px;
+      }
+
+      .divider {
+        border-bottom: 1px solid gainsboro;
+      }
+
+      .description {
+        margin-top: 15px;
+      }
+
+      .review {
+        margin: 20px 0 20px 0;
+
+        .strength-wrapper {
+          margin-top: 10px;
+
+          .strength {
+            font-style: italic;
+            text-decoration: underline;
+          }
+        }
+        
+      }
+    }
+
+
+  }
+
+
+}

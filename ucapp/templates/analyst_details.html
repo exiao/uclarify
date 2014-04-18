@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+
+{% block head %}
+  {% load scss %}
+  <link href="{{ STATIC_URL }}{% scss 'scss/analyst_details.scss' %}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+  <div class="container profile-container">
+    <div class="row">
+      <div class="profile col-md-3">
+        <div class="col-md-12 profile-pic">
+          <img src="http://bit.ly/NIhdeX" class="img-rounded">
+        </div>
+        <div class="basic-info col-md-12">
+          <div class="name">{{analyst.first_name}} {{analyst.last_name}}</div>
+          <div class="firm">{{analyst.analyst_firm}}</div>
+          <div class="rating"></div>
+          <div class="review-button"><div class="button-content">Write a review</div></div>
+        </div>
+      </div>
+
+      <div class="reviews-container col-md-9">
+        <!-- <ul class="nav nav-tabs">
+          <li class="active"><a href="#reviews">Reviews</a></li>
+          <li class=""><a href="#reports">Reports</a></li>
+        </ul> -->
+        <div id="sort">
+            <div class="sort-option active">
+              Most Helpful
+            </div>
+            <div class="sort-option">
+              Best Rating
+            </div>
+            <div class="sort-option">
+              Most Reviewed
+            </div>
+        </div>
+        <div class="reviews-list">
+          {% if reviews %}
+            {% for review in reviews %}
+              <div class="row review">
+                <div class="col-md-2">
+                  <img src="http://bit.ly/NIhdeX" class="img-rounded">
+                </div>
+                <div class="col-md-10 description-col">
+                  <div class="rating"></div>
+                  <div class="strength-wrapper">Best used for 
+                    <span class="strength">{{ review.strength1 }}</span>
+                  </div>
+                  <div class="description">
+                    <i class="fa fa-quote-left fa-border"></i>
+                    {{review.content}}
+                  </div>
+                </div>
+              </div>
+
+              {% if not forloop.last %}
+                <div class="divider"></div>
+              {% endif %}
+            {% endfor %}
+          {% else %}
+            <div class="no-results">Sorry, no results were found.</div>
+          {% endif %}
+        </div>
+
+      </div>
+    </div>
+  </div>
+{% endblock %}

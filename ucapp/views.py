@@ -6,7 +6,7 @@ from haystack.query import SearchQuerySet
 from haystack.inputs import AutoQuery, Clean
 from haystack.models import SearchResult
 
-from models import Analyst, AnalystFirm
+from models import Analyst, AnalystFirm, AnalystReview
 import json
 
 # Create your views here.
@@ -15,7 +15,8 @@ def home(request):
 
 def analyst_details(request, analyst_id):
     analyst = Analyst.objects.get(pk=analyst_id)
-    return render(request, 'analyst_details.html', {'analyst': analyst})
+    reviews = AnalystReview.objects.all().filter(analyst=analyst)
+    return render(request, "analyst_details.html", {'analyst': analyst, 'reviews': reviews})
 
 def ajax_search(request):
     #if request.is_ajax():
