@@ -54,6 +54,7 @@ docs/_build/
 
 *.sqlite3
 static/COMPILED
+elasticsearch
 
 .DS_Store
 .idea/
