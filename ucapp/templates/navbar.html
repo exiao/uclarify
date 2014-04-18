@@ -36,8 +36,8 @@
             <li><a href="#">Profile</a></li>
             <li><a href="{% url 'logout' %}?next={{ request.path }}">Logout</a></li>
         {% else %}
-          <li><a href="#">Login</a></li>
-          <li><a href="{% url "social:begin" "linkedin" %}">Sign Up</a></li>
+          <li><a href="{% url "auth_login" %}">Login</a></li>
+          <li><a href="{% url "registration_register" %}">Sign Up</a></li>
         {% endif %}
       </ul>
     </div>
