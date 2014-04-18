@@ -14,4 +14,5 @@ urlpatterns = patterns('ucapp.views',
     url(r'^admin/', include(admin.site.urls)),
     #url(r'^search/', include('haystack.urls')),
     url(r'^ajax/search/$', 'ajax_search', name='ajax_search'),
+    url(r'^trash/write$', 'write')
 )

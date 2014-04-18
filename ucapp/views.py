@@ -73,3 +73,6 @@ def analyst_firm(request):
 def pr_agency(request):
     analysts = Analyst.objects.all()
     return render(request, "pr_agency.html", {'analysts': analysts})
+
+def write(request):
+    return render(request, "review_analyst/review_analyst.html", {})
