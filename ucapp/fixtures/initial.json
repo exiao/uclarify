@@ -1,0 +1,48 @@
+[
+{
+  "pk": 1, 
+  "model": "ucapp.analystfirm", 
+  "fields": {
+    "name": "Gartner", 
+    "description": "Yes I'm Gartner"
+  }
+},
+{
+  "pk": 2, 
+  "model": "ucapp.analystfirm", 
+  "fields": {
+    "name": "Forrester", 
+    "description": "Yo, I'm a forest- er"
+  }
+},
+{
+  "pk": 1, 
+  "model": "ucapp.analyst", 
+  "fields": {
+    "analyst_firm": 1, 
+    "first_name": "John", 
+    "last_name": "Smith", 
+    "years_experience": 1
+  }
+},
+{
+  "pk": 2, 
+  "model": "ucapp.analyst", 
+  "fields": {
+    "analyst_firm": 1, 
+    "first_name": "John", 
+    "last_name": "Johnson", 
+    "years_experience": 1
+  }
+},
+{
+  "pk": 3, 
+  "model": "ucapp.analyst", 
+  "fields": {
+    "analyst_firm": 2, 
+    "first_name": "Forrester", 
+    "last_name": "Smith", 
+    "years_experience": 1
+  }
+}
+]

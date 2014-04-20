@@ -1,13 +1,12 @@
 from django.core import serializers
 from django.shortcuts import render
-from django.template import RequestContext
 from django.http import HttpResponse
 
 from haystack.query import SearchQuerySet
 from haystack.inputs import AutoQuery, Clean
 from haystack.models import SearchResult
 
-from models import Analyst, AnalystFirm
+from models import Analyst, AnalystFirm, AnalystReview
 import json
 
 # Create your views here.
@@ -16,7 +15,8 @@ def home(request):
 
 def analyst_details(request, analyst_id):
     analyst = Analyst.objects.get(pk=analyst_id)
-    return render(request, 'analyst_details.html', {'analyst': analyst})
+    reviews = AnalystReview.objects.all().filter(analyst=analyst)
+    return render(request, "analyst_details.html", {'analyst': analyst, 'reviews': reviews})
 
 def ajax_search(request):
     #if request.is_ajax():
@@ -59,16 +59,8 @@ def search(request):
     return render(request, "search/search.html", data)
 
 def analyst_firm(request):
-    analysts = Analyst.objects.all()
-    return render(request, "analyst_firm.html", {'analysts': analysts})
-
-def pr_agency(request):
-    analysts = Analyst.objects.all()
-    return render(request, "pr_agency.html", {'analysts': analysts})
-
-def analyst_firm(request):
-    analysts = Analyst.objects.all()
-    return render(request, "analyst_firm.html", {'analysts': analysts})
+    analyst_firms = AnalystFirm.objects.all()
+    return render(request, "analyst_firm.html", {'analyst_firms': analyst_firms})
 
 def pr_agency(request):
     analysts = Analyst.objects.all()

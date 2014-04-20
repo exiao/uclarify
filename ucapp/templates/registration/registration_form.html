@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block content %}
+<form action="{% url 'registration_register' %}" method="post">
+    {% if form.errors %}
+       <div class="alert alert-danger">
+           {% for field in form %}
+               {% for error in field.errors %}<div>{{ error }}</div>{% endfor %}
+           {% endfor %}
+       </div>
+    {% endif %}
+    <fieldset>
+        {% csrf_token %}
+        {% for field in form %}
+        <div class="form-group{% if field.errors %} has-error{% endif %}">
+            <label class="control-label" for="{{field.auto_id}}">{{field.label}}</label>
+            {{field}}
+        </div>
+        {% endfor %}
+    </fieldset>
+    <input type="submit" value="Register" class="btn btn-primary">
+</form>
+<a href="{% url "social:begin" "linkedin" %}">Sign in with LinkedIn</a>
+{% endblock %}

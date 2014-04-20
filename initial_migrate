@@ -1,0 +1,8 @@
+source ./env/bin/activate
+./manage.py syncdb
+./manage.py schemamigration ucapp --initial
+./manage.py schemamigration li_registration --initial
+./manage.py schemamigration static_precompiler --initial
+./manage.py migrate ucapp
+./manage.py migrate li_registration
+./manage.py migrate static_precompiler

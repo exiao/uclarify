@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth import get_user_model
 
 # Create your models here.
 class AnalystFirm(models.Model):
@@ -31,7 +32,9 @@ class Review(models.Model):
     relationship = models.CharField(choices=RELATIONSHIP_CHOICES,
                                     default=CURRENT, max_length=50)
     content = models.TextField()
-    last_interaction = models.DateField()
+    last_interaction = models.DateField(blank=True, null=True)
+    author = models.ForeignKey(get_user_model(), null=True)
+    time_created = models.DateTimeField(auto_now_add=True, null=True)
 
 class AnalystReview(Review):
     CD = 'Consulting Days'
@@ -54,6 +57,14 @@ class AnalystReview(Review):
     strength4 = models.CharField(choices=STRENGTH_CHOICES, max_length=50)
     strength5 = models.CharField(choices=STRENGTH_CHOICES, max_length=50)
     analyst = models.ForeignKey(Analyst)
+
+    def __unicode__(self):
+        return str(self.author) + ' ' + str(self.analyst)
+
+class HelpfulRating(models.Model):
+    review = models.ForeignKey(Review)
+    user = models.ForeignKey(get_user_model())
+    upvote = models.BooleanField()
 
 class Rating(models.Model):
     SCORE_CHOICES = zip( range(1,6), range(1,6) )

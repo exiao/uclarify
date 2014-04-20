@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block head %}
+  {% load scss %}
+  <link href="{{ STATIC_URL }}{% scss 'scss/profile.scss' %}" rel="stylesheet">
+{% endblock %}
+
+
+{% block content %}
+<div class="section1">
+    <div class="container">
+      <div class="contentHeader">Account</div>
+        <div class="row">
+          <div class="col-md-3 columns">
+            <ul class="nav nav-pills nav-stacked">
+              <li class="active">
+                <a href="#">
+                  Reviews
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  Settings
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          <div class="col-md-8 columns">
+            <div class="review">" Doge is a great garbage recycler! "</div>
+          </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

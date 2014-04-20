@@ -21,6 +21,7 @@ var/
 *.egg-info/
 .installed.cfg
 *.egg
+static/
 
 # Installer logs
 pip-log.txt
@@ -54,6 +55,7 @@ docs/_build/
 
 *.sqlite3
 static/COMPILED
+elasticsearch
 
 .DS_Store
 .idea/

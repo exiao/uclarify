@@ -38,17 +38,22 @@ DEFAULT_APPS = (
     'django.contrib.staticfiles',
 )
 
+LOCAL_APPS = (
+    'ucapp',
+    'li_registration',
+)
+
 THIRD_PARTY_APPS = (
     'static_precompiler',
     'south',
     'haystack',
+    'social.apps.django_app.default',
+    'registration',
+    'registration_email',
 )
 
-LOCAL_APPS = (
-    'ucapp',
-)
 
-INSTALLED_APPS = DEFAULT_APPS + THIRD_PARTY_APPS + LOCAL_APPS
+INSTALLED_APPS = DEFAULT_APPS + LOCAL_APPS + THIRD_PARTY_APPS
 
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -118,6 +123,8 @@ TEMPLATE_DIRS = (
     # Don't forget to use absolute paths, not relative paths.
 )
 
+DJANGORESIZED_DEFAULT_SIZE = [1024, 768]
+
 HAYSTACK_CONNECTIONS = {
     'default': {
         'ENGINE': 'haystack.backends.elasticsearch_backend.ElasticsearchSearchEngine',
@@ -125,3 +132,74 @@ HAYSTACK_CONNECTIONS = {
         'INDEX_NAME': 'haystack_uclarify',
     },
 }
+
+import django.conf.global_settings as DEFAULT_SETTINGS
+
+TEMPLATE_CONTEXT_PROCESSORS = DEFAULT_SETTINGS.TEMPLATE_CONTEXT_PROCESSORS + (
+    'social.apps.django_app.context_processors.backends',
+    'social.apps.django_app.context_processors.login_redirect',
+    'django.core.context_processors.request',
+)
+
+################## EMAIL STUFF ##########################
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.sendgrid.net'
+EMAIL_HOST_USER = 'buynearme'
+EMAIL_HOST_PASSWORD = 'CalClassified'
+EMAIL_PORT = 587
+
+#TEMPLATED_EMAIL_TEMPLATE_DIR = BASE_DIR + '/templates/email/'
+#TEMPLATED_EMAIL_BACKEND = 'templated_email.backends.vanilla_django'
+
+################## SOCIAL STUFF #########################
+ACCOUNT_ACTIVATION_DAYS = 7
+
+AUTHENTICATION_BACKENDS = (
+    'social.backends.linkedin.LinkedinOAuth',
+    'registration_email.auth.EmailBackend',
+    'django.contrib.auth.backends.ModelBackend',
+)
+SOCIAL_AUTH_LINKEDIN_SCOPE = ['r_basicprofile', 'r_emailaddress']
+
+SOCIAL_AUTH_LINKEDIN_FIELD_SELECTORS = [
+    'email-address',
+    'headline', # The job title
+    'industry',
+    'positions', # Used to retrieve the company
+]
+
+SOCIAL_AUTH_PROTECTED_USER_FIELDS = ['email', 'name']
+
+SOCIAL_AUTH_LINKEDIN_EXTRA_DATA = [
+    ('id', 'id'),
+    ('first-name', 'first_name'),
+    ('last-name', 'last_name'),
+    ('email-address', 'email_address'),
+    ('headline', 'headline'),
+    ('industry', 'industry'),
+    ('positions', 'positions')]
+
+SOCIAL_AUTH_LINKEDIN_KEY = '75enltnahdhfvf' # The LinkedIn application "API Key"
+SOCIAL_AUTH_LINKEDIN_SECRET = 'qGwQ4DwtU6rfWD46' # The LinkedIn application "Secret Key"
+
+LOGIN_URL = '/login/'
+LOGIN_ERROR_URL = '/error/'
+LOGIN_REDIRECT_URL = '/complete/'
+REGISTRATION_EMAIL_REGISTER_SUCCESS_URL = '/complete/'
+
+SOCIAL_AUTH_PIPELINE = (
+    'social.pipeline.social_auth.social_details',
+    'social.pipeline.social_auth.social_uid',
+    'social.pipeline.social_auth.auth_allowed',
+    'social.pipeline.social_auth.social_user',
+    'social.pipeline.user.get_username',
+    'social.pipeline.user.create_user',
+    'social.pipeline.social_auth.associate_user',
+    'social.pipeline.social_auth.load_extra_data',
+    'social.pipeline.user.user_details',
+    'li_registration.models.social_auth_to_profile'
+)
+
+AUTH_PROFILE_MODULE = 'li_registration.UserProfile'
+#AUTH_USER_MODEL = 'ucapp.UserProfile'
+#SOCIAL_AUTH_USER_MODEL = 'ucapp.UserProfile'

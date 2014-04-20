@@ -3,6 +3,7 @@
 {% block head %}
   {% load scss %}
   <link href="{{ STATIC_URL }}{% scss 'scss/analyst_firm.scss' %}" rel="stylesheet">
+  <link href="{{ STATIC_URL }}{% scss 'scss/category_page.scss' %}" rel="stylesheet">
 {% endblock %}
 
 {% block content %}
@@ -32,24 +33,23 @@
   <div class="section1">
     <div class="container">
       <div class="contentHeader border">Analyst Firm Reviews</div>
-      {% for analyst in analysts %}
+      {% for firm in analyst_firms %}
         <div class="row border">
           <div class="col-md-2 columns">
             Insert Picture
           </div>
 
           <div class="col-md-3 columns">
-            <div class="name">{{analyst.first_name}} {{analyst.last_name}}</div>
+            <div class="name">{{ firm.name }}</div>
             <div class="rating"></div>
-            <div class="firm">{{analyst.analyst_firm.name}}</div>
           </div>
 
           <div class="col-md-7 columns">
-            <div class="review">" Doge is a great garbage recycler! "</div>
+            <div class="review">{{ firm.description }}</div>
           </div>
         </div>
       {% endfor %}
-      <div class="seeMore">See All Analyst Reviews</div>
+      <div class="seeMore">See All Analyst Firms</div>
     </div>
   </div>
 {% endblock %}

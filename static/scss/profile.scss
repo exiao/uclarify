@@ -1,7 +1,9 @@
 .hero {
   background-image: url("/static/images/closed_laptop.jpg");
 }
-
+body {
+  background: #f6f6f6 none;
+}
 .section1 {
 
   background: #f6f6f6 none;
@@ -10,6 +12,7 @@
   .container {
     background: white;
     border: 1px solid #dbdbdb;
+    padding-bottom: 200px;
 
     .row {
       margin: 0;

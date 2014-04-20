@@ -3,6 +3,7 @@
 {% block head %}
   {% load scss %}
   <link href="{{ STATIC_URL }}{% scss 'scss/analyst.scss' %}" rel="stylesheet">
+  <link href="{{ STATIC_URL }}{% scss 'scss/category_page.scss' %}" rel="stylesheet">
 {% endblock %}
 
 {% block content %}
@@ -39,9 +40,9 @@
           </div>
 
           <div class="col-md-3 columns">
-            <div class="name">{{analyst.first_name}} {{analyst.last_name}}</div>
+            <div class="name"><a href={{analyst.pk}}>{{analyst.first_name}} {{analyst.last_name}}</a></div>
             <div class="rating"></div>
-            <div class="firm">{{analyst.analyst_firm.name}}</div>
+            <div class="firm">{{ analyst.analyst_firm.name }}</div>
           </div>
 
           <div class="col-md-7 columns">
