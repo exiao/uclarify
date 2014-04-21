@@ -74,6 +74,7 @@ class Analyst(models.Model):
     num_reviews = models.IntegerField(null=True, blank=True)
     specializations = models.ManyToManyField('Specialization')
     best_strength = models.CharField(choices=AnalystReview.STRENGTH_CHOICES, max_length=50)
+    recent_review = models.ForeignKey('AnalystReview', null=True, blank=True)
 
     @property
     def full_name(self):
