@@ -6,39 +6,25 @@
   <link href="{{ STATIC_URL }}{% scss 'scss/login.scss' %}" rel="stylesheet">
 {% endblock %}
 
-{% block javascript %}
-  <script type="text/javascript">
-    var STATIC_URL = "{{ STATIC_URL }}";
-  </script>
-
-  <script type="text/javascript" src="{{ STATIC_URL }}js/login.js"></script>
-{% endblock %}
-
 {% block content %}
 <div class="form-wrapper">
 	<div class="form-container">
 		<div class="title">Welcome To uClarify</div>
 		<form method="post" action=".">
 		  {% csrf_token %}
-		  {% for field in form %}
-		  {% if field.html_name == "remember_me" %}
-		  	<div class="remember_me">
-		      {{ field }}
-		       Stay signed in
-		  	</div>
-		  {% else %}
-		  	{{ field }}
-	  	  {% endif %}
-		  {% endfor %}
-
+		  <input name="{{ form.username.html_name }}" id="id_username" type="text" placeholder="Email"/>
+		  <input name="{{ form.password.html_name }}" id="id_password" type="password" placeholder="Password"/>
 		  <input type="submit" value="{% trans 'Log in' %}" />
+		  <div class="remember_me">
+		  	<input name="{{ form.remember_me.html_name }}" id="id_remember_me" type="checkbox"> Stay Signed In
+		  </div> 
 		  <input type="hidden" name="next" value="{{ next }}" />
 		</form>
-
-		<p class="forgot_password">{% trans "Forgot password" %}? <a href="{% url 'auth_password_reset' %}">{% trans "Reset it" %}</a>!</p>
-		<p class="register">{% trans "Not member" %}? <a href="{% url 'registration_register' %}">{% trans "Register" %}</a>!</p>
-
-		<a href="{% url "social:begin" "linkedin" %}">Sign in with LinkedIn</a>
+		<div class="other_options">
+			<span class="forgot_password"><a href="{% url 'auth_password_reset' %}">{% trans "Forgot password" %}?</a></span>
+			<span class="register"><a href="{% url 'registration_register' %}">{% trans "Not a member" %}?</a></span>
+		</div>
+		<div class="linkedin"><a href="{% url "social:begin" "linkedin" %}">Sign in with LinkedIn</a></div>
 	</div>
 </div>
 {% endblock %}
