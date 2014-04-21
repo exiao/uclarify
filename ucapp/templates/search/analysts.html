@@ -5,7 +5,7 @@
         <img src="http://bit.ly/NIhdeX" class="img-rounded">
       </div>
       <div class="col-md-3 description-col">
-        <div class="name">{{ analyst.first_name }} {{ analyst.last_name }}</div>
+        <div class="name"><a href='{% url "analyst_details" analyst.object.id %}'>{{ analyst.first_name }} {{ analyst.last_name }}</a></div>
         <div class="rating">insert rating</div>
         <div class="company">{{ analyst.analyst_firm }}</div>
       </div>
