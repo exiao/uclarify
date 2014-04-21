@@ -41,7 +41,7 @@ class AnalystReview(Review):
     SCORE_CHOICES = zip( range(1,6), range(1,6) )
     best_strength = models.CharField(choices=STRENGTH_CHOICES, max_length=50, null=True, blank=True)
     overall_rating = models.IntegerField(choices=SCORE_CHOICES, null=True)
-    analyst = models.ForeignKey('Analyst')
+    analyst = models.ForeignKey('Analyst', related_name='reviews_set')
     is_anonymous = models.BooleanField()
 
     def __unicode__(self):
@@ -74,7 +74,7 @@ class Analyst(models.Model):
     num_reviews = models.IntegerField(null=True, blank=True)
     specializations = models.ManyToManyField('Specialization')
     best_strength = models.CharField(choices=AnalystReview.STRENGTH_CHOICES, max_length=50)
-    recent_review = models.ForeignKey('AnalystReview', null=True, blank=True)
+    recent_review = models.ForeignKey('AnalystReview', null=True, blank=True, related_name='+')
 
     @property
     def full_name(self):
