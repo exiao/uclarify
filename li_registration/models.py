@@ -1,7 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django_resized import ResizedImageField
-from django.db.models.signals import post_save
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User, blank=True, null=True, unique=True)
@@ -22,13 +21,6 @@ class UserProfile(models.Model):
             pass
         models.Model.save(self, *args, **kwargs)
 
-def create_user_profile(sender, instance, created, **kwargs):
-    """Get the temproray profile creating in the form class, then linked it to the user instance"""
-    profile, created = UserProfile.objects.get_or_create(email=instance.email)
-    profile.user = instance
-    profile.save()
-post_save.connect(create_user_profile, sender=User)
-
 def social_auth_to_profile(backend, details, response, user=None, is_new=False, *args, **kwargs):
     if is_new:
         profile, created = UserProfile.objects.get_or_create(user=user)
@@ -39,9 +31,9 @@ def social_auth_to_profile(backend, details, response, user=None, is_new=False, 
     profile.name = details['fullname']
     # Now we also need the extra details, found in the `social_user` kwarg
     social_user = kwargs['social']
-    import json
+    #import json
     #print(social_user.extra_data)
-    print(json.dumps(social_user.extra_data, indent=4, sort_keys=True))
+    #print(json.dumps(social_user.extra_data, indent=4, sort_keys=True))
     profile.company = social_user.extra_data['headline']
     profile.job_title = social_user.extra_data['positions']['values'][0]['title']
     profile.save()
