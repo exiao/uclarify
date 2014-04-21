@@ -1,0 +1,69 @@
+@import "base.scss";
+
+.form-wrapper {
+  text-align: center;
+
+  .form-container {
+    padding: 20px 40px 40px 40px;
+    background-color: #f7f7f7;
+    border: 1px solid #dbdbdb;
+    border-radius: 10px;
+    margin-top: 80px;
+    text-align: left;
+    display: inline-block;
+
+    .title {
+      text-align: center;
+      color: $blue;
+      font-size: 24px;
+      margin-top: 10px;
+      margin-bottom: 30px;
+    }
+
+    #id_username,
+    #id_password {
+      font-size: 18px;
+      padding: 5px 8px 5px 8px;
+      width: 275px;
+      height: 40px;
+    }
+
+    input {
+      display: table;
+    }
+
+    input[type="submit"] {
+      background-color: $blue;
+      color: white;
+      width: 100%;
+      border-radius: 5px;
+      font-size: 18px;
+      padding: 5px 0 5px 0;
+      margin-top: 20px;
+      height: 40px;
+    }
+
+    .remember_me {
+      margin-top: 10px;
+
+      input#id_remember_me {
+        display: initial;
+      }
+    }
+
+    .other_options {
+      margin-top: 20px;
+
+      .register {
+        float: right;
+      }
+    }
+
+    .linkedin {
+      margin-top: 10px;
+    }
+
+    
+
+  }
+}
