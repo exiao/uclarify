@@ -5,7 +5,9 @@
 {% block head %}
   {% load scss %}
   <link href="{{ STATIC_URL }}{% scss 'scss/review_analyst.scss' %}" rel="stylesheet">
-  <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+  <link
+      href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800'
+      rel='stylesheet' type='text/css'>
 {% endblock %}
 
 {% block content %}
@@ -15,39 +17,95 @@
   </div>
 
   <div class="container">
-    <div id="profile">
-      <div id="photo">
-        <img src="http://thelightboxdesigns.com/wp-content/uploads/2013/12/Business-Guy-Cropped.jpg" class="img-circle">
-      </div>
-      <div id="info">
-        <div id="name">John David</div>
-        <div id="company">Douche and co</div>
+  <div id="profile">
+    <div id="photo">
+      <img src="http://thelightboxdesigns.com/wp-content/uploads/2013/12/Business-Guy-Cropped.jpg" class="img-circle">
+    </div>
+    <div id="info">
+      <div id="name">John David</div>
+      <div id="company">Douche and co</div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-4 section-label">
+      <div class="title">Anonymous</div>
+      <div class="description">Decide if you want to be anonymous.</div>
+    </div>
+    <div class="col-md-8 section-input">
+      <div class="btn-group" data-toggle="buttons">
+        <label class="btn btn-white yes-no">
+          <input type="radio" name="strength" value="CD" id="option1"> <i class="fa fa-thumbs-up"></i> Yes, hide me!
+        </label>
+        <label class="btn btn-white yes-no">
+          <input type="radio" name="strength" value="SD" id="option2"> <i class="fa fa-thumbs-down"></i> No, show me!
+        </label>
+        </label>
       </div>
     </div>
+  </div>
 
-    <div class="row">
-      <div class="col-md-4 section-label">
-        <div class="title">Rating</div>
-        <div class="description">How would you rate this analyst?</div>
-      </div>
-      <div class="col-md-8 section-input">
-        {% include "review_analyst/rating-table.html" %}
+  <hr class="split-section">
+
+  <div class="row">
+    <div class="col-md-4 section-label">
+      <div class="title">Rating</div>
+      <div class="description">How would you rate this analyst?</div>
+    </div>
+    <div class="col-md-8 section-input">
+      {% include "review_analyst/rating-table.html" %}
+    </div>
+  </div>
+
+  <hr class="split-section">
+
+  <div class="row">
+    <div class="col-md-4 section-label">
+      <div class="title">Strengths</div>
+      <div class="description">Identify the analyst's best skill.</div>
+    </div>
+    <div class="col-md-8 section-input">
+      <div class="btn-group" data-toggle="buttons">
+        <label class="btn btn-white">
+          <input type="radio" name="strength" value="CD" id="option1"> <i class="fa fa-calendar"></i> Consulting Days
+        </label>
+        <label class="btn btn-white">
+          <input type="radio" name="strength" value="SD" id="option2"> <i class="fa fa-puzzle-piece"></i> Strategy
+          Development
+        </label>
+        <label class="btn btn-white">
+          <input type="radio" name="strength" value="MP" id="option3"> <i class="fa fa-dollar"></i> Market Positioning
+        </label>
+        <label class="btn btn-white">
+          <input type="radio" name="strength" value="RS" id="option3"> <i class="fa fa-flask"></i> Research
+        </label>
+        <label class="btn btn-white">
+          <input type="radio" name="strength" value="WP" id="option3"> <i class="fa fa-copy"></i> White Papers
+        </label>
       </div>
     </div>
+  </div>
 
-    <hr>
+  <hr class="split-section">
 
-    <div class="row">
-      <div class="col-md-4 section-label">
-        <div class="title">Feedback</div>
-        <div class="description">Provide a description of your experience.</div>
-      </div>
-      <div class="col-md-8 section-input">
-        <textarea class="form-control" rows="5" placeholder="Comments about your experience."></textarea>
-      </div>
+  <div class="row">
+    <div class="col-md-4 section-label">
+      <div class="title">Feedback</div>
+      <div class="description">Provide a description of your experience.</div>
+    </div>
+    <div class="col-md-8 section-input">
+      <textarea class="form-control" rows="7" placeholder="Comments about your experience."></textarea>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-4 section-label">
+
+    </div>
+    <div class="col-md-8 section-input">
+      <input type="submit" class="btn btn-primary btn-lg btn-submit" value="Submit Review"/>
     </div>
 
-    <div class="spacing"></div>
 
   </div>
 {% endblock %}

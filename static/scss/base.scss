@@ -3,12 +3,23 @@ $dark_blue: #428bca;
 
 body {
   font-family: 'Source Sans Pro', sans-serif;
-  font-size: 16px; //make base font size larger cause font style is naturally small
+  font-size: 16px;
+  //make base font size larger cause font style is naturally small
 }
 
 .btn.btn-primary {
   background-color: #2DA1FF;
   &:hover {
     background-color: #2892e8;
+  }
+}
+
+input[type="text"], textarea {
+  &:hover, &:focus {
+    $input-box-shadow: none;
+    -webkit-box-shadow: $input-box-shadow;
+    -moz-box-shadow: $input-box-shadow;
+    box-shadow: $input-box-shadow;
+    border-color: rgb(107, 211, 255);
   }
 }

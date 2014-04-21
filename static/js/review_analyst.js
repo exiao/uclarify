@@ -23,5 +23,6 @@ $(document).ready(function () {
         path: STATIC_URL + "plugins/raty-2.5.2/img"
     });
 
+    $(".btn").button();
 
 });
