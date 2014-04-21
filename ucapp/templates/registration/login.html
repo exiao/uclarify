@@ -1,17 +1,30 @@
 {% extends "base.html" %}
 {% load i18n %}
 
+{% block head %}
+  {% load scss %}
+  <link href="{{ STATIC_URL }}{% scss 'scss/login.scss' %}" rel="stylesheet">
+{% endblock %}
+
 {% block content %}
-<form method="post" action=".">
-  {% csrf_token %} 
-  {{ form.as_p }}
-
-  <input type="submit" value="{% trans 'Log in' %}" />
-  <input type="hidden" name="next" value="{{ next }}" />
-</form>
-
-<p>{% trans "Forgot password" %}? <a href="{% url 'auth_password_reset' %}">{% trans "Reset it" %}</a>!</p>
-<p>{% trans "Not member" %}? <a href="{% url 'registration_register' %}">{% trans "Register" %}</a>!</p>
-
-<a href="{% url "social:begin" "linkedin" %}">Sign in with LinkedIn</a>
+<div class="form-wrapper">
+	<div class="form-container">
+		<div class="title">Welcome To uClarify</div>
+		<form method="post" action=".">
+		  {% csrf_token %}
+		  <input name="{{ form.username.html_name }}" id="id_username" type="text" placeholder="Email"/>
+		  <input name="{{ form.password.html_name }}" id="id_password" type="password" placeholder="Password"/>
+		  <input type="submit" value="{% trans 'Log in' %}" />
+		  <div class="remember_me">
+		  	<input name="{{ form.remember_me.html_name }}" id="id_remember_me" type="checkbox"> Stay Signed In
+		  </div> 
+		  <input type="hidden" name="next" value="{{ next }}" />
+		</form>
+		<div class="other_options">
+			<span class="forgot_password"><a href="{% url 'auth_password_reset' %}">{% trans "Forgot password" %}?</a></span>
+			<span class="register"><a href="{% url 'registration_register' %}">{% trans "Not a member" %}?</a></span>
+		</div>
+		<div class="linkedin"><a href="{% url "social:begin" "linkedin" %}">Sign in with LinkedIn</a></div>
+	</div>
+</div>
 {% endblock %}
