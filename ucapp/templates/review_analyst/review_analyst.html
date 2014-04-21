@@ -16,98 +16,122 @@
     <div id="sub">Provide some feedback to the community.</div>
   </div>
 
-  <div class="container">
-  <div id="profile">
-    <div id="photo">
-      <img src="http://thelightboxdesigns.com/wp-content/uploads/2013/12/Business-Guy-Cropped.jpg" class="img-circle">
-    </div>
-    <div id="info">
-      <div id="name">John David</div>
-      <div id="company">Douche and co</div>
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="col-md-4 section-label">
-      <div class="title">Anonymous</div>
-      <div class="description">Decide if you want to be anonymous.</div>
-    </div>
-    <div class="col-md-8 section-input">
-      <div class="btn-group" data-toggle="buttons">
-        <label class="btn btn-white yes-no">
-          <input type="radio" name="strength" value="CD" id="option1"> <i class="fa fa-thumbs-up"></i> Yes, hide me!
-        </label>
-        <label class="btn btn-white yes-no">
-          <input type="radio" name="strength" value="SD" id="option2"> <i class="fa fa-thumbs-down"></i> No, show me!
-        </label>
-        </label>
+  <form action="{% url "review_analyst" analyst.id %}" method="post">
+  {% csrf_token %}
+    <div class="container">
+      <div id="profile">
+        <div id="photo">
+          <img src="http://thelightboxdesigns.com/wp-content/uploads/2013/12/Business-Guy-Cropped.jpg"
+               class="img-circle">
+        </div>
+        <div id="info">
+          <div id="name">{{ analyst.full_name }}</div>
+          <div id="company">{{ analyst.analyst_firm.name }}</div>
+        </div>
       </div>
-    </div>
-  </div>
 
-  <hr class="split-section">
-
-  <div class="row">
-    <div class="col-md-4 section-label">
-      <div class="title">Rating</div>
-      <div class="description">How would you rate this analyst?</div>
-    </div>
-    <div class="col-md-8 section-input">
-      {% include "review_analyst/rating-table.html" %}
-    </div>
-  </div>
-
-  <hr class="split-section">
-
-  <div class="row">
-    <div class="col-md-4 section-label">
-      <div class="title">Strengths</div>
-      <div class="description">Identify the analyst's best skill.</div>
-    </div>
-    <div class="col-md-8 section-input">
-      <div class="btn-group" data-toggle="buttons">
-        <label class="btn btn-white">
-          <input type="radio" name="strength" value="CD" id="option1"> <i class="fa fa-calendar"></i> Consulting Days
-        </label>
-        <label class="btn btn-white">
-          <input type="radio" name="strength" value="SD" id="option2"> <i class="fa fa-puzzle-piece"></i> Strategy
-          Development
-        </label>
-        <label class="btn btn-white">
-          <input type="radio" name="strength" value="MP" id="option3"> <i class="fa fa-dollar"></i> Market Positioning
-        </label>
-        <label class="btn btn-white">
-          <input type="radio" name="strength" value="RS" id="option3"> <i class="fa fa-flask"></i> Research
-        </label>
-        <label class="btn btn-white">
-          <input type="radio" name="strength" value="WP" id="option3"> <i class="fa fa-copy"></i> White Papers
-        </label>
+      <div class="row">
+        <div class="col-md-4 section-label">
+          <div class="title">Anonymous</div>
+          <div class="description">Decide if you want to be anonymous.</div>
+        </div>
+        <div class="col-md-8 section-input">
+          <div class="btn-group" data-toggle="buttons">
+            <label class="btn btn-white yes-no">
+              <input type="radio" name="{{ form.is_anonymous.html_name }}" value="True" id="option1"> <i
+                class="fa fa-thumbs-up"></i> Yes, hide me!
+            </label>
+            <label class="btn btn-white yes-no">
+              <input type="radio" name="{{ form.is_anonymous.html_name }}" value="False" id="option2"> <i
+                class="fa fa-thumbs-down"></i> No, show me!
+            </label>
+            </label>
+          </div>
+        </div>
       </div>
+
+      <hr class="split-section">
+
+      <div class="row">
+        <div class="col-md-4 section-label">
+          <div class="title">Rating</div>
+          <div class="description">How would you rate this analyst?</div>
+        </div>
+        <div class="col-md-8 section-input">
+          {% include "review_analyst/rating-table.html" %}
+        </div>
+      </div>
+
+      <hr class="split-section">
+
+      <div class="row">
+        <div class="col-md-4 section-label">
+          <div class="title">Strengths</div>
+          <div class="description">Identify the analyst's best skill.</div>
+        </div>
+        <div class="col-md-8 section-input">
+          <div class="btn-group" data-toggle="buttons">
+            <label class="btn btn-white">
+              <input type="radio" name="{{ form.best_strength.html_name }}" value="Consulting Days" id="option1"> <i
+                class="fa fa-calendar"></i> Consulting Days
+            </label>
+            <label class="btn btn-white">
+              <input type="radio" name="{{ form.best_strength.html_name }}" value="Strategy Development" id="option2">
+              <i
+                  class="fa fa-puzzle-piece"></i> Strategy
+              Development
+            </label>
+            <label class="btn btn-white">
+              <input type="radio" name="{{ form.best_strength.html_name }}" value="Market Positioning" id="option3"> <i
+                class="fa fa-dollar"></i> Market Positioning
+            </label>
+            <label class="btn btn-white">
+              <input type="radio" name="{{ form.best_strength.html_name }}" value="Research" id="option3"> <i
+                class="fa fa-flask"></i> Research
+            </label>
+            <label class="btn btn-white">
+              <input type="radio" name="{{ form.best_strength.html_name }}" value="White Papers" id="option3"> <i
+                class="fa fa-copy"></i> White Papers
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <hr class="split-section">
+
+      <div class="row">
+        <div class="col-md-4 section-label">
+          <div class="title">Feedback</div>
+          <div class="description">Provide a description of your experience.</div>
+        </div>
+        <div class="col-md-8 section-input">
+          <textarea name="{{ form.content.html_name }}" class="form-control" rows="7"
+                    placeholder="Comments about your experience."></textarea>
+        </div>
+      </div>
+
+      <hr class="split-section">
+
+      <div class="row">
+        <div class="col-md-4 section-label">
+          <div class="title">Overall Rating</div>
+          <div class="description">Your final say about this person.</div>
+        </div>
+        <div class="col-md-8 section-input">
+          <div id="overall-rating" class="rating"></div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-4 section-label">
+        </div>
+        <div class="col-md-8 section-input">
+          <input type="submit" class="btn btn-primary btn-lg btn-submit" value="Submit Review"/>
+        </div>
+      </div>
+
     </div>
-  </div>
-
-  <hr class="split-section">
-
-  <div class="row">
-    <div class="col-md-4 section-label">
-      <div class="title">Feedback</div>
-      <div class="description">Provide a description of your experience.</div>
-    </div>
-    <div class="col-md-8 section-input">
-      <textarea class="form-control" rows="7" placeholder="Comments about your experience."></textarea>
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="col-md-4 section-label">
-
-    </div>
-    <div class="col-md-8 section-input">
-      <input type="submit" class="btn btn-primary btn-lg btn-submit" value="Submit Review"/>
-    </div>
-
-
-  </div>
+  </form>
 {% endblock %}
 
 {% block javascript %}
@@ -117,4 +141,12 @@
 
   <script type="text/javascript" src="{{ STATIC_URL }}plugins/raty-2.5.2/jquery.raty.min.js"></script>
   <script type="text/javascript" src="{{ STATIC_URL }}js/review_analyst.js"></script>
+  <script type="text/javascript">
+    {% for rating_text in rating_texts %}
+      $("#rating-text-{{ rating_text.id }}-id").raty({
+        path: STATIC_URL + "plugins/raty-2.5.2/img",
+        scoreName: "rating-text-{{ rating_text.id }}"
+      });
+    {% endfor %}
+  </script>
 {% endblock %}

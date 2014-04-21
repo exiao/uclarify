@@ -16,7 +16,7 @@ class Migration(SchemaMigration):
             ('email', self.gf('django.db.models.fields.EmailField')(max_length=75)),
             ('company', self.gf('django.db.models.fields.CharField')(max_length=150, blank=True)),
             ('job_title', self.gf('django.db.models.fields.CharField')(max_length=150, blank=True)),
-            ('avatar', self.gf('django_resized.forms.ResizedImageField')(max_length=1024, max_width=1024, blank=True)),
+            ('avatar', self.gf('django_resized.forms.ResizedImageField')(max_length=1024, blank=True)),
         ))
         db.send_create_signal(u'li_registration', ['UserProfile'])
 
@@ -65,7 +65,7 @@ class Migration(SchemaMigration):
         },
         u'li_registration.userprofile': {
             'Meta': {'object_name': 'UserProfile'},
-            'avatar': ('django_resized.forms.ResizedImageField', [], {'max_length': '1024', 'max_width': '1024', 'blank': 'True'}),
+            'avatar': ('django_resized.forms.ResizedImageField', [], {'max_length': '1024', 'blank': 'True'}),
             'company': ('django.db.models.fields.CharField', [], {'max_length': '150', 'blank': 'True'}),
             'email': ('django.db.models.fields.EmailField', [], {'max_length': '75'}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),

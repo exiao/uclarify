@@ -51,12 +51,18 @@ class AnalystReview(Review):
         (WP, WP),
     )
 
+    SCORE_CHOICES = zip( range(1,6), range(1,6) )
+
     strength1 = models.CharField(choices=STRENGTH_CHOICES, max_length=50)
     strength2 = models.CharField(choices=STRENGTH_CHOICES, max_length=50)
     strength3 = models.CharField(choices=STRENGTH_CHOICES, max_length=50)
     strength4 = models.CharField(choices=STRENGTH_CHOICES, max_length=50)
     strength5 = models.CharField(choices=STRENGTH_CHOICES, max_length=50)
+
+    best_strength = models.CharField(choices=STRENGTH_CHOICES, max_length=50)
+    overall_rating = models.IntegerField(choices=SCORE_CHOICES, null=True)
     analyst = models.ForeignKey(Analyst)
+    is_anonymous = models.BooleanField()
 
     def __unicode__(self):
         return str(self.author) + ' ' + str(self.analyst)
@@ -66,10 +72,20 @@ class HelpfulRating(models.Model):
     user = models.ForeignKey(get_user_model())
     upvote = models.BooleanField()
 
+#set amount of base questions to be referenced
+class AnalystRatingText(models.Model):
+    text = models.CharField(max_length=200)
+    def __unicode__(self):
+        return self.text
+
+#NOT USED
 class Rating(models.Model):
     SCORE_CHOICES = zip( range(1,6), range(1,6) )
     stars = models.IntegerField(choices=SCORE_CHOICES)
-    text = models.CharField(max_length=200)
 
-class AnalystRating(Rating):
+#this is what gets created for reviews
+class AnalystRating(models.Model):
     review = models.ForeignKey(AnalystReview)
+    text = models.ForeignKey(AnalystRatingText)
+    SCORE_CHOICES = zip( range(1,6), range(1,6) )
+    rating = models.IntegerField(choices=SCORE_CHOICES)

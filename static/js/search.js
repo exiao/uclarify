@@ -20,8 +20,8 @@ $(document).ready(function () {
         runSearch();
     });
 
-    $("#cancel-query").click(function(){
-       $("#query-id").val("");
+    $("#cancel-query").click(function () {
+        $("#query-id").val("");
         runSearch();
     })
 
@@ -31,31 +31,31 @@ function runSearch() {
     showLoading(true);
     var url = $("#sidebar-form").attr("action");
     $.ajax({
-               type: "GET",
-               url: url,
-               data: $("#sidebar-form").serialize(),
-               success: function (response) {
-                   $("#analysts").html(response["analyst_page"]);
-                   $("#analyst-firms").html(response["analyst_firm_page"]);
+        type: "GET",
+        url: url,
+        data: $("#sidebar-form").serialize(),
+        success: function (response) {
+            $("#analysts").html(response["analyst_page"]);
+            $("#analyst-firms").html(response["analyst_firm_page"]);
 
-                   $(".analyst-number").html(response["analyst_number"]);
-                   $(".analyst-firm-number").html(response["analyst_firm_number"]);
+            $(".analyst-number").html(response["analyst_number"]);
+            $(".analyst-firm-number").html(response["analyst_firm_number"]);
 
-                   //if query exists, show the "search results for" section
-                   if ($("#query-id").val()) {
-                       $("#results-for").show();
-                       $("#results-for-query").html($("#query-id").val());
-                       $("#cancel-query").show()
-                   } else {
-                       $("#results-for").hide();
-                       $("#cancel-query").hide()
-                   }
+            //if query exists, show the "search results for" section
+            if ($("#query-id").val()) {
+                $("#results-for").show();
+                $("#results-for-query").html($("#query-id").val());
+                $("#cancel-query").show()
+            } else {
+                $("#results-for").hide();
+                $("#cancel-query").hide()
+            }
 
 
-               }
-           }).done(function () {
-                       showLoading(false);
-                   });
+        }
+    }).done(function () {
+            showLoading(false);
+        });
 }
 
 /**

@@ -5,8 +5,9 @@ from django.http import HttpResponse
 from haystack.query import SearchQuerySet
 from haystack.inputs import AutoQuery, Clean
 from haystack.models import SearchResult
+from ucapp.forms import AnalystReviewForm
 
-from models import Analyst, AnalystFirm, AnalystReview
+from models import Analyst, AnalystFirm, AnalystReview, AnalystRatingText, AnalystRating
 import json
 
 # Create your views here.
@@ -66,5 +67,30 @@ def pr_agency(request):
     analysts = Analyst.objects.all()
     return render(request, "pr_agency.html", {'analysts': analysts})
 
-def write(request):
-    return render(request, "review_analyst/review_analyst.html", {})
+def review_analyst(request, analyst_id):
+    analyst = Analyst.objects.get(id=analyst_id)
+    if request.method == "GET":
+        form = AnalystReviewForm()
+        rating_texts = AnalystRatingText.objects.all()
+
+        data = {'form': form, 'rating_texts': rating_texts, 'analyst': analyst}
+        return render(request, "review_analyst/review_analyst.html", data)
+    elif request.method == "POST":
+        form = AnalystReviewForm(request.POST)
+        if form.is_valid():
+            review = form.save(commit=False)
+            review.author = request.user
+            review.analyst = analyst
+            review.save()
+
+        for rating_text in AnalystRatingText.objects.all():
+            rating = request.POST['rating-text-' + str(rating_text.id)]
+            analyst_rating = AnalystRating.objects.create(review=review, text=rating_text, rating=int(rating))
+
+
+
+        return render(request, "home.html", {})
+
+#helper function to update analyst summary
+def update_analyst(analyst, analyst_review):
+    return None

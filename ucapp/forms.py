@@ -2,6 +2,7 @@ __author__ = 'ericxiao'
 from li_registration.models import UserProfile
 from django import forms
 from django.contrib.auth.models import User
+from ucapp.models import AnalystReview
 from registration_email.forms import generate_username
 attrs_dict={'class':'form-control'}
 
@@ -38,3 +39,9 @@ class NewEmailRegistrationForm(forms.ModelForm):
         profile.name = self.cleaned_data['name']
         profile.save()
         return self.cleaned_data
+
+class AnalystReviewForm(forms.ModelForm):
+
+    class Meta:
+        model = AnalystReview
+        fields = ("content", "best_strength", "overall_rating", "is_anonymous")
