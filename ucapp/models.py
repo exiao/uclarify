@@ -2,24 +2,11 @@ from django.db import models
 from django.contrib.auth import get_user_model
 
 # Create your models here.
-class AnalystFirm(models.Model):
+class Specialization(models.Model):
     name = models.CharField(max_length=100)
     description = models.TextField()
     def __unicode__(self):
         return self.name
-
-class Analyst(models.Model):
-    first_name = models.CharField(max_length=50)
-    last_name = models.CharField(max_length=50)
-    analyst_firm = models.ForeignKey(AnalystFirm, related_name='analysts')
-    years_experience = models.IntegerField(default=1)
-
-    @property
-    def full_name(self):
-        return self.first_name + ' ' + self.last_name
-
-    def __unicode__(self):
-        return self.full_name
 
 class Review(models.Model):
     CURRENT = 'Current'
@@ -52,16 +39,9 @@ class AnalystReview(Review):
     )
 
     SCORE_CHOICES = zip( range(1,6), range(1,6) )
-
-    strength1 = models.CharField(choices=STRENGTH_CHOICES, max_length=50)
-    strength2 = models.CharField(choices=STRENGTH_CHOICES, max_length=50)
-    strength3 = models.CharField(choices=STRENGTH_CHOICES, max_length=50)
-    strength4 = models.CharField(choices=STRENGTH_CHOICES, max_length=50)
-    strength5 = models.CharField(choices=STRENGTH_CHOICES, max_length=50)
-
-    best_strength = models.CharField(choices=STRENGTH_CHOICES, max_length=50)
+    best_strength = models.CharField(choices=STRENGTH_CHOICES, max_length=50, null=True, blank=True)
     overall_rating = models.IntegerField(choices=SCORE_CHOICES, null=True)
-    analyst = models.ForeignKey(Analyst)
+    analyst = models.ForeignKey('Analyst')
     is_anonymous = models.BooleanField()
 
     def __unicode__(self):
@@ -78,14 +58,34 @@ class AnalystRatingText(models.Model):
     def __unicode__(self):
         return self.text
 
-#NOT USED
-class Rating(models.Model):
-    SCORE_CHOICES = zip( range(1,6), range(1,6) )
-    stars = models.IntegerField(choices=SCORE_CHOICES)
-
 #this is what gets created for reviews
 class AnalystRating(models.Model):
     review = models.ForeignKey(AnalystReview)
     text = models.ForeignKey(AnalystRatingText)
     SCORE_CHOICES = zip( range(1,6), range(1,6) )
     rating = models.IntegerField(choices=SCORE_CHOICES)
+
+class Analyst(models.Model):
+    first_name = models.CharField(max_length=50)
+    last_name = models.CharField(max_length=50)
+    analyst_firm = models.ForeignKey('AnalystFirm', related_name='analysts')
+    years_experience = models.IntegerField(default=1)
+    average_rating = models.DecimalField(max_digits=3, decimal_places=2, null=True, blank=True)
+    num_reviews = models.IntegerField(null=True, blank=True)
+    specializations = models.ManyToManyField('Specialization')
+    best_strength = models.CharField(choices=AnalystReview.STRENGTH_CHOICES, max_length=50)
+
+    @property
+    def full_name(self):
+        return self.first_name + ' ' + self.last_name
+
+    def __unicode__(self):
+        return self.full_name
+
+class AnalystFirm(models.Model):
+    name = models.CharField(max_length=100)
+    description = models.TextField()
+    average_rating = models.DecimalField(max_digits=3, decimal_places=2, null=True, blank=True)
+    num_reviews = models.IntegerField(null=True, blank=True)
+    def __unicode__(self):
+        return self.name

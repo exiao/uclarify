@@ -7,7 +7,8 @@ from haystack.inputs import AutoQuery, Clean
 from haystack.models import SearchResult
 from ucapp.forms import AnalystReviewForm
 
-from models import Analyst, AnalystFirm, AnalystReview, AnalystRatingText, AnalystRating
+
+from models import Analyst, AnalystFirm, AnalystReview, AnalystRatingText, AnalystRating, Specialization
 import json
 
 # Create your views here.
@@ -28,9 +29,24 @@ def ajax_search(request):
         found_entries = SearchQuerySet().filter(
             content=AutoQuery(query_string)
         )
+
     # Sorting Results by Model
     analysts = found_entries.models(Analyst)
     analyst_firms = found_entries.models(AnalystFirm)
+
+    if ('sort' in request.GET) and request.GET['sort'].strip():
+        sort = request.GET['sort']
+        if sort == 'best_rating':
+            analysts = analysts.order_by('average_rating')
+            analyst_firms = analyst_firms.order_by('average_rating')
+        elif sort == 'most_reviewed':
+            analysts = analysts.order_by('num_reviews')
+            analyst_firms = analyst_firms.order_by('num_reviews')
+
+    if ('specialization' in request.GET) and request.GET['specialization'].strip():
+        specialization = request.GET['specialization'] # this is a PK of the specialization object
+        if specialization != 'All':
+            analysts = analysts.filter(specializations__contains=specialization)
 
     search_data['analysts'] = analysts
     search_data['analyst_firms'] = analyst_firms
@@ -55,6 +71,7 @@ def analyst(request):
 
 def search(request):
     data = {}
+    data['specializations'] = Specialization.objects.all()
     if "query" in request.GET:
         data["query"] = request.GET["query"];
     return render(request, "search/search.html", data)

@@ -23,7 +23,11 @@ $(document).ready(function () {
     $("#cancel-query").click(function () {
         $("#query-id").val("");
         runSearch();
-    })
+    });
+
+    $("#specialization-id").change(function() {
+       runSearch();
+    });
 
 });
 

@@ -1,4 +1,6 @@
 {{ object.full_name }}
 {{ object.analyst_firm }}
+{% for specialization in specializations %}
+{{ specialization.name }}
+{% endfor %}
 Analyst
-
