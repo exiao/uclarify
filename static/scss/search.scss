@@ -164,6 +164,12 @@ body {
         font-weight: 600;
         font-size: 16px;
       }
+      .description {
+        .no-review {
+          color: #6f6f6f;
+          font-style: italic;
+        }
+      }
     }
   } /* end .element */
 

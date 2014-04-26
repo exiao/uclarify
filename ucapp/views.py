@@ -1,15 +1,14 @@
-from django.core import serializers
+import json
+
 from django.shortcuts import render
 from django.http import HttpResponse
-
 from haystack.query import SearchQuerySet
-from haystack.inputs import AutoQuery, Clean
-from haystack.models import SearchResult
+from haystack.inputs import AutoQuery
 from ucapp.forms import AnalystReviewForm
-
-
+from ucapp.utils import add_new_review_to_analyst
 from models import Analyst, AnalystFirm, AnalystReview, AnalystRatingText, AnalystRating, Specialization
-import json
+from django.shortcuts import redirect
+
 
 # Create your views here.
 def home(request):
@@ -99,15 +98,15 @@ def review_analyst(request, analyst_id):
             review.author = request.user
             review.analyst = analyst
             review.save()
+        else: #throw error handler
+            pass
 
         for rating_text in AnalystRatingText.objects.all():
             rating = request.POST['rating-text-' + str(rating_text.id)]
             analyst_rating = AnalystRating.objects.create(review=review, text=rating_text, rating=int(rating))
 
+        add_new_review_to_analyst(analyst, review)
+
+        return redirect(analyst)
 
 
-        return render(request, "home.html", {})
-
-#helper function to update analyst summary
-def update_analyst(analyst, analyst_review):
-    return None

@@ -1,5 +1,12 @@
+
+#!/bin/bash
+
+function runserver {
 source ./env/bin/activate
 ./manage.py syncdb
 ./manage.py migrate ucapp --fake
 ./manage.py migrate li_registration --fake
 ./manage.py migrate static_precompiler --fake
+}
+
+runserver

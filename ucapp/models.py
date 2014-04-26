@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth import get_user_model
+from django.core.urlresolvers import reverse
 
 # Create your models here.
 class Specialization(models.Model):
@@ -45,7 +46,7 @@ class AnalystReview(Review):
     is_anonymous = models.BooleanField()
 
     def __unicode__(self):
-        return str(self.author) + ' ' + str(self.analyst)
+        return str(self.author) + ' reviewed ' + str(self.analyst)
 
 class HelpfulRating(models.Model):
     review = models.ForeignKey(Review)
@@ -71,7 +72,7 @@ class Analyst(models.Model):
     analyst_firm = models.ForeignKey('AnalystFirm', related_name='analysts')
     years_experience = models.IntegerField(default=1)
     average_rating = models.DecimalField(max_digits=3, decimal_places=2, null=True, blank=True)
-    num_reviews = models.IntegerField(null=True, blank=True)
+    num_reviews = models.IntegerField(default=0)
     specializations = models.ManyToManyField('Specialization')
     best_strength = models.CharField(choices=AnalystReview.STRENGTH_CHOICES, max_length=50)
     recent_review = models.ForeignKey('AnalystReview', null=True, blank=True, related_name='+')
@@ -82,6 +83,9 @@ class Analyst(models.Model):
 
     def __unicode__(self):
         return self.full_name
+
+    def get_absolute_url(self):
+        return reverse("ucapp.views.analyst_details", args=[str(self.id)])
 
 class AnalystFirm(models.Model):
     name = models.CharField(max_length=100)
