@@ -19,6 +19,11 @@ def analyst_details(request, analyst_id):
     reviews = AnalystReview.objects.all().filter(analyst=analyst)
     return render(request, "analyst_details.html", {'analyst': analyst, 'reviews': reviews})
 
+def analyst_firm_details(request, analyst_firm_id):
+    analyst_firm = AnalystFirm.objects.get(pk=analyst_firm_id)
+    #reviews = AnalystReview.objects.all().filter(analyst=analyst)
+    return render(request, "analyst_firm_details.html", {'analyst_firm': analyst_firm})
+
 def ajax_search(request):
     #if request.is_ajax():
     search_data = {}
@@ -36,11 +41,11 @@ def ajax_search(request):
     if ('sort' in request.GET) and request.GET['sort'].strip():
         sort = request.GET['sort']
         if sort == 'best_rating':
-            analysts = analysts.order_by('average_rating')
-            analyst_firms = analyst_firms.order_by('average_rating')
+            analysts = analysts.order_by('-average_rating')
+            analyst_firms = analyst_firms.order_by('-average_rating')
         elif sort == 'most_reviewed':
-            analysts = analysts.order_by('num_reviews')
-            analyst_firms = analyst_firms.order_by('num_reviews')
+            analysts = analysts.order_by('-num_reviews')
+            analyst_firms = analyst_firms.order_by('-num_reviews')
 
     if ('specialization' in request.GET) and request.GET['specialization'].strip():
         specialization = request.GET['specialization'] # this is a PK of the specialization object

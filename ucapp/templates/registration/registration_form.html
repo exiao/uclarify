@@ -16,6 +16,7 @@
         <div class="form-group{% if field.errors %} has-error{% endif %}">
             <label class="control-label" for="{{field.auto_id}}">{{field.label}}</label>
             {{field}}
+            <span class="helptext">{{ field.help_text }}</span>
         </div>
         {% endfor %}
     </fieldset>

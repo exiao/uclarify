@@ -14,7 +14,10 @@ class NewEmailRegistrationForm(forms.ModelForm):
 
     class Meta:
         model = UserProfile
-        fields = ('name', 'company', 'job_title', 'email', 'password1', 'password2')
+        fields = ('name', 'company', 'job_title', 'alias', 'email', 'password1', 'password2')
+        help_texts = {
+            'alias': ('This will be displayed instead of your name on an anonymous review.'),
+        }
 
     def clean_email(self):
         email = self.cleaned_data['email'].strip()
