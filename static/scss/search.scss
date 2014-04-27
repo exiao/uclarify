@@ -127,6 +127,13 @@ body {
           cursor: pointer;
           text-decoration: underline;
         }
+        &.active {
+          color: rgb(51, 51, 51);
+          &:hover {
+            cursor: default;
+            text-decoration: none;
+          }
+        }
       }
     }
     #results-for {

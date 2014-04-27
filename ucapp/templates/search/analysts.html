@@ -5,8 +5,11 @@
         <img src="http://bit.ly/NIhdeX" class="img-rounded">
       </div>
       <div class="col-md-3 description-col">
-        <div class="name"><a
-            href='{{ analyst.object.get_absolute_url }}'>{{ analyst.first_name }} {{ analyst.last_name }}</a></div>
+        <div class="name">
+          <a href='{{ analyst.object.get_absolute_url }}'>
+            {{ analyst.first_name }} {{ analyst.last_name }}
+          </a>
+        </div>
         <div class="rating">{{ analyst.object.average_rating }}</div>
         <div class="company">{{ analyst.analyst_firm }}</div>
       </div>
