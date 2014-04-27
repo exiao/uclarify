@@ -72,7 +72,7 @@ class Analyst(models.Model):
     analyst_firm = models.ForeignKey('AnalystFirm', related_name='analysts')
     years_experience = models.IntegerField(default=1)
     average_rating = models.DecimalField(max_digits=3, decimal_places=2, null=True, blank=True)
-    num_reviews = models.IntegerField(default=0)
+    num_reviews = models.IntegerField(default=0, null=True)
     specializations = models.ManyToManyField('Specialization')
     best_strength = models.CharField(choices=AnalystReview.STRENGTH_CHOICES, max_length=50)
     recent_review = models.ForeignKey('AnalystReview', null=True, blank=True, related_name='+')

@@ -9,6 +9,7 @@ class UserProfile(models.Model):
     company = models.CharField(max_length=150, blank=True)
     job_title = models.CharField(max_length=150, blank=True)
     avatar = ResizedImageField(max_width=1024, max_length=1024, upload_to='/profile_images/', blank=True)
+    alias = models.CharField(max_length=100, unique=True, null=True)
 
     def __unicode__(self):
         return u'Profile: %s' % self.email
