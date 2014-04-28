@@ -1,62 +1,15 @@
 <!-- MASSIVE TABLE SECTION -->
 <table id="ratings" class="table table-striped">
   <tbody>
-  <tr class="rate-row">
-    <td>
-      <div id="rate-1" class="rating"></div>
-    </td>
-    <td>
-      <div class="explanation">Their insight and vision of the industry segment(s) they cover.</div>
-    </td>
-  </tr>
-  <tr class="rate-row">
-    <td>
-      <div id="rate-2" class="rating"></div>
-    </td>
-    <td>
-      <div class="explanation">Their ability grasp the technology they cover.</div>
-    </td>
-  </tr>
-  <tr class="rate-row">
-    <td>
-      <div id="rate-3" class="rating"></div>
-    </td>
-    <td>
-      <div class="explanation">The overall quality of the content this analyst creates.</div>
-    </td>
-  </tr>
-  <tr class="rate-row">
-    <td>
-      <div id="rate-4" class="rating"></div>
-    </td>
-    <td>
-      <div class="explanation">Their customer insights.</div>
-    </td>
-  </tr>
-  <tr class="rate-row">
-    <td>
-      <div id="rate-5" class="rating"></div>
-    </td>
-    <td>
-      <div class="explanation">Their helpfulness in the development of strategy.</div>
-    </td>
-  </tr>
-  <tr class="rate-row">
-    <td>
-      <div id="rate-6" class="rating"></div>
-    </td>
-    <td>
-      <div class="explanation">The business impact this analyst offers to a company.</div>
-    </td>
-  </tr>
-
-  <tr class="rate-row">
-    <td>
-      <div id="rate-7" class="rating"></div>
-    </td>
-    <td>
-      <div class="explanation">The perceived reputation of this analyst in the industry segment they cover.</div>
-    </td>
-  </tr>
+  {% for rating_text in rating_texts %}
+    <tr class="rate-row">
+      <td>
+        <div id="rating-text-{{ rating_text.id }}-id" class="rating"></div>
+      </td>
+      <td>
+        <div class="explanation">{{ rating_text.text }}</div>
+      </td>
+    </tr>
+  {% endfor %}
   </tbody>
 </table>

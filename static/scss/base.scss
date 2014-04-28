@@ -1,5 +1,6 @@
 $blue: #2DA1FF;
 $dark_blue: #428bca;
+$light_blue: rgb(45, 161, 255);
 
 body {
   font-family: 'Source Sans Pro', sans-serif;
@@ -21,5 +22,12 @@ input[type="text"], textarea {
     -moz-box-shadow: $input-box-shadow;
     box-shadow: $input-box-shadow;
     border-color: rgb(107, 211, 255);
+  }
+}
+
+a {
+  color: $light_blue;
+  &:hover {
+    color: #2b79d1;
   }
 }

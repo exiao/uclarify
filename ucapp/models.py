@@ -1,25 +1,13 @@
 from django.db import models
 from django.contrib.auth import get_user_model
+from django.core.urlresolvers import reverse
 
 # Create your models here.
-class AnalystFirm(models.Model):
+class Specialization(models.Model):
     name = models.CharField(max_length=100)
     description = models.TextField()
     def __unicode__(self):
         return self.name
-
-class Analyst(models.Model):
-    first_name = models.CharField(max_length=50)
-    last_name = models.CharField(max_length=50)
-    analyst_firm = models.ForeignKey(AnalystFirm, related_name='analysts')
-    years_experience = models.IntegerField(default=1)
-
-    @property
-    def full_name(self):
-        return self.first_name + ' ' + self.last_name
-
-    def __unicode__(self):
-        return self.full_name
 
 class Review(models.Model):
     CURRENT = 'Current'
@@ -51,25 +39,58 @@ class AnalystReview(Review):
         (WP, WP),
     )
 
-    strength1 = models.CharField(choices=STRENGTH_CHOICES, max_length=50)
-    strength2 = models.CharField(choices=STRENGTH_CHOICES, max_length=50)
-    strength3 = models.CharField(choices=STRENGTH_CHOICES, max_length=50)
-    strength4 = models.CharField(choices=STRENGTH_CHOICES, max_length=50)
-    strength5 = models.CharField(choices=STRENGTH_CHOICES, max_length=50)
-    analyst = models.ForeignKey(Analyst)
+    SCORE_CHOICES = zip( range(1,6), range(1,6) )
+    best_strength = models.CharField(choices=STRENGTH_CHOICES, max_length=50, null=True, blank=True)
+    overall_rating = models.IntegerField(choices=SCORE_CHOICES, null=True)
+    analyst = models.ForeignKey('Analyst', related_name='reviews_set')
+    is_anonymous = models.BooleanField()
 
     def __unicode__(self):
-        return str(self.author) + ' ' + str(self.analyst)
+        return str(self.author) + ' reviewed ' + str(self.analyst)
 
 class HelpfulRating(models.Model):
     review = models.ForeignKey(Review)
     user = models.ForeignKey(get_user_model())
     upvote = models.BooleanField()
 
-class Rating(models.Model):
-    SCORE_CHOICES = zip( range(1,6), range(1,6) )
-    stars = models.IntegerField(choices=SCORE_CHOICES)
+#set amount of base questions to be referenced
+class AnalystRatingText(models.Model):
     text = models.CharField(max_length=200)
+    def __unicode__(self):
+        return self.text
 
-class AnalystRating(Rating):
+#this is what gets created for reviews
+class AnalystRating(models.Model):
     review = models.ForeignKey(AnalystReview)
+    text = models.ForeignKey(AnalystRatingText)
+    SCORE_CHOICES = zip( range(1,6), range(1,6) )
+    rating = models.IntegerField(choices=SCORE_CHOICES)
+
+class Analyst(models.Model):
+    first_name = models.CharField(max_length=50)
+    last_name = models.CharField(max_length=50)
+    analyst_firm = models.ForeignKey('AnalystFirm', related_name='analysts')
+    years_experience = models.IntegerField(default=1)
+    average_rating = models.DecimalField(max_digits=3, decimal_places=2, null=True, blank=True)
+    num_reviews = models.IntegerField(default=0, null=True)
+    specializations = models.ManyToManyField('Specialization')
+    best_strength = models.CharField(choices=AnalystReview.STRENGTH_CHOICES, max_length=50)
+    recent_review = models.ForeignKey('AnalystReview', null=True, blank=True, related_name='+')
+
+    @property
+    def full_name(self):
+        return self.first_name + ' ' + self.last_name
+
+    def __unicode__(self):
+        return self.full_name
+
+    def get_absolute_url(self):
+        return reverse("ucapp.views.analyst_details", args=[str(self.id)])
+
+class AnalystFirm(models.Model):
+    name = models.CharField(max_length=100)
+    description = models.TextField()
+    average_rating = models.DecimalField(max_digits=3, decimal_places=2, null=True, blank=True)
+    num_reviews = models.IntegerField(null=True, blank=True)
+    def __unicode__(self):
+        return self.name

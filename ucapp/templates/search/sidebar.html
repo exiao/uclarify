@@ -10,14 +10,13 @@
       <i id="cancel-query" class="fa fa-times-circle"></i>
     </div>
 
-    <div id="specialization" class="section">
+    <div id="specialization" class="section type analyst-type">
       <div class="title">Specialization</div>
-      <select name="specialization" class="form-control">
-        <option>Marketing Solutions</option>
-        <option>2</option>
-        <option>3</option>
-        <option>4</option>
-        <option>5</option>
+      <select id="specialization-id" name="specialization" class="form-control">
+          <option>All</option>
+        {% for specialization in specializations %}
+          <option value='{{ specialization.pk }}'>{{ specialization.name }}</option>
+        {% endfor %}
       </select>
     </div>
 

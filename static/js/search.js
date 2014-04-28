@@ -1,10 +1,11 @@
 $(document).ready(function () {
     var current_type = "analyst-type"; //analyst-type, analyst-firm-type -- these values are the ID of the button
+    var sort_option = "relevance";
 
     //activate the initial type
     activateType(current_type);
 
-    //switches the current type
+    //switches the current type in the front end(analyst, analyst firm)
     $(".type-btn").click(function () {
         //handle button logic
         current_type = $(this).attr("id");
@@ -20,43 +21,56 @@ $(document).ready(function () {
         runSearch();
     });
 
-    $("#cancel-query").click(function(){
-       $("#query-id").val("");
+    $("#cancel-query").click(function () {
+        $("#query-id").val("");
         runSearch();
-    })
+    });
 
+    //run search when you hit a specialization filter
+    $("#specialization-id").change(function () {
+        runSearch();
+    });
+
+    //change sort option
+    $(".sort-option").on("click", function () {
+        $(".sort-option").removeClass("active");
+        $(this).addClass("active");
+        sort_option = $(this).attr("id");
+        runSearch();
+    });
+
+    function runSearch() {
+        showLoading(true);
+        var url = $("#sidebar-form").attr("action");
+        $.ajax({
+                   type: "GET",
+                   url: url,
+                   data: $("#sidebar-form").serialize() + "&sort=" + sort_option,
+                   success: function (response) {
+                       $("#analysts").html(response["analyst_page"]);
+                       $("#analyst-firms").html(response["analyst_firm_page"]);
+
+                       $(".analyst-number").html(response["analyst_number"]);
+                       $(".analyst-firm-number").html(response["analyst_firm_number"]);
+
+                       //if query exists, show the "search results for" section
+                       if ($("#query-id").val()) {
+                           $("#results-for").show();
+                           $("#results-for-query").html($("#query-id").val());
+                           $("#cancel-query").show()
+                       } else {
+                           $("#results-for").hide();
+                           $("#cancel-query").hide()
+                       }
+
+
+                   }
+               }).done(function () {
+                           showLoading(false);
+                       });
+    }
 });
 
-function runSearch() {
-    showLoading(true);
-    var url = $("#sidebar-form").attr("action");
-    $.ajax({
-               type: "GET",
-               url: url,
-               data: $("#sidebar-form").serialize(),
-               success: function (response) {
-                   $("#analysts").html(response["analyst_page"]);
-                   $("#analyst-firms").html(response["analyst_firm_page"]);
-
-                   $(".analyst-number").html(response["analyst_number"]);
-                   $(".analyst-firm-number").html(response["analyst_firm_number"]);
-
-                   //if query exists, show the "search results for" section
-                   if ($("#query-id").val()) {
-                       $("#results-for").show();
-                       $("#results-for-query").html($("#query-id").val());
-                       $("#cancel-query").show()
-                   } else {
-                       $("#results-for").hide();
-                       $("#cancel-query").hide()
-                   }
-
-
-               }
-           }).done(function () {
-                       showLoading(false);
-                   });
-}
 
 /**
  * Shows all the matching type classes while hiding the inactive ones

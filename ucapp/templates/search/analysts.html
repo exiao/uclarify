@@ -5,17 +5,25 @@
         <img src="http://bit.ly/NIhdeX" class="img-rounded">
       </div>
       <div class="col-md-3 description-col">
-        <div class="name">{{ analyst.first_name }} {{ analyst.last_name }}</div>
-        <div class="rating">insert rating</div>
+        <div class="name">
+          <a href='{{ analyst.object.get_absolute_url }}'>
+            {{ analyst.first_name }} {{ analyst.last_name }}
+          </a>
+        </div>
+        <div class="rating">{{ analyst.object.average_rating }}</div>
         <div class="company">{{ analyst.analyst_firm }}</div>
       </div>
       <div class="col-md-7 review-col">
         <div class="description-title">Recent Review</div>
         <div class="description">
-          <i class="fa fa-quote-left fa-border"></i>
-          Herpy derpy deprprpprp Herpy derpy deprprpprp Herpy derpy deprprpprp.
-          Herpy derpy deprprpprp Herpy derpy deprprpprp Herpy derpy deprprpprp.
-          Herpy derpy deprprpprp Herpy derpy deprprpprp Herpy derpy deprprpprp.
+          {% if analyst.object.recent_review.content %}
+            <i class="fa fa-quote-left fa-border"></i>
+            {{ analyst.object.recent_review.content }}
+          {% else %}
+            <div class="no-review">
+              No review available.
+            </div>
+          {% endif %}
         </div>
       </div>
     </div>

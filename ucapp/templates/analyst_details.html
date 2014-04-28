@@ -16,7 +16,7 @@
           <div class="name">{{analyst.first_name}} {{analyst.last_name}}</div>
           <div class="firm">{{analyst.analyst_firm}}</div>
           <div class="rating"></div>
-          <div class="review-button"><div class="button-content">Write a review</div></div>
+          <a id="write-review-btn" class="btn btn-primary btn-block" href="{% url "review_analyst" analyst.id %}">Write a review <i class="fa fa-pencil"></i></a>
         </div>
       </div>
 

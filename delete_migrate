@@ -1,0 +1,15 @@
+#!/bin/bash
+
+function runserver {
+
+source ./env/bin/activate
+./manage.py syncdb
+rm -rf ./ucapp/migrations
+rm -rf ./li_registration/migrations
+mkdir ./ucapp/migrations
+mkdir ./li_registration/migrations
+./manage.py migrate ucapp --delete-ghost-migrations
+./manage.py migrate li_registration --delete-ghost-migrations
+}
+
+runserver

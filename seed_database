@@ -1,0 +1,6 @@
+#!/bin/bash
+
+function runserver {
+./manage.py loaddata initial
+}
+runserver

@@ -1,13 +1,14 @@
-from django.core import serializers
+import json
+
 from django.shortcuts import render
 from django.http import HttpResponse
-
 from haystack.query import SearchQuerySet
-from haystack.inputs import AutoQuery, Clean
-from haystack.models import SearchResult
+from haystack.inputs import AutoQuery
+from ucapp.forms import AnalystReviewForm
+from ucapp.utils import add_new_review_to_analyst
+from models import Analyst, AnalystFirm, AnalystReview, AnalystRatingText, AnalystRating, Specialization
+from django.shortcuts import redirect
 
-from models import Analyst, AnalystFirm, AnalystReview
-import json
 
 # Create your views here.
 def home(request):
@@ -18,6 +19,11 @@ def analyst_details(request, analyst_id):
     reviews = AnalystReview.objects.all().filter(analyst=analyst)
     return render(request, "analyst_details.html", {'analyst': analyst, 'reviews': reviews})
 
+def analyst_firm_details(request, analyst_firm_id):
+    analyst_firm = AnalystFirm.objects.get(pk=analyst_firm_id)
+    #reviews = AnalystReview.objects.all().filter(analyst=analyst)
+    return render(request, "analyst_firm_details.html", {'analyst_firm': analyst_firm})
+
 def ajax_search(request):
     #if request.is_ajax():
     search_data = {}
@@ -27,9 +33,24 @@ def ajax_search(request):
         found_entries = SearchQuerySet().filter(
             content=AutoQuery(query_string)
         )
+
     # Sorting Results by Model
     analysts = found_entries.models(Analyst)
     analyst_firms = found_entries.models(AnalystFirm)
+
+    if ('sort' in request.GET) and request.GET['sort'].strip():
+        sort = request.GET['sort']
+        if sort == 'best_rating':
+            analysts = analysts.order_by('-average_rating')
+            analyst_firms = analyst_firms.order_by('-average_rating')
+        elif sort == 'most_reviewed':
+            analysts = analysts.order_by('-num_reviews')
+            analyst_firms = analyst_firms.order_by('-num_reviews')
+
+    if ('specialization' in request.GET) and request.GET['specialization'].strip():
+        specialization = request.GET['specialization'] # this is a PK of the specialization object
+        if specialization != 'All':
+            analysts = analysts.filter(specializations__contains=specialization)
 
     search_data['analysts'] = analysts
     search_data['analyst_firms'] = analyst_firms
@@ -54,6 +75,7 @@ def analyst(request):
 
 def search(request):
     data = {}
+    data['specializations'] = Specialization.objects.all()
     if "query" in request.GET:
         data["query"] = request.GET["query"];
     return render(request, "search/search.html", data)
@@ -66,5 +88,30 @@ def pr_agency(request):
     analysts = Analyst.objects.all()
     return render(request, "pr_agency.html", {'analysts': analysts})
 
-def write(request):
-    return render(request, "review_analyst/review_analyst.html", {})
+def review_analyst(request, analyst_id):
+    analyst = Analyst.objects.get(id=analyst_id)
+    if request.method == "GET":
+        form = AnalystReviewForm()
+        rating_texts = AnalystRatingText.objects.all()
+
+        data = {'form': form, 'rating_texts': rating_texts, 'analyst': analyst}
+        return render(request, "review_analyst/review_analyst.html", data)
+    elif request.method == "POST":
+        form = AnalystReviewForm(request.POST)
+        if form.is_valid():
+            review = form.save(commit=False)
+            review.author = request.user
+            review.analyst = analyst
+            review.save()
+        else: #throw error handler
+            pass
+
+        for rating_text in AnalystRatingText.objects.all():
+            rating = request.POST['rating-text-' + str(rating_text.id)]
+            analyst_rating = AnalystRating.objects.create(review=review, text=rating_text, rating=int(rating))
+
+        add_new_review_to_analyst(analyst, review)
+
+        return redirect(analyst)
+
+
