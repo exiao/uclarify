@@ -1,25 +1,52 @@
 {% extends "base.html" %}
 {% load i18n %}
 
+{% block head %}
+  {% load scss %}
+  <link href="{{ STATIC_URL }}{% scss 'scss/register.scss' %}" rel="stylesheet">
+{% endblock %}
+
 {% block content %}
-<form action="{% url 'registration_register' %}" method="post">
-    {% if form.errors %}
-       <div class="alert alert-danger">
-           {% for field in form %}
-               {% for error in field.errors %}<div>{{ error }}</div>{% endfor %}
-           {% endfor %}
-       </div>
-    {% endif %}
-    <fieldset>
+<div class="form-wrapper">
+  <div class="form-container">
+    <div class="title">Sign Up For uClarify</div>
+    <form action="{% url 'registration_register' %}" method="post">
+        {% if form.errors %}
+           <div class="alert alert-danger">
+               {% for field in form %}
+                   {% for error in field.errors %}<div>{{ error }}</div>{% endfor %}
+               {% endfor %}
+           </div>
+        {% endif %}
         {% csrf_token %}
-        {% for field in form %}
-        <div class="form-group{% if field.errors %} has-error{% endif %}">
-            <label class="control-label" for="{{field.auto_id}}">{{field.label}}</label>
-            {{field}}
+        <div class="form-group">
+          <input class="form-control" name="{{ form.name.html_name }}" id="{{ form.name.auto_id }}" type="text" placeholder="Your Name" required/>
+          <label>Name</label>
         </div>
-        {% endfor %}
-    </fieldset>
-    <input type="submit" value="Register" class="btn btn-primary">
-</form>
-<a href="{% url "social:begin" "linkedin" %}">Sign in with LinkedIn</a>
+        <div class="form-group">
+          <input class="form-control" name="{{ form.company.html_name }}" id="{{ form.company.auto_id }}" type="text" placeholder="Company" required/>
+          <label>Company</label>
+        </div>
+        <div class="form-group">
+        <input class="form-control" name="{{ form.job_title.html_name }}" id="{{ form.job_title.auto_id }}" type="text" placeholder="Job Title" required/>
+          <label>Job Title</label>
+        </div>
+        <div class="form-group">
+        <input class="form-control" name="{{ form.email.html_name }}" id="{{ form.email.auto_id }}" type="text" placeholder="Email" required/>
+          <label>Email</label>
+        </div>
+        <div class="form-group">
+        <input class="form-control" name="{{ form.password1.html_name }}" id="{{ form.password1.auto_id }}" type="password" placeholder="Create a password" required/>
+          <label>Create a password</label>
+        </div>
+        <div class="form-group">
+        <input class="form-control" name="{{ form.password2.html_name }}" id="{{ form.password2.auto_id }}" type="password" placeholder="Confirm your password" required/>
+          <label>Confirm your password</label>
+        </div>
+        
+        <input type="submit" value="Register" class="btn btn-primary">
+    </form>
+    <div class="linkedin"><a href="{% url "social:begin" "linkedin" %}"><img src="/static/images/linkedin.png"></a></div>
+  </div>
+</div>
 {% endblock %}
