@@ -31,25 +31,25 @@
       position: relative;
       overflow: auto;
       margin-bottom: 5px;
-    }
 
-    .form-control {
-      margin-top: 20px;
-    }
+      .form-control {
+        margin-top: 20px;
+      }
 
-    label {
-      display: block;
-      text-transform: uppercase;
-      color: #878787;
-      font-size: 14px;
-      position: absolute;
-      top: 0;
-      transition: top 200ms linear, color 200ms linear;
-    }
+      label {
+        display: block;
+        text-transform: uppercase;
+        color: #878787;
+        font-size: 14px;
+        position: absolute;
+        top: 0;
+        transition: top 200ms linear, color 200ms linear;
+      }
 
-    .form-control:invalid + label{
-      color: transparent;
-      top: 10px;
+      .form-control:invalid + label{
+        color: transparent;
+        top: 10px;
+      }
     }
 
     input[type="submit"] {

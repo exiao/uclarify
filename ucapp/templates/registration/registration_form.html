@@ -6,6 +6,10 @@
   <link href="{{ STATIC_URL }}{% scss 'scss/register.scss' %}" rel="stylesheet">
 {% endblock %}
 
+{% block javascript %}
+  <script src="{{ STATIC_URL }}js/register.js"></script>
+{% endblock %}
+
 {% block content %}
 <div class="form-wrapper">
   <div class="form-container">
@@ -22,6 +26,10 @@
         <div class="form-group">
           <input class="form-control" name="{{ form.name.html_name }}" id="{{ form.name.auto_id }}" type="text" placeholder="Your Name" required/>
           <label>Name</label>
+        </div>
+        <div class="form-group">
+          <input class="form-control" name="{{ form.alias.html_name }}" id="{{ form.alias.auto_id }}" type="text" placeholder="Anonymous Alias" required title="{{ form.alias.help_text }}" data-toggle="tooltip"/>
+          <label>Anonymous Alias</label>
         </div>
         <div class="form-group">
           <input class="form-control" name="{{ form.company.html_name }}" id="{{ form.company.auto_id }}" type="text" placeholder="Company" required/>
