@@ -10,4 +10,12 @@ $(document).ready(function () {
 
     $(".btn").button();
 
+//    $("#review-form").validate({
+//        rules: {
+//            is_anonymous: "required",
+//            content: "required"
+//
+//        }
+//                               });
+
 });

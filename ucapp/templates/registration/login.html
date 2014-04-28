@@ -12,9 +12,9 @@
 		<div class="title">Welcome To uClarify</div>
 		<form method="post" action=".">
 		  {% csrf_token %}
-		  <input name="{{ form.username.html_name }}" id="id_username" type="text" placeholder="Email"/>
-		  <input name="{{ form.password.html_name }}" id="id_password" type="password" placeholder="Password"/>
-		  <input type="submit" value="{% trans 'Log in' %}" />
+		  <input name="{{ form.username.html_name }}" id="id_username" class="form-control" type="text" placeholder="Email"/>
+		  <input name="{{ form.password.html_name }}" id="id_password" class="form-control" type="password" placeholder="Password"/>
+		  <input type="submit" class="btn btn-primary btn-block" value="{% trans 'Log in' %}" />
 		  <div class="remember_me">
 		  	<input name="{{ form.remember_me.html_name }}" id="id_remember_me" type="checkbox"> Stay Signed In
 		  </div> 

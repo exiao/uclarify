@@ -16,7 +16,7 @@
       text-align: center;
       color: $blue;
       font-size: 24px;
-      margin-bottom:10px;
+      margin-bottom: 10px;
     }
 
     input {
@@ -29,26 +29,31 @@
 
     .form-group {
       position: relative;
-      overflow: auto;
+      overflow: visible;
       margin-bottom: 5px;
 
       .form-control {
         margin-top: 20px;
+        &:invalid + label{
+            visibility: hidden;
+            left: -20px;
+        }
+        input {
+          z-index: 10;
+        }
       }
 
       label {
         display: block;
+        visibility: visible;
         text-transform: uppercase;
         color: #878787;
         font-size: 14px;
         position: absolute;
-        top: 0;
-        transition: top 200ms linear, color 200ms linear;
-      }
-
-      .form-control:invalid + label{
-        color: transparent;
-        top: 10px;
+        top: -20px;
+        left: 0px;
+        transition: left 0.1s linear, visibility 0.1s linear;
+        z-index: 0;
       }
     }
 

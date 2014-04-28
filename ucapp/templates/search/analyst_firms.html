@@ -1,16 +1,29 @@
+{% load extra_filters %}
+
 {% if analyst_firms %}
   {% for analyst_firm in analyst_firms %}
     <div class="row element">
       <div class="col-md-2">
         {% if analyst_firm.object.photo %}
-          <img src="{{ analyst_firm.object.photo.url }}" class="img-rounded">
+          <img src="{{ analyst_firm.object.photo.url }}" class="img-rounded avatar">
         {% else %}
-          <img src="http://blog.rmi.org/Content/Images/officebuilding.jpg" class="img-rounded">
+          <img src="http://blog.rmi.org/Content/Images/officebuilding.jpg" class="img-rounded avatar">
         {% endif %}
       </div>
       <div class="col-md-3 description-col">
         <div class="name">{{ analyst_firm.name }}</div>
-        <div class="rating">insert rating</div>
+        <div class="rating">
+          {% if analyst_firm.object.average_rating %}
+            {% for i in analyst_firm.object.average_rating|floatformat:0|get_range %} {# for loop to add filled stars #}
+               <img src="{{ STATIC_URL }}plugins/raty-2.5.2/img/star-on.png" class="star-img"/>
+            {% endfor %}
+            {% for i in analyst_firm.object.average_rating|floatformat:0|get_subtracted_range_by_5 %} {# for loop to add empty stars #}
+               <img src="{{ STATIC_URL }}plugins/raty-2.5.2/img/star-off.png" class="star-img"/>
+            {% endfor %}
+          {% else %}
+            No rating available.
+          {% endif %}
+        </div>
       </div>
       <div class="col-md-7 review-col">
         <div class="description-title">Description</div>

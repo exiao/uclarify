@@ -17,7 +17,7 @@ def home(request):
 
 def analyst_details(request, analyst_id):
     analyst = Analyst.objects.get(pk=analyst_id)
-    reviews = AnalystReview.objects.all().filter(analyst=analyst)
+    reviews = AnalystReview.objects.all().filter(analyst=analyst).order_by("-time_created")
     return render(request, "analyst_details.html", {'analyst': analyst, 'reviews': reviews})
 
 def analyst_firm_details(request, analyst_firm_id):
@@ -106,7 +106,10 @@ def review_analyst(request, analyst_id):
             review.analyst = analyst
             review.save()
         else: #throw error handler
-            pass
+            rating_texts = AnalystRatingText.objects.all()
+
+            data = {'form': form, 'rating_texts': rating_texts, 'analyst': analyst}
+            return render(request, "review_analyst/review_analyst.html", data)
 
         for rating_text in AnalystRatingText.objects.all():
             rating = request.POST['rating-text-' + str(rating_text.id)]

@@ -33,10 +33,12 @@ $(document).ready(function () {
 
     //change sort option
     $(".sort-option").on("click", function () {
-        $(".sort-option").removeClass("active");
-        $(this).addClass("active");
-        sort_option = $(this).attr("id");
-        runSearch();
+        if (!$(this).hasClass("active")) {
+            $(".sort-option").removeClass("active");
+            $(this).addClass("active");
+            sort_option = $(this).attr("id");
+            runSearch();
+        }
     });
 
     function runSearch() {

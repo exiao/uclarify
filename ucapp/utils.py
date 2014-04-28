@@ -1,6 +1,6 @@
 #helper function to update analyst summary
 def add_new_review_to_analyst(analyst, review):
-    if analyst.num_reviews == 0:
+    if not analyst.num_reviews or analyst.num_reviews == 0:
         analyst.num_reviews = 1
         analyst.average_rating = review.overall_rating
     else:
@@ -16,7 +16,7 @@ def add_new_review_to_analyst(analyst, review):
 
 #helper function to update analyst_firm summary
 def add_new_review_to_analyst_firm(analyst_firm, review):
-    if analyst_firm.num_reviews == 0:
+    if not analyst_firm.num_reviews or analyst_firm.num_reviews == 0:
         analyst_firm.num_reviews = 1
         analyst_firm.average_rating = review.overall_rating
     else:

@@ -1,5 +1,9 @@
 @import "base.scss";
 
+body {
+  background-color: $grey_background;
+}
+
 .profile-container {
 
   margin-top: 20px;
@@ -8,14 +12,6 @@
   border-radius: 10px;
   overflow: hidden;
   min-height: 590px;
-
-  .star-rating {
-    font-size: 16px;
-    width: 22px;
-    height: 22px;
-    background-image: url("/static/images/star.png");
-    background-size: contain;
-  }
 
   .profile {
     padding-top: 20px;
@@ -36,14 +32,33 @@
       margin-top: 10px;
 
       .name {
-        font-size: 20px;
-        font-weight: bold;
+        font-size: 24px;
+        font-weight: 400;
       }
 
       .firm {
         font-size: 16px;
-        color: #999999;
-        font-weight: bold;
+        font-weight: 400;
+        margin-top: -5px;
+      }
+
+      .rating {
+        margin-top: 10px;
+        display: inline-block;
+        .no-rating {
+          font-style: italic;
+          color: $dark_grey;
+        }
+        .rating-summary {
+          margin-left: 5px;
+          display: inline-block;
+          .num-reviews {
+            font-size: 14px;
+            display: inline-block;
+            color: $dark_grey;
+            margin-left: 3px;
+          }
+        }
       }
 
       #write-review-btn {
@@ -79,13 +94,18 @@
   }
 
   .reviews-container {
-
+    background-color: white;
+     margin-bottom: -99999px;
+    padding-bottom: 99999px;
     .reviews-title {
       margin-top: 20px;
       margin-left: 15px;
-      color: $blue;
-      font-weight: bold;
+      //color: $blue;
+      font-weight: 400;
       font-size: 24px;
+      span {
+        color: $default_color;
+      }
     }
 
     .nav {
@@ -101,10 +121,9 @@
       margin-top: 10px;
       margin-bottom: 15px;
       margin-left: 5px;
-      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
       .active.sort-option {
         color: black;
-        font-size: 13px;
+        font-size: 14px;
         font-weight: bold;
         &:hover {
           cursor: auto;
@@ -112,10 +131,10 @@
         }
       }
       .sort-option {
-        font-size: 12px;
+        font-size: 14px;
         display: inline-block;
         margin-left: 10px;
-        color: #428bca;
+        color: $dark_blue;
         &:hover {
           cursor: pointer;
           text-decoration: underline;
@@ -124,25 +143,31 @@
     }
 
     .reviews-list {
-      
+
       .divider {
         border-bottom: 1px solid gainsboro;
       }
 
       .review {
         margin: 20px 0 20px 0;
+        .overall {
+          margin-bottom: 5px;
+        }
 
         .rating-wrapper {
           .description {
-            margin-top: 10px;
             font-size: 11px;
             color: #818181;
           }
           .rating-bar {
-            margin-top: 2px;
+            margin-bottom: 4px;
             height: 5px;
-            width: 60px;
-            background-color: $blue;
+            width: 80px;
+            background-color: #d4d4d4;
+            .fill {
+              background-color: $blue;
+              height: 5px;
+            }
           }
         }
 
@@ -166,8 +191,8 @@
               }
             }
 
-            .reviewer {
-              margin-top: 5px;
+            .review-by {
+              font-size: 14px;
             }
           }
         }
@@ -185,7 +210,7 @@
             margin-left: 10px;
           }
         }
-        
+
       }
 
       .no-reviews {
@@ -195,8 +220,6 @@
       }
     }
 
-
   }
-
 
 }

@@ -1,12 +1,16 @@
+{% load extra_filters %}
+
 {% if analysts %}
   {% for analyst in analysts %}
     <div class="row element">
       <div class="col-md-2">
-        {% if analyst.object.photo %}
-          <img src="{{ analyst.object.photo.url }}" class="img-rounded">
-        {% else %}
-          <img src="http://paddocks.kwiksta.com/files/profile/default.jpg" class="img-rounded">
-        {% endif %}
+        <a href='{{ analyst.object.get_absolute_url }}'>
+          {% if analyst.object.photo %}
+            <img src="{{ analyst.object.photo.url }}" class="img-rounded avatar">
+          {% else %}
+            <img src="http://paddocks.kwiksta.com/files/profile/default.jpg" class="img-rounded avatar">
+          {% endif %}
+        </a>
       </div>
       <div class="col-md-3 description-col">
         <div class="name">
@@ -14,8 +18,21 @@
             {{ analyst.first_name }} {{ analyst.last_name }}
           </a>
         </div>
-        <div class="rating">{{ analyst.object.average_rating }}</div>
         <div class="company">{{ analyst.analyst_firm }}</div>
+        <div class="rating">
+          {% if analyst.object.average_rating %}
+            {% for i in analyst.object.average_rating|floatformat:0|get_range %} {# for loop to add filled stars #}
+              <img src="{{ STATIC_URL }}plugins/raty-2.5.2/img/star-on.png" class="star-img"/>
+            {% endfor %}
+            {% for i in analyst.object.average_rating|floatformat:0|get_subtracted_range_by_5 %}
+              {# for loop to add empty stars #}
+              <img src="{{ STATIC_URL }}plugins/raty-2.5.2/img/star-off.png" class="star-img"/>
+            {% endfor %}
+          {% else %}
+            No rating available.
+          {% endif %}
+        </div>
+
       </div>
       <div class="col-md-7 review-col">
         <div class="description-title">Recent Review</div>

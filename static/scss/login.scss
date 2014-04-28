@@ -2,6 +2,7 @@
 
 .form-wrapper {
   text-align: center;
+  margin-bottom: 20px;
 
   .form-container {
     padding: 20px 40px 40px 40px;
@@ -34,14 +35,7 @@
     }
 
     input[type="submit"] {
-      background-color: $blue;
-      color: white;
-      width: 100%;
-      border-radius: 5px;
-      font-size: 18px;
-      padding: 5px 0 5px 0;
       margin-top: 20px;
-      height: 40px;
     }
 
     .remember_me {

@@ -33,9 +33,15 @@
     font-weight: 300;
     margin-left: 20px;
     margin-top: 35px;
-    #name {
-      font-size: 40px;
-      line-height: 40px;
+    a {
+      &:hover {
+        text-decoration: none !important;
+      }
+      #name {
+        font-size: 40px;
+        line-height: 40px;
+
+      }
     }
     #company {
       font-size: 22px;

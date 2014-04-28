@@ -16,16 +16,20 @@
     <div id="sub">Provide some feedback to the community.</div>
   </div>
 
-  <form action="{% url "review_analyst" analyst.id %}" method="post">
+  <form id="review-form" action="{% url "review_analyst" analyst.id %}" method="post">
   {% csrf_token %}
     <div class="container">
       <div id="profile">
         <div id="photo">
-          <img src="http://thelightboxdesigns.com/wp-content/uploads/2013/12/Business-Guy-Cropped.jpg"
+          {% if analyst.photo %}
+          <img src="{{ analyst.photo.url }}"
                class="img-circle">
+          {% else %}
+            <img src="http://paddocks.kwiksta.com/files/profile/default.jpg" class="img-circle">
+          {% endif %}
         </div>
         <div id="info">
-          <div id="name">{{ analyst.full_name }}</div>
+          <a href="{{ analyst.get_absolute_url }}"><div id="name">{{ analyst.full_name }}</div></a>
           <div id="company">{{ analyst.analyst_firm.name }}</div>
         </div>
       </div>
@@ -38,13 +42,12 @@
         <div class="col-md-8 section-input">
           <div class="btn-group" data-toggle="buttons">
             <label class="btn btn-white yes-no">
-              <input type="radio" name="{{ form.is_anonymous.html_name }}" value="True" id="option1"> <i
+              <input type="radio" name="is_anonymous" value="True" required /> <i
                 class="fa fa-thumbs-up"></i> Yes, hide me!
             </label>
             <label class="btn btn-white yes-no">
-              <input type="radio" name="{{ form.is_anonymous.html_name }}" value="False" id="option2"> <i
+              <input type="radio" name="is_anonymous" value="False" /> <i
                 class="fa fa-thumbs-down"></i> No, show me!
-            </label>
             </label>
           </div>
         </div>
@@ -139,6 +142,7 @@
     var STATIC_URL = "{{ STATIC_URL }}";
   </script>
 
+  <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.12.0/jquery.validate.min.js"></script>
   <script type="text/javascript" src="{{ STATIC_URL }}plugins/raty-2.5.2/jquery.raty.min.js"></script>
   <script type="text/javascript" src="{{ STATIC_URL }}js/review_analyst.js"></script>
   <script type="text/javascript">
