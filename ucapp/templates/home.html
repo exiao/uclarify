@@ -6,13 +6,16 @@
 {% endblock %}
 
 {% block content %}
+{% if user and not user.is_anonymous %}
+  <div class="alert alert-success">Welcome to uClarify, <strong>{{ user.get_full_name }}</strong></div>
+{% endif %}
   <div class="hero">
     <div class="hero-layer">
       <div class="container">
         <div class="row">
           <div class="col-md-10 col-md-offset-2">
             <div class="main-text">Discover your marketing mojo</div>
-            <div class="sub-text">Find the best marketing solutions for your company</div>
+            <div class="sub-text">Find and review the best marketing analysts for your company</div>
             <div class="row search-row">
               <form action="{% url "search" %}">
                 <div class="col-md-6">
@@ -36,9 +39,7 @@
           <div class="title">Take your marketing to the next level</div>
           <!--div class="sub-text">Revolutionizing some garbage your way.</div-->
           <div class="description">
-            Companies use reviews on uClarify to raise their PR above their competitors. Leverage the marketing
-            community
-            to find the best one for your business.
+            uClarify is the definitive community driven source of reviews for analysts, creative agencies, and industry events.
           </div>
 
         </div>
@@ -50,4 +51,16 @@
       </div>
     </div>
   </div>
+{% endblock %}
+
+{% block javascript %}
+  <script src="{{ STATIC_URL }}js/get_url.js" type='text/javascript'></script>
+  <script type="text/javascript">
+  $(document).ready(function () {
+      var li_login = GetUrlValue('li_login');
+      if (li_login == 1) {
+          $(".alert").show();
+      }
+  });
+  </script>
 {% endblock %}

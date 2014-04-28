@@ -96,7 +96,7 @@ class AnalystFirm(models.Model):
     name = models.CharField(max_length=100)
     description = models.TextField()
     average_rating = models.DecimalField(max_digits=3, decimal_places=2, null=True, blank=True)
-    num_reviews = models.IntegerField(default=0)
+    num_reviews = models.IntegerField(default=0, null=True)
     photo = ResizedImageField(max_width=1024, max_length=1024, upload_to='analyst_firm_images/', blank=True, null=True)
 
     def __unicode__(self):

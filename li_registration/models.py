@@ -14,13 +14,13 @@ class UserProfile(models.Model):
     def __unicode__(self):
         return u'Profile: %s' % self.email
 
-    def save(self, *args, **kwargs):
-        try:
-            existing = UserProfile.objects.get(user=self.user)
-            self.id = existing.id #force update instead of insert
-        except UserProfile.DoesNotExist:
-            pass
-        models.Model.save(self, *args, **kwargs)
+    # def save(self, *args, **kwargs):
+    #     try:
+    #         existing = UserProfile.objects.get(user=self.user)
+    #         self.id = existing.id #force update instead of insert
+    #     except UserProfile.DoesNotExist:
+    #         pass
+    #     models.Model.save(self, *args, **kwargs)
 
 def social_auth_to_profile(backend, details, response, user=None, is_new=False, *args, **kwargs):
     if is_new:

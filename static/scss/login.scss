@@ -1,5 +1,11 @@
 @import "base.scss";
 
+.alert {
+  text-align: center;
+  display: none;
+  margin-bottom: 0px;
+}
+
 .form-wrapper {
   text-align: center;
   margin-bottom: 20px;

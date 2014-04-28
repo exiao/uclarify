@@ -1,0 +1,202 @@
+@import "base.scss";
+
+.profile-container {
+
+  margin-top: 20px;
+  margin-bottom: 30px;
+  border: 1px solid #dfdfdf;
+  border-radius: 10px;
+  overflow: hidden;
+  min-height: 590px;
+
+  .star-rating {
+    font-size: 16px;
+    width: 22px;
+    height: 22px;
+    background-image: url("/static/images/star.png");
+    background-size: contain;
+  }
+
+  .profile {
+    padding-top: 20px;
+    padding-bottom: 99999px;
+    margin-bottom: -99999px;
+
+    background-color: #f7f7f7;
+    border-right: 1px solid #dfdfdf;
+
+    .profile-pic {
+      img {
+        height: 220px;
+        width: 220px;
+      }
+    }
+
+    .basic-info {
+      margin-top: 10px;
+
+      .name {
+        font-size: 20px;
+        font-weight: bold;
+      }
+
+      .firm {
+        font-size: 16px;
+        color: #999999;
+        font-weight: bold;
+      }
+
+      #write-review-btn {
+        margin-top: 15px;
+        font-size: 16px;
+        i {
+          display: inline-block;
+          margin-left: 5px;
+        }
+      }
+
+      .review-button {
+
+        &:hover {
+          background-color: $blue;
+        }
+
+        text-align: center;
+        margin: auto;
+        margin-top: 30px;
+        width: 125px;
+        cursor: pointer;
+        border-radius: 10px;
+        background-color: $dark_blue;
+
+        .button-content {
+          color: white;
+          padding: 10px;
+        }
+      }
+
+    }
+  }
+
+  .reviews-container {
+
+    .reviews-title {
+      margin-top: 20px;
+      margin-left: 15px;
+      color: $blue;
+      font-weight: bold;
+      font-size: 24px;
+    }
+
+    .nav {
+      margin-top: 20px;
+      font-size: 18px;
+
+      .active {
+        font-weight: bold;
+      }
+    }
+
+    #sort {
+      margin-top: 10px;
+      margin-bottom: 15px;
+      margin-left: 5px;
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      .active.sort-option {
+        color: black;
+        font-size: 13px;
+        font-weight: bold;
+        &:hover {
+          cursor: auto;
+          text-decoration: none;
+        }
+      }
+      .sort-option {
+        font-size: 12px;
+        display: inline-block;
+        margin-left: 10px;
+        color: #428bca;
+        &:hover {
+          cursor: pointer;
+          text-decoration: underline;
+        }
+      }
+    }
+
+    .reviews-list {
+      
+      .divider {
+        border-bottom: 1px solid gainsboro;
+      }
+
+      .review {
+        margin: 20px 0 20px 0;
+
+        .rating-wrapper {
+          .description {
+            margin-top: 10px;
+            font-size: 11px;
+            color: #818181;
+          }
+          .rating-bar {
+            margin-top: 2px;
+            height: 5px;
+            width: 60px;
+            background-color: $blue;
+          }
+        }
+
+        .review-headline {
+
+          img {
+            height: 50px;
+            width: 50px;
+          }
+
+          .review-title {
+            margin-left: 10px;
+            display: inline-block;
+            vertical-align: top;
+
+            .strength-wrapper {
+              font-size: 18px;
+              .strength {
+                font-style: italic;
+                text-decoration: underline;
+              }
+            }
+
+            .reviewer {
+              margin-top: 5px;
+            }
+          }
+        }
+
+        .review-content {
+          margin-top: 15px;
+          clear: left;
+        }
+
+        .helpful {
+          margin-top: 20px;
+          font-size: 14px;
+
+          .feedback {
+            margin-left: 10px;
+          }
+        }
+        
+      }
+
+      .no-reviews {
+        margin-top: 40px;
+        text-align: center;
+        font-size: 20px;
+      }
+    }
+
+
+  }
+
+
+}

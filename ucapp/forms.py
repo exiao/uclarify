@@ -7,14 +7,15 @@ from registration_email.forms import generate_username
 attrs_dict={'class':'form-control'}
 
 class NewEmailRegistrationForm(forms.ModelForm):
-    name = forms.CharField(widget=forms.TextInput(attrs=attrs_dict))
+    first_name = forms.CharField(widget=forms.TextInput(attrs=attrs_dict))
+    last_name = forms.CharField(widget=forms.TextInput(attrs=attrs_dict))
     email = forms.EmailField(widget=forms.TextInput(attrs=attrs_dict))
     password1 = forms.CharField(widget=forms.PasswordInput(attrs=attrs_dict, render_value=False), label="Password")
     password2 = forms.CharField(widget=forms.PasswordInput(attrs=attrs_dict, render_value=False), label="Password (repeat)")
 
     class Meta:
         model = UserProfile
-        fields = ('name', 'company', 'job_title', 'alias', 'email', 'password1', 'password2')
+        fields = ('first_name', 'last_name', 'company', 'job_title', 'alias', 'email', 'password1', 'password2')
         help_texts = {
             'alias': ('This will be displayed instead of your name on an anonymous review.'),
         }
@@ -37,14 +38,17 @@ class NewEmailRegistrationForm(forms.ModelForm):
         self.cleaned_data['username'] = generate_username(self.cleaned_data['email'])
         # Create a temporary UserProfile, to be linked to forthcoming new User instance
         profile, created = UserProfile.objects.get_or_create(email=self.cleaned_data['email'])
+
+        profile.alias = self.cleaned_data['alias']
+        profile.first_name = self.cleaned_data['first_name']
+        profile.last_name = self.cleaned_data['last_name']
         profile.company = self.cleaned_data['company']
         profile.job_title = self.cleaned_data['job_title']
-        profile.name = self.cleaned_data['name']
+
         profile.save()
         return self.cleaned_data
 
 class AnalystReviewForm(forms.ModelForm):
-
     class Meta:
         model = AnalystReview
         fields = ("content", "best_strength", "overall_rating", "is_anonymous")

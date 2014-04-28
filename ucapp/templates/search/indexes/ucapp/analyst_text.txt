@@ -1,5 +1,7 @@
 {{ object.full_name }}
 {{ object.analyst_firm }}
+{{ object.best_strength }}
+{{ object.recent_review }}
 {% for specialization in specializations %}
 {{ specialization.name }}
 {% endfor %}

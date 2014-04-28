@@ -65,6 +65,20 @@ $(document).ready(function () {
                            $("#cancel-query").hide()
                        }
 
+                       //if specialization exists, show the filters section
+                       var specialization = $("#specialization-id option").filter(':selected').text();
+                       if (specialization != 'All') {
+                           $("#specialization-for").show();
+                           console.log(specialization);
+                           $("#specialization-for-query").html(specialization);
+                           if ($("#query-id").val()) {
+                               $("#specialization-text").html(" in ");
+                           }
+                       } else {
+                           $("#specialization-for").hide();
+                           $("#results-for").removeClass('has-specialization');
+                       }
+
 
                    }
                }).done(function () {

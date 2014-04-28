@@ -136,15 +136,20 @@ body {
         }
       }
     }
-    #results-for {
+    #results-for,
+    #specialization-for {
       margin-top: 10px;
       color: #616161;
       //font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
       font-size: 16px;
       display: none;
-      #results-for-query {
+      #results-for-query,
+      #specialization-for-query {
         font-weight: bold;
       }
+    }
+    #specialization-text {
+      margin-left:4px;
     }
   }
 
