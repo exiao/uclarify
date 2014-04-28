@@ -64,6 +64,9 @@
       .rate-row {
         td {
           vertical-align: middle;
+          &.rating-td {
+            width: 100px;
+          }
           .rating {
             display: inline-block;
           }

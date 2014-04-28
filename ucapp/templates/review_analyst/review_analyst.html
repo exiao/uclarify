@@ -145,7 +145,8 @@
     {% for rating_text in rating_texts %}
       $("#rating-text-{{ rating_text.id }}-id").raty({
         path: STATIC_URL + "plugins/raty-2.5.2/img",
-        scoreName: "rating-text-{{ rating_text.id }}"
+        scoreName: "rating-text-{{ rating_text.id }}",
+        size: 24
       });
     {% endfor %}
   </script>

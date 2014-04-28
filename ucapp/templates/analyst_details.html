@@ -10,7 +10,11 @@
     <div class="row">
       <div class="profile col-md-3">
         <div class="col-md-12 profile-pic">
-          <img src="http://bit.ly/NIhdeX" class="img-rounded">
+        {% if analyst.object.photo %}
+          <img src="{{ analyst.object.photo.url }}" class="img-rounded">
+        {% else %}
+          <img src="http://paddocks.kwiksta.com/files/profile/default.jpg" class="img-rounded">
+        {% endif %}
         </div>
         <div class="basic-info col-md-12">
           <div class="name">{{analyst.first_name}} {{analyst.last_name}}</div>
@@ -54,10 +58,14 @@
                 </div>
                 <div class="col-md-10">
                   <div class="review-headline">
-                    <img src="http://bit.ly/NIhdeX" class="img-rounded">
+                    {% if not review.is_anonymous and review.author.get_profile.avatar %}
+                      <img src="{{ review.author.get_profile.avatar.url }}" class="img-rounded">
+                    {% else %}
+                      <img src="http://paddocks.kwiksta.com/files/profile/default.jpg" class="img-rounded">
+                    {% endif %}
                     <div class="review-title">
-                      <div class="strength-wrapper">Best used for 
-                        <span class="strength">{{ review.strength1 }}</span>
+                      <div class="strength-wrapper">Best used for
+                        <span class="strength">{{ review.best_strength }}</span>
                       </div>
                       <div>Reviewed by anonymous</div>
                     </div>

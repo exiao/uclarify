@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth import get_user_model
 from django.core.urlresolvers import reverse
+from django_resized import ResizedImageField
 
 # Create your models here.
 class Specialization(models.Model):
@@ -73,9 +74,10 @@ class Analyst(models.Model):
     years_experience = models.IntegerField(default=1)
     average_rating = models.DecimalField(max_digits=3, decimal_places=2, null=True, blank=True)
     num_reviews = models.IntegerField(default=0, null=True)
-    specializations = models.ManyToManyField('Specialization')
-    best_strength = models.CharField(choices=AnalystReview.STRENGTH_CHOICES, max_length=50)
+    specializations = models.ManyToManyField('Specialization', blank=True)
+    best_strength = models.CharField(choices=AnalystReview.STRENGTH_CHOICES, max_length=50, blank=True)
     recent_review = models.ForeignKey('AnalystReview', null=True, blank=True, related_name='+')
+    photo = ResizedImageField(max_width=1024, max_length=1024, upload_to='analyst_images/', blank=True, null=True)
 
     @property
     def full_name(self):
@@ -91,6 +93,8 @@ class AnalystFirm(models.Model):
     name = models.CharField(max_length=100)
     description = models.TextField()
     average_rating = models.DecimalField(max_digits=3, decimal_places=2, null=True, blank=True)
-    num_reviews = models.IntegerField(null=True, blank=True)
+    num_reviews = models.IntegerField(default=0, null=True)
+    photo = ResizedImageField(max_width=1024, max_length=1024, upload_to='analyst_firm_images/', blank=True, null=True)
+
     def __unicode__(self):
         return self.name

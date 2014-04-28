@@ -26,6 +26,9 @@ TEMPLATE_DEBUG = True
 
 ALLOWED_HOSTS = []
 
+MEDIA_ROOT = BASE_DIR+ '/media'
+
+MEDIA_URL = '/site_media/'
 
 # Application definition
 

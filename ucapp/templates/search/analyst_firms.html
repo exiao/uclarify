@@ -2,7 +2,11 @@
   {% for analyst_firm in analyst_firms %}
     <div class="row element">
       <div class="col-md-2">
-        <img src="http://bit.ly/NIhdeX" class="img-rounded">
+        {% if analyst_firm.object.photo %}
+          <img src="{{ analyst_firm.object.photo.url }}" class="img-rounded">
+        {% else %}
+          <img src="http://blog.rmi.org/Content/Images/officebuilding.jpg" class="img-rounded">
+        {% endif %}
       </div>
       <div class="col-md-3 description-col">
         <div class="name">{{ analyst_firm.name }}</div>

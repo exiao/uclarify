@@ -5,9 +5,10 @@ from django.http import HttpResponse
 from haystack.query import SearchQuerySet
 from haystack.inputs import AutoQuery
 from ucapp.forms import AnalystReviewForm
-from ucapp.utils import add_new_review_to_analyst
+from ucapp.utils import add_new_review_to_analyst, add_new_review_to_analyst_firm
 from models import Analyst, AnalystFirm, AnalystReview, AnalystRatingText, AnalystRating, Specialization
 from django.shortcuts import redirect
+from django.contrib.auth.decorators import login_required
 
 
 # Create your views here.
@@ -88,6 +89,7 @@ def pr_agency(request):
     analysts = Analyst.objects.all()
     return render(request, "pr_agency.html", {'analysts': analysts})
 
+@login_required
 def review_analyst(request, analyst_id):
     analyst = Analyst.objects.get(id=analyst_id)
     if request.method == "GET":
@@ -111,6 +113,7 @@ def review_analyst(request, analyst_id):
             analyst_rating = AnalystRating.objects.create(review=review, text=rating_text, rating=int(rating))
 
         add_new_review_to_analyst(analyst, review)
+        add_new_review_to_analyst_firm(analyst.analyst_firm, review)
 
         return redirect(analyst)
 

@@ -2,7 +2,11 @@
   {% for analyst in analysts %}
     <div class="row element">
       <div class="col-md-2">
-        <img src="http://bit.ly/NIhdeX" class="img-rounded">
+        {% if analyst.object.photo %}
+          <img src="{{ analyst.object.photo.url }}" class="img-rounded">
+        {% else %}
+          <img src="http://paddocks.kwiksta.com/files/profile/default.jpg" class="img-rounded">
+        {% endif %}
       </div>
       <div class="col-md-3 description-col">
         <div class="name">
