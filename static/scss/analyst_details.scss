@@ -59,6 +59,27 @@ body {
             margin-left: 3px;
           }
         }
+
+        .rating-wrapper {
+          margin-top: 10px;
+          .description {
+            font-size: 14px;
+            color: #818181;
+          }
+          .rating-bar {
+            margin-bottom: 6px;
+            height: 8px;
+            width: 120px;
+            background-color: #d4d4d4;
+            .fill {
+              background-color: $blue;
+              height: 8px;
+            }
+          }
+          .tooltip {
+            width: 100px;
+          }
+        }
       }
 
       #write-review-btn {
@@ -154,7 +175,7 @@ body {
           margin-bottom: 5px;
 
           .date {
-            font-size: 13px;
+            font-size: 1px;
             color: #818181;
           }
         }
@@ -174,6 +195,9 @@ body {
               height: 5px;
             }
           }
+          .tooltip {
+            width: 100px;
+          }
         }
 
         .review-headline {
@@ -192,7 +216,7 @@ body {
               font-size: 18px;
               .strength {
                 font-style: italic;
-                /*text-decoration: underline;*/
+                border-bottom: 1px #6d6d6d dotted;
               }
             }
 

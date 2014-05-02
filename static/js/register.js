@@ -1,7 +1,6 @@
 $(document).ready(function () {
 
-   //"#id_alias"
-     $("input").tooltip({ /*or use any other selector, class, ID*/
+     $("input").tooltip({
 	    placement: "right",
 	    trigger: "focus"
 	});

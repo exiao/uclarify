@@ -1,5 +1,5 @@
 import json
-
+from django.db.models import Avg
 from django.shortcuts import render
 from django.http import HttpResponse
 from haystack.query import SearchQuerySet
@@ -18,7 +18,10 @@ def home(request):
 def analyst_details(request, analyst_id):
     analyst = Analyst.objects.get(pk=analyst_id)
     reviews = AnalystReview.objects.all().filter(analyst=analyst).order_by("-time_created")
-    return render(request, "analyst_details.html", {'analyst': analyst, 'reviews': reviews})
+    ratingsAvg = AnalystRating.objects.all().filter(review__analyst=analyst).values('text').annotate(average_rating=Avg('rating'))
+    for i in range(len(ratingsAvg)):
+        ratingsAvg[i]['text'] = AnalystRatingText.objects.get(pk=int(ratingsAvg[i]['text']))
+    return render(request, "analyst_details.html", {'analyst': analyst, 'reviews': reviews, 'ratingsAvg' : ratingsAvg})
 
 def analyst_firm_details(request, analyst_firm_id):
     analyst_firm = AnalystFirm.objects.get(pk=analyst_firm_id)

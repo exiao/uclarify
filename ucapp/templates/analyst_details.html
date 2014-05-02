@@ -7,6 +7,10 @@
   <link href="{{ STATIC_URL }}{% scss 'scss/analyst_details.scss' %}" rel="stylesheet">
 {% endblock %}
 
+{% block javascript %}
+  <script src="{{ STATIC_URL }}js/analyst_details.js"></script>
+{% endblock %}
+
 {% block content %}
   <div class="container profile-container">
     <div class="row">
@@ -35,6 +39,14 @@
               <div class="rating-summary">
                 {{ analyst.average_rating|floatformat:"-1" }} of 5
                 <div class="num-reviews">({{ reviews|length }} reviews)</div>
+              </div>
+              <div class="rating-wrapper">
+                {% for rating in ratingsAvg %}
+                  <div class="description" title="{{ rating.text.summary }}" data-toggle="tooltip">{{ rating.text.text }}</div>
+                  <div class="rating-bar">
+                    <div class="fill" style="width: {{ rating.average_rating|multiply:24 }}px;"></div>
+                  </div>
+                {% endfor %}
               </div>
             {% else %}
               <span class="no-rating">
@@ -88,7 +100,7 @@
                   </div>
                   <div class="rating-wrapper">
                     {% for rating in review.analystrating_set.all %}
-                      <div class="description">{{ rating.text.summary }}</div>
+                      <div class="description" title="{{ rating.text.summary }}" data-toggle="tooltip">{{ rating.text.text }}</div>
                       <div class="rating-bar">
                         <div class="fill" style="width: {{ rating.rating|multiply:16 }}px;"></div>
                       </div>
@@ -104,7 +116,7 @@
                     {% endif %}
                     <div class="review-title">
                       <div class="strength-wrapper">Best used for
-                        <span class="strength">{{ review.best_strength }}</span>
+                        <span class="strength" title="TO-DO Add strength description" data-toggle="tooltip">{{ review.best_strength }}</span>
                       </div>
                       <div class="review-by">
                         {% if review.is_anonymous %}
