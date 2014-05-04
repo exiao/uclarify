@@ -42,7 +42,7 @@
               </div>
               <div class="rating-wrapper">
                 {% for rating in ratingsAvg %}
-                  <div class="description" title="{{ rating.text.summary }}" data-toggle="tooltip">{{ rating.text.text }}</div>
+                  <div class="description" title="{{ rating.text.text }}" data-toggle="tooltip">{{ rating.text.summary }}</div>
                   <div class="rating-bar">
                     <div class="fill" style="width: {{ rating.average_rating|multiply:24 }}px;"></div>
                   </div>
@@ -100,7 +100,7 @@
                   </div>
                   <div class="rating-wrapper">
                     {% for rating in review.analystrating_set.all %}
-                      <div class="description" title="{{ rating.text.summary }}" data-toggle="tooltip">{{ rating.text.text }}</div>
+                      <div class="description" title="{{ rating.text.text }}" data-toggle="tooltip">{{ rating.text.summary }}</div>
                       <div class="rating-bar">
                         <div class="fill" style="width: {{ rating.rating|multiply:16 }}px;"></div>
                       </div>
