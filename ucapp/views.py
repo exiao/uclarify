@@ -93,6 +93,11 @@ def pr_agency(request):
     return render(request, "pr_agency.html", {'analysts': analysts})
 
 @login_required
+def write_review(request):
+    rating_texts = AnalystRatingText.objects.all()
+    return render(request, "write_review.html", {'rating_texts': rating_texts})
+
+@login_required
 def review_analyst(request, analyst_id):
     analyst = Analyst.objects.get(id=analyst_id)
     if request.method == "GET":

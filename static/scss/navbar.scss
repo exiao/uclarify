@@ -16,6 +16,10 @@
   }
 
   li{
+    .write-review {
+      font-weight: bold;
+    }
+
     a {
       $transitionTime: 0.1s;
 
