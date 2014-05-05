@@ -27,62 +27,55 @@
       display: table;
     }
 
-    .form-group {
-      position: relative;
-      overflow: visible;
-      margin-bottom: 5px;
+    .form-column {
+      float:left;
+      margin-bottom: 20px;
 
-      .form-control {
-        margin-top: 20px;
-        &:invalid + label{
-            visibility: hidden;
-            left: -20px;
-        }
-        input {
-          z-index: 10;
-        }
+      &.first {
+        margin-right: 10px;
       }
 
-      label {
-        display: block;
-        visibility: visible;
-        text-transform: uppercase;
-        color: #878787;
-        font-size: 14px;
-        position: absolute;
-        top: -20px;
-        left: 0px;
-        transition: left 0.1s linear, visibility 0.1s linear;
-        z-index: 0;
+      .form-group {
+        position: relative;
+        overflow: visible;
+        margin-bottom: 5px;
+
+        .form-control {
+          margin-top: 20px;
+          &:invalid + label{
+              visibility: hidden;
+              left: -20px;
+          }
+          input {
+            z-index: 10;
+          }
+        }
+
+        label {
+          display: block;
+          visibility: visible;
+          text-transform: uppercase;
+          color: #878787;
+          font-size: 14px;
+          position: absolute;
+          top: -20px;
+          left: 0px;
+          transition: left 0.1s linear, visibility 0.1s linear;
+          z-index: 0;
+        }
       }
     }
 
     input[type="submit"] {
-      background-color: $blue;
-      color: white;
-      width: 100%;
-      border-radius: 5px;
-      font-size: 18px;
-      padding: 5px 0 5px 0;
-      margin-top: 20px;
-      height: 40px;
-    }
-
-    .remember_me {
-      margin-top: 10px;
-
-      input#id_remember_me {
-        display: initial;
+        background-color: $blue;
+        clear: both;
+        color: white;
+        border-radius: 5px;
+        font-size: 18px;
+        padding: 5px 0 5px 0;
+        margin: 0 auto;
+        height: 40px;
       }
-    }
-
-    .other_options {
-      margin-top: 20px;
-
-      .register {
-        float: right;
-      }
-    }
 
     .linkedin {
       margin-top: 15px;
