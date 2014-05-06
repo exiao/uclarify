@@ -13,7 +13,8 @@ from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 def home(request):
-    return render(request, "home.html", {})
+    analysts = Analyst.objects.all()
+    return render(request, "home.html", {'analysts': analysts})
 
 def analyst_details(request, analyst_id):
     analyst = Analyst.objects.get(pk=analyst_id)

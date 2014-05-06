@@ -5,6 +5,8 @@
   <link href="{{ STATIC_URL }}{% scss 'scss/home.scss' %}" rel="stylesheet">
 {% endblock %}
 
+{% load extra_filters %}
+
 {% block content %}
 {% if user and not user.is_anonymous %}
   <div class="alert alert-success">Welcome to uClarify, <strong>{{ user.get_full_name }}</strong></div>
@@ -34,10 +36,97 @@
 
   <div class="section1">
     <div class="container">
+      <div class="col-md-9 border-right">
+        <div>
+          <div class="contentHeader">Recent Reviews</div>
+          <ul class="nav nav-tabs">
+            <li class="active"><a href="#">Analysts</a></li>
+            <li class=""><a href="#">Analyst Firms</a></li>
+            <li class=""><a href="#">Analyst Reports</a></li>
+          </ul>
+        </div>
+        <div>        
+          {% for analyst in analysts %}
+            <div class="row border">
+              <div class="col-md-2 columns img-col">
+                {% if analyst.photo %}
+                  <img src="{{ analyst.photo.url }}" class="img-rounded avatar">
+                {% else %}
+                  <img src="http://paddocks.kwiksta.com/files/profile/default.jpg" class="img-rounded avatar">
+                {% endif %}
+              </div>
+
+              <div class="col-md-3 columns">
+                <div class="name"><a href={{ analyst.pk }}>{{ analyst.first_name }} {{ analyst.last_name }}</a></div>
+                <div class="firm">{{ analyst.analyst_firm.name }}</div>
+                <div class="rating">
+                  {% if analyst.average_rating %}
+                    {% for i in analyst.average_rating|floatformat:0|get_range %}
+                      {# for loop to add filled stars #}
+                      <img src="{{ STATIC_URL }}plugins/raty-2.5.2/img/star-on.png" class="star-img"/>
+                    {% endfor %}
+                    {% for i in analyst.average_rating|floatformat:0|get_subtracted_range_by_5 %}
+                      {# for loop to add empty stars #}
+                      <img src="{{ STATIC_URL }}plugins/raty-2.5.2/img/star-off.png" class="star-img"/>
+                    {% endfor %}
+                  {% else %}
+                    <span class="no-rating">No rating available.</span>
+                  {% endif %}
+                </div>
+              </div>
+
+              <div class="col-md-6 columns">
+                <div class="review">
+                  <div class="header">
+                    Recent Review
+                  </div>
+                  <div class="review-text">
+                    {% if analyst.recent_review.content %}
+                      <i class="fa fa-quote-left fa-border"></i> {{ analyst.recent_review.content }}
+                    {% else %}
+                      <span class="no-review">No review available.</span>
+                    {% endif %}
+                  </div>
+                </div>
+              </div>
+            </div>
+          {% endfor %}
+          <div class="seeMore">See All Analyst Reviews</div>
+        </div>
+      </div>
+
+      <div class="col-md-3">
+        <div class="row review-of-the-day">
+          <div class="contentHeader2 border">Review of the Day</div>
+          <div class="col-md-5 nopadding"><img src="http://paddocks.kwiksta.com/files/profile/default.jpg" class="img-rounded avatar"></div>
+          <div class="col-md-7 nopadding">
+            <div class="name"><a href="#">Doge Doge</a></div>
+            <div class="firm">Forrester</div>
+            <div class="rating">
+              <img src="{{ STATIC_URL }}plugins/raty-2.5.2/img/star-on.png" class="star-img"/>
+              <img src="{{ STATIC_URL }}plugins/raty-2.5.2/img/star-on.png" class="star-img"/>
+              <img src="{{ STATIC_URL }}plugins/raty-2.5.2/img/star-on.png" class="star-img"/>
+              <img src="{{ STATIC_URL }}plugins/raty-2.5.2/img/star-on.png" class="star-img"/>
+              <img src="{{ STATIC_URL }}plugins/raty-2.5.2/img/star-on.png" class="star-img"/>
+            </div>
+          </div>
+          <div class="col-md-12 nopadding review-text">
+            This guys is great!
+          </div>
+        </div>
+        <div class="row popular-reports">
+          <div class="contentHeader2 border">Popular Reports</div>
+          <a class="row">Highest Rated Analyst</a>
+          <a class="row">Highest Rated Analyst Firm</a>
+          <a class="row">Top Analysts In Strategy Development</a>
+        </div>
+      </div>
+  </div>
+  <!-- <div class="section1">
+    <div class="container">
       <div class="row">
         <div class="col-md-5 col-md-offset-1 columns">
           <div class="title">Take your marketing to the next level</div>
-          <!--div class="sub-text">Revolutionizing some garbage your way.</div-->
           <div class="description">
             uClarify is the definitive community driven source of reviews for analysts, creative agencies, and industry events.
           </div>
@@ -50,7 +139,7 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
 {% endblock %}
 
 {% block javascript %}

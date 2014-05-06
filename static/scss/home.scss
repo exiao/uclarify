@@ -1,3 +1,5 @@
+@import "base.scss";
+
 .alert {
   text-align: center;
   display: none;
@@ -57,28 +59,127 @@
 }
 
 .section1 {
-  //background: rgba(45,161,255, 0.1);
-  //background-color: #EEEEEE;
-  .columns {
-    padding-top: 70px;
-    padding-bottom: 70px;
-    .title {
-      font-size: 28px;
-      color: #2DA1FF;
-      font-weight: 300;
+
+  background: #f6f6f6 none;
+  padding: 15px 0 30px 0;
+
+  .container {
+    background: white;
+    border: 1px solid #dbdbdb;
+    padding: 15px 0 15px 0;
+
+    .row {
+      margin: 0;
     }
-    .sub-text {
+
+    .contentHeader {
+      font-size: 22px;
+      font-weight: 600;
+      margin-bottom: 10px;
+      padding-left: 15px;
+    }
+
+    .review-of-the-day {
+
+      .contentHeader2 {
+        font-size: 18px;
+        font-weight: 600;
+        margin-bottom: 10px;
+      }
+
+      .nopadding {
+        padding: 0;
+      }
+
+      img {
+        height: 70px;
+        width: 70px;
+      }
+
+      .rating {
+        img {
+          height: 20px;
+          width: 20px;
+        }
+      }
+
+      .review-text {
+        margin-top: 5px;
+      }
+    }
+
+    .popular-reports {
+      margin-top: 30px;
+
+      .contentHeader2 {
+        font-size: 18px;
+        font-weight: 600;
+        margin-bottom: 10px;
+      }
+    }
+
+    .nav {
+      padding-left: 15px;
+    }
+
+    .border {
+      border-bottom: 1px solid #dbdbdb
+    }
+
+    .border-right {
+      border-right: 1px solid #dbdbdb
+    }
+
+    .columns {
+      padding-top: 15px;
+      padding-bottom: 20px;
+      &.img-col {
+        width: 140px;
+        .avatar {
+          width: 90px;
+          height: 90px;
+        }
+      }
+      .name {
+        font-size: 20px;
+        color: #2DA1FF;
+        line-height: 24px;
+      }
+      .rating {
+        padding-top: 3px;
+
+        img {
+          height: 20px;
+          width: 20px;
+        }
+
+        .no-rating {
+          font-style: italic;
+          color: $dark_grey;
+        }
+      }
+      .firm {
+        font-size: 16px;
+        color: rgb(93, 93, 93);
+      }
+      .review {
+        //font-size: 20px;
+        .header {
+          font-weight: 600;
+        }
+        .no-review {
+          font-style: italic;
+          color: $dark_grey;
+        }
+      }
+    }
+
+    .seeMore {
+      text-align: right;
       font-size: 16px;
-      color: rgb(93, 93, 93);
+      font-weight: bold;
+      margin: 10px 10px 10px 0;
+      color: #0378bb
     }
-    .description {
-      margin-top: 25px;
-      font-size: 20px;
-      line-height: 26px;
-    }
-  }
-  .col-img {
-    font-size: 120px;
-    line-height: 300px;
   }
 }
