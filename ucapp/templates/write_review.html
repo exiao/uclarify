@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block title %}uClarify - Search{% endblock %}
+
+{% block head %}
+  {% load scss %}
+  <link href="{{ STATIC_URL }}{% scss 'scss/write_review.scss' %}" rel="stylesheet">
+  <link
+      href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800'
+      rel='stylesheet' type='text/css'>
+{% endblock %}
+
+{% block content %}
+  <div id="header">
+    <div id="title">Write a Review</div>
+    <div id="sub">Provide some feedback to the community.</div>
+  </div>
+
+  <form id="review-form">
+  {% csrf_token %}
+    <div class="container">
+        
+        <div class="row analyst-name-row">
+          <div class="col-md-4 section-label">
+            <div class="title">Analyst Name</div>
+            <div class="description">Choose an analyst to review.</div>
+          </div>
+          <div class="col-md-8 section-input">
+            <input id="autocomplete" placeholder="Find an analyst">
+          </div>
+        </div>
+
+        <hr class="split-section">
+
+      {% include "write_review_fields.html" %}
+    </div>
+  </form>
+{% endblock %}
+
+{% block javascript %}
+  <script type="text/javascript">
+    var STATIC_URL = "{{ STATIC_URL }}";
+  </script>
+
+  <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.12.0/jquery.validate.min.js"></script>
+  <script type="text/javascript" src="{{ STATIC_URL }}plugins/raty-2.5.2/jquery.raty.min.js"></script>
+  <script type="text/javascript" src="{{ STATIC_URL }}js/review_analyst.js"></script>
+  <script type="text/javascript">
+    {% for rating_text in rating_texts %}
+      $("#rating-text-{{ rating_text.id }}-id").raty({
+        path: STATIC_URL + "plugins/raty-2.5.2/img",
+        scoreName: "rating-text-{{ rating_text.id }}",
+        size: 24
+      });
+    {% endfor %}
+  </script>
+{% endblock %}
