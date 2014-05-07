@@ -1,3 +1,5 @@
+@import "base.scss";
+
 .hero {
   background-image: url("/static/images/skyline2.jpg");
 }
@@ -29,17 +31,24 @@
     .columns {
       padding-top: 15px;
       padding-bottom: 20px;
+      &.img-col {
+        width: 140px;
+        .avatar {
+          width: 100px;
+          height: 100px;
+        }
+      }
 
       .name {
         font-size: 24px;
         color: #2DA1FF;
       }
       .rating {
-        font-size: 16px;
-        width: 22px;
-        height: 22px;
-        background-image: url("/static/images/star.png");
-        background-size: contain;
+        padding-top: 3px;
+        .no-rating {
+          font-style: italic;
+          color: $dark_grey;
+        }
       }
       .firm {
         font-size: 16px;

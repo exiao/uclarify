@@ -1,9 +1,14 @@
 {% extends "base.html" %}
 
+{% load extra_filters %}
+
 {% block head %}
   {% load scss %}
-  <link href="{{ STATIC_URL }}{% scss 'scss/analyst_details.scss' %}" rel="stylesheet">
   <link href="{{ STATIC_URL }}{% scss 'scss/analyst_firm_details.scss' %}" rel="stylesheet">
+{% endblock %}
+
+{% block javascript %}
+  <script src="{{ STATIC_URL }}js/analyst_firm_details.js"></script>
 {% endblock %}
 
 {% block content %}
@@ -11,61 +16,98 @@
     <div class="row">
       <div class="profile col-md-3">
         <div class="col-md-12 profile-pic">
-          <img src="http://bit.ly/NIhdeX" class="img-rounded">
+          <img src="http://paddocks.kwiksta.com/files/profile/default.jpg" class="img-rounded">
         </div>
         <div class="basic-info col-md-12">
           <div class="name">{{analyst_firm.name}}</div>
+          <div class="rating" title="This is an average rating of all the analysts in this firm." data-toggle="tooltip">
+            {% if  analyst_firm.average_rating %}
+              {% for i in analyst_firm.average_rating|floatformat:0|get_range %}
+                {# for loop to add filled stars #}
+                <img src="{{ STATIC_URL }}plugins/raty-2.5.2/img/star-on.png" class="star-img"/>
+              {% endfor %}
+              {% for i in analyst_firm.average_rating|floatformat:0|get_subtracted_range_by_5 %}
+                {# for loop to add empty stars #}
+                <img src="{{ STATIC_URL }}plugins/raty-2.5.2/img/star-off.png" class="star-img"/>
+              {% endfor %}
+              <div class="rating-summary">
+                {{ analyst_firm.average_rating|floatformat:"-1" }} of 5
+              </div>
+            {% else %}
+              <span class="no-rating">
+              No rating available.
+              </span>
+            {% endif %}
+          </div>
           <div class="description">{{analyst_firm.description}}</div>
-          <div class="rating"></div>
-          <div class="rating-help-text">Aggregated rating of all of its analysts</div>
         </div>
       </div>
 
       <div class="reviews-container col-md-9">
-        <!-- <ul class="nav nav-tabs">
-          <li class="active"><a href="#reviews">Reviews</a></li>
-          <li class=""><a href="#reports">Reports</a></li>
-        </ul> -->
-        <div class="reviews-title">Client Reviews</div>
-        <div id="sort">
-            <div class="sort-option active">
-              Most Helpful
-            </div>
-            <div class="sort-option">
-              Best Rating
-            </div>
-            <div class="sort-option">
-              Most Reviewed
-            </div>
-        </div>
+        <div class="reviews-title">Client Reviews of Analysts</div>
         <div class="reviews-list">
           {% if reviews %}
             {% for review in reviews %}
               <div class="row review">
+                <div class="col-md-2 analyst-reviewed">
+                  {% if review.analyst.photo %}
+                    <img src="{{ analyst.photo.url }}" class="img-rounded">
+                  {% else %}
+                    <img src="http://paddocks.kwiksta.com/files/profile/default.jpg" class="img-rounded">
+                  {% endif %}
+
+                  <div class="name"><a href="{{review.analyst.get_absolute_url}}">{{review.analyst.first_name}} {{review.analyst.last_name}}</a></div>
+                </div>
                 <div class="col-md-2">
-                  <div class="star-rating"></div>
+                  <div class="overall">
+                    <div class="date">{{review.time_created|date:"M d, Y"}}</div>
+                  {% if review.overall_rating %}
+                    {% for i in review.overall_rating|floatformat:0|get_range %}
+                      {# for loop to add filled stars #}
+                      <img src="{{ STATIC_URL }}plugins/raty-2.5.2/img/star-on-small.png" class="star-img"/>
+                    {% endfor %}
+                    {% for i in review.overall_rating|floatformat:0|get_subtracted_range_by_5 %}
+                      {# for loop to add empty stars #}
+                      <img src="{{ STATIC_URL }}plugins/raty-2.5.2/img/star-off-small.png" class="star-img"/>
+                    {% endfor %}
+                  {% else %}
+                    No rating available.
+                  {% endif %}
+                  </div>
                   <div class="rating-wrapper">
-                    <div class="description">Insight and Vision</div>
-                    <div class="rating-bar"></div>
-                    <div class="description">Customer Insight</div>
-                    <div class="rating-bar" style="width: 80px"></div>
-                    <div class="description">Quality of Content</div>
-                    <div class="rating-bar" style="width: 40px"></div>
+                    {% for rating in review.analystrating_set.all %}
+                      <div class="description" title="{{ rating.text.text }}" data-toggle="tooltip">{{ rating.text.summary }}</div>
+                      <div class="rating-bar">
+                        <div class="fill" style="width: {{ rating.rating|multiply:16 }}px;"></div>
+                      </div>
+                    {% endfor %}
                   </div>
                 </div>
-                <div class="col-md-10">
+                <div class="col-md-8">
                   <div class="review-headline">
-                    <img src="http://bit.ly/NIhdeX" class="img-rounded">
+                    {% if not review.is_anonymous and review.author.get_profile.photo %}
+                      <img src="{{ review.author.get_profile.photo.url }}" class="img-rounded">
+                    {% else %}
+                      <img src="http://paddocks.kwiksta.com/files/profile/default.jpg" class="img-rounded">
+                    {% endif %}
                     <div class="review-title">
-                      <div class="strength-wrapper">Best used for 
-                        <span class="strength">{{ review.strength1 }}</span>
+                      <div class="strength-wrapper">Best used for
+                        <span class="strength" title="TO-DO Add strength description" data-toggle="tooltip">{{ review.best_strength }}</span>
                       </div>
-                      <div>Reviewed by anonymous</div>
+                      <div class="review-by">
+                        {% if review.is_anonymous %}
+                          Anonymous review by
+                          {{ review.author.get_profile.alias }}
+                        {% else %}
+                          Review by
+                          {{ review.author.get_full_name }}
+                        {% endif %}
+                      </div>
                     </div>
                   </div>
                   <div class="review-content">
                     <i class="fa fa-quote-left fa-border"></i>
-                    {{review.content}}
+                    {{ review.content }}
                   </div>
                   <div class="helpful">
                     <span>Was this review helpful?</span>
@@ -82,8 +124,6 @@
             <div class="no-reviews">There are currently no reviews.</div>
           {% endif %}
         </div>
-
-      </div>
     </div>
   </div>
 {% endblock %}

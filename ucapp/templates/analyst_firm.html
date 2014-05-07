@@ -1,5 +1,7 @@
 {% extends "base.html" %}
 
+{% load extra_filters %}
+
 {% block head %}
   {% load scss %}
   <link href="{{ STATIC_URL }}{% scss 'scss/analyst_firm.scss' %}" rel="stylesheet">
@@ -13,7 +15,7 @@
         <div class="row">
           <div class="col-md-10 col-md-offset-2">
             <div class="main-text">Analyst Firm</div>
-            <div class="sub-text">Help you decide which garbage to recycle</div>
+            <div class="sub-text">Helps you make the best decisions.</div>
             <div class="row search-row">
               <form>
                 <div class="col-md-6">
@@ -35,13 +37,26 @@
       <div class="contentHeader border">Analyst Firm Reviews</div>
       {% for firm in analyst_firms %}
         <div class="row border">
-          <div class="col-md-2 columns">
-            Insert Picture
+          <div class="col-md-2 columns img-col">
+            <img src="http://paddocks.kwiksta.com/files/profile/default.jpg" class="img-rounded avatar">
           </div>
 
           <div class="col-md-3 columns">
-            <div class="name">{{ firm.name }}</div>
-            <div class="rating"></div>
+            <div class="name"><a href="{{firm.pk}}">{{ firm.name }}</a></div>
+            <div class="rating">
+              {% if firm.average_rating %}
+                {% for i in firm.average_rating|floatformat:0|get_range %}
+                  {# for loop to add filled stars #}
+                  <img src="{{ STATIC_URL }}plugins/raty-2.5.2/img/star-on.png" class="star-img"/>
+                {% endfor %}
+                {% for i in firm.average_rating|floatformat:0|get_subtracted_range_by_5 %}
+                  {# for loop to add empty stars #}
+                  <img src="{{ STATIC_URL }}plugins/raty-2.5.2/img/star-off.png" class="star-img"/>
+                {% endfor %}
+              {% else %}
+                <span class="no-rating">No rating available.</span>
+              {% endif %}
+            </div>
           </div>
 
           <div class="col-md-7 columns">

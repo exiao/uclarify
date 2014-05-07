@@ -26,8 +26,8 @@ def analyst_details(request, analyst_id):
 
 def analyst_firm_details(request, analyst_firm_id):
     analyst_firm = AnalystFirm.objects.get(pk=analyst_firm_id)
-    #reviews = AnalystReview.objects.all().filter(analyst=analyst)
-    return render(request, "analyst_firm_details.html", {'analyst_firm': analyst_firm})
+    reviews = AnalystReview.objects.all().filter(analyst__analyst_firm=analyst_firm).order_by("-time_created")
+    return render(request, "analyst_firm_details.html", {'analyst_firm': analyst_firm, 'reviews': reviews})
 
 def ajax_search(request):
     #if request.is_ajax():

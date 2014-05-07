@@ -9,14 +9,6 @@
   overflow: hidden;
   min-height: 590px;
 
-  .star-rating {
-    font-size: 16px;
-    width: 22px;
-    height: 22px;
-    background-image: url("/static/images/star.png");
-    background-size: contain;
-  }
-
   .profile {
     padding-top: 20px;
     padding-bottom: 99999px;
@@ -40,41 +32,18 @@
         font-weight: bold;
       }
 
-      .firm {
-        font-size: 16px;
-        color: #999999;
-        font-weight: bold;
+      .rating {
+        margin-top: 5px;
+        width: 180px;
       }
 
-      #write-review-btn {
-        margin-top: 15px;
-        font-size: 16px;
-        i {
-          display: inline-block;
-          margin-left: 5px;
-        }
+      .description {
+        margin-top: 10px;
       }
 
-      .review-button {
-
-        &:hover {
-          background-color: $blue;
-        }
-
-        text-align: center;
-        margin: auto;
-        margin-top: 30px;
-        width: 125px;
-        cursor: pointer;
-        border-radius: 10px;
-        background-color: $dark_blue;
-
-        .button-content {
-          color: white;
-          padding: 10px;
-        }
+      .tooltip {
+        width: 200px;
       }
-
     }
   }
 
@@ -124,25 +93,52 @@
     }
 
     .reviews-list {
-      
+
       .divider {
         border-bottom: 1px solid gainsboro;
       }
 
       .review {
         margin: 20px 0 20px 0;
+        .overall {
+          margin-bottom: 5px;
+
+          .date {
+            font-size: 1px;
+            color: #818181;
+          }
+        }
+
+        .analyst-reviewed {
+          img {
+            width: 90px;
+            height: 90px;
+          }
+
+          .name {
+            font-size: 16px;
+            font-weight: bold;
+            margin-top: 5px;
+          }
+        }
 
         .rating-wrapper {
           .description {
-            margin-top: 10px;
             font-size: 11px;
             color: #818181;
           }
           .rating-bar {
-            margin-top: 2px;
+            margin-bottom: 4px;
             height: 5px;
-            width: 60px;
-            background-color: $blue;
+            width: 80px;
+            background-color: #d4d4d4;
+            .fill {
+              background-color: $blue;
+              height: 5px;
+            }
+          }
+          .tooltip {
+            width: 100px;
           }
         }
 
@@ -162,12 +158,12 @@
               font-size: 18px;
               .strength {
                 font-style: italic;
-                text-decoration: underline;
+                border-bottom: 1px #6d6d6d dotted;
               }
             }
 
-            .reviewer {
-              margin-top: 5px;
+            .review-by {
+              font-size: 14px;
             }
           }
         }
@@ -185,7 +181,7 @@
             margin-left: 10px;
           }
         }
-        
+
       }
 
       .no-reviews {
@@ -195,8 +191,6 @@
       }
     }
 
-
   }
-
 
 }
