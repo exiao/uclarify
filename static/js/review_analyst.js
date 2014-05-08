@@ -10,6 +10,10 @@ $(document).ready(function () {
 
     $(".btn").button();
 
+    //analysts array is instantiated in the html template
+    $("#autocomplete").chosen({
+                                    });
+
 //    $("#review-form").validate({
 //        rules: {
 //            is_anonymous: "required",

@@ -1,7 +1,7 @@
 @import "base.scss";
 
 body {
-  background-color: $grey_background;
+  background-color: $light_bg;
 }
 
 .profile-container {
@@ -9,7 +9,7 @@ body {
   margin-top: 20px;
   margin-bottom: 30px;
   border: 1px solid #dfdfdf;
-  border-radius: 10px;
+  border-radius: 2px;
   overflow: hidden;
   min-height: 590px;
 
@@ -84,6 +84,7 @@ body {
 
       #write-review-btn {
         margin-top: 15px;
+        margin-bottom: 35px;
         font-size: 16px;
         i {
           display: inline-block;
@@ -175,7 +176,7 @@ body {
           margin-bottom: 5px;
 
           .date {
-            font-size: 1px;
+            font-size: 14px;
             color: #818181;
           }
         }

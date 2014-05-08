@@ -1,6 +1,25 @@
 {% extends "base.html" %}
 {% load i18n %}
 
+{% block head %}
+{% load scss %}
+  <link href="{{ STATIC_URL }}{% scss 'scss/registration/registration_complete.scss' %}" rel="stylesheet">
+{% endblock %}
 {% block content %}
-<p>{% trans "You are now registered. Activation email sent." %}</p>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h1 class="main-heading">
+                Activation email sent <i class="fa fa-envelope-o"></i>
+            </h1>
+            <div class="sub-heading">
+                Please check your email.
+            </div>
+            <div class="go-home">
+                <a href="/">Click here to return home.</a>
+            </div>
+
+        </div>
+    </div>
+</div>
 {% endblock %}

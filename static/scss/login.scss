@@ -1,5 +1,9 @@
 @import "base.scss";
 
+body {
+  background-color: $light_bg;
+}
+
 .alert {
   text-align: center;
   display: none;
@@ -12,9 +16,9 @@
 
   .form-container {
     padding: 20px 40px 40px 40px;
-    background-color: #f7f7f7;
+    background-color: white;
     border: 1px solid #dbdbdb;
-    border-radius: 10px;
+    border-radius: 0px;
     margin-top: 80px;
     text-align: left;
     display: inline-block;

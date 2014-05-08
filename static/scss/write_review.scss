@@ -20,9 +20,19 @@
   margin-top: 50px;
 
   #autocomplete {
-    padding: 10px;
-    font-size: 18px;
-    width: 300px;
-    height: 50px;
+    width: 500px;
   }
+
+}
+
+select.form-control + .chosen-container.chosen-container-single .chosen-single {
+  font-size: 22px;
+  height: 46px;
+  //background-position: ;
+}
+
+//this div is for the dropdown arrow
+.chosen-single div {
+  right: -5px !important;
+  top: 8px !important;
 }

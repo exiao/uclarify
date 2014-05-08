@@ -1,13 +1,17 @@
 @import "base.scss";
 
+body {
+  background-color: $light_bg;
+}
+
 .form-wrapper {
   text-align: center;
 
   .form-container {
     padding: 30px 30px 30px 30px;
-    background-color: #f7f7f7;
+    background-color: white;
     border: 1px solid #dbdbdb;
-    border-radius: 10px;
+    border-radius: 0px;
     margin: 30px 0 30px 0;
     text-align: left;
     display: inline-block;

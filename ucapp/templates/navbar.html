@@ -35,7 +35,7 @@
       <ul class="nav navbar-nav navbar-right">
         <li><a href="/write-review">Write a Review</a></li>
         {% if user and not user.is_anonymous %}
-            <li><a href="{% url 'account_profile' %}">Profile</a></li>
+            <li><a href="{% url 'account_profile' %}">Hi, {{ user.get_profile.first_name }}</a></li>
             <li><a href="{% url 'logout' %}?next={{ request.path }}">Logout</a></li>
         {% else %}
           <li><a href="{% url "auth_login" %}?next={{ request.path }}">Login</a></li>
