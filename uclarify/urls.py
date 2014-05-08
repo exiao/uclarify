@@ -30,7 +30,7 @@ urlpatterns = patterns('',
         name="registration_register",
     ),
     url(r'^account/$', 'li_registration.views.account_profile', name='account_profile'),
-    url(r'', include("registration_email.backends.default.urls")),
+    url(r'', include("registration.backends.default.urls")),
     url(r'^write-review/$', 'ucapp.views.write_review', name='write_review'),
 
 ) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

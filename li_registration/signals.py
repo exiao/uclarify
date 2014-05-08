@@ -1,5 +1,6 @@
 __author__ = 'ericxiao'
-from li_registration.models import UserProfile, User
+from li_registration.models import UserProfile
+from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 
 def create_user_profile(sender, instance, created, **kwargs):

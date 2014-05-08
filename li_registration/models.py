@@ -4,6 +4,8 @@ from django_resized import ResizedImageField
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User, blank=True, null=True, unique=True)
+    first_name = models.CharField(max_length=100)
+    last_name = models.CharField(max_length=100)
     email = models.EmailField()
     company = models.CharField(max_length=150, blank=True)
     job_title = models.CharField(max_length=150, blank=True)
@@ -12,6 +14,10 @@ class UserProfile(models.Model):
 
     def __unicode__(self):
         return u'Profile: %s' % self.email
+
+    @property
+    def get_full_name(self):
+        return self.first_name + ' ' + self.last_name
 
     # def save(self, *args, **kwargs):
     #     try:

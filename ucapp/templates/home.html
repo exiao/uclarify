@@ -9,7 +9,7 @@
 
 {% block content %}
 {% if user and not user.is_anonymous %}
-  <div class="alert alert-success">Welcome to uClarify, <strong>{{ user.get_full_name }}</strong></div>
+  <div class="alert alert-success">Welcome to uClarify, <strong>{{ user.get_profile.get_full_name }}</strong></div>
 {% endif %}
   <div class="hero">
     <div class="hero-layer">
