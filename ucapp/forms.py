@@ -53,3 +53,7 @@ class AnalystReviewForm(forms.ModelForm):
     class Meta:
         model = AnalystReview
         fields = ("content", "best_strength", "overall_rating", "is_anonymous")
+
+class ResendActivationEmailForm(forms.Form):
+    email = forms.EmailField(required=True)
+

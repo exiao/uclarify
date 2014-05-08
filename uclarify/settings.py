@@ -192,6 +192,8 @@ LOGIN_REDIRECT_URL = '/?li_login=1'
 REGISTRATION_EMAIL_REGISTER_SUCCESS_URL = '/complete/'
 REGISTRATION_EMAIL_ACTIVATE_SUCCESS_URL = '/login/?activation=1'
 
+ACCOUNT_ACTIVATION_DAYS = 1
+
 SOCIAL_AUTH_PIPELINE = (
     'social.pipeline.social_auth.social_details',
     'social.pipeline.social_auth.social_uid',

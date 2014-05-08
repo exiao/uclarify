@@ -38,8 +38,8 @@
       {% for analyst in analysts %}
         <div class="row border">
           <div class="col-md-2 columns img-col">
-            {% if analyst.photo %}
-              <img src="{{ analyst.photo.url }}" class="img-rounded avatar">
+            {% if analyst.img_url %}
+              <img src="http://forrester.com{{ analyst.img_url }}" class="img-rounded avatar">
             {% else %}
               <img src="http://paddocks.kwiksta.com/files/profile/default.jpg" class="img-rounded avatar">
             {% endif %}

@@ -1,7 +1,10 @@
 import json
+import datetime
 from django.db.models import Avg
 from django.shortcuts import render
 from django.http import HttpResponse
+from django.contrib.auth.models import User
+from forms import ResendActivationEmailForm
 from haystack.query import SearchQuerySet
 from haystack.inputs import AutoQuery
 from ucapp.forms import AnalystReviewForm
@@ -10,10 +13,17 @@ from models import Analyst, AnalystFirm, AnalystReview, AnalystRatingText, Analy
 from django.shortcuts import redirect
 from django.contrib.auth.decorators import login_required
 
+from li_registration.models import UserProfile
+import random
+
+from hashlib import sha1 as sha_constructor
+from django.contrib.sites.models import RequestSite
+
+
 
 # Create your views here.
 def home(request):
-    analysts = Analyst.objects.all()
+    analysts = Analyst.objects.all()[0:4]
     return render(request, "home.html", {'analysts': analysts})
 
 def analyst_details(request, analyst_id):
@@ -75,7 +85,7 @@ def ajax_search(request):
     return HttpResponse(data, content_type='application/json')
 
 def analyst(request):
-    analysts = Analyst.objects.all()
+    analysts = Analyst.objects.all()[0:10]
     return render(request, "analyst.html", {'analysts': analysts})
 
 def search(request):
@@ -86,7 +96,7 @@ def search(request):
     return render(request, "search/search.html", data)
 
 def analyst_firm(request):
-    analyst_firms = AnalystFirm.objects.all()
+    analyst_firms = AnalystFirm.objects.all()[0:10]
     return render(request, "analyst_firm.html", {'analyst_firms': analyst_firms})
 
 def pr_agency(request):
@@ -130,3 +140,34 @@ def review_analyst(request, analyst_id):
         return redirect(analyst)
 
 
+def resend_activation_email(request):
+    form = None
+    if request.method == 'POST':
+        form = ResendActivationEmailForm(request.POST)
+        if form.is_valid():
+            email = form.cleaned_data["email"]
+            users = User.objects.filter(email=email, is_active=0)
+
+            if not users.count():
+                form._errors["email"] = (_("Account for email address is not registered or already activated."),)
+
+            for user in users:
+                for profile in UserProfile.objects.filter(user=user):
+                    # need to write this
+                    if profile.activation_key_expired():
+                        salt = sha_constructor(str(random())).hexdigest()[:5]
+                        profile.activation_key = sha_constructor(salt+user.username).hexdigest()
+                        user.date_joined = datetime.now()
+                        user.save()
+                        profile.save()
+
+                    site = RequestSite(request)
+
+                    # need to write this also
+                    profile.send_activation_email(site)
+                    return render(request, "registration/resend_activation_email_done.html", {"form" : form})
+
+    if not form:
+        form = ResendActivationEmailForm()
+
+    return render(request, "registration/resend_activation_email_form.html", {"form" : form})

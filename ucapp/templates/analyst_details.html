@@ -16,8 +16,8 @@
     <div class="row">
       <div class="profile col-md-3">
         <div class="col-md-12 profile-pic">
-          {% if analyst.photo %}
-            <img src="{{ analyst.photo.url }}" class="img-rounded">
+          {% if analyst.img_url %}
+            <img src="http://forrester.com{{ analyst.img_url }}" class="img-rounded">
           {% else %}
             <img src="http://paddocks.kwiksta.com/files/profile/default.jpg" class="img-rounded">
           {% endif %}

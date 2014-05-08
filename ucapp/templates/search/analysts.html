@@ -5,8 +5,8 @@
     <div class="row element">
       <div class="col-md-2">
         <a href='{{ analyst.object.get_absolute_url }}'>
-          {% if analyst.object.photo %}
-            <img src="{{ analyst.object.photo.url }}" class="img-rounded avatar">
+          {% if analyst.object.img_url %}
+            <img src="http://forrester.com{{ analyst.object.img_url }}" class="img-rounded avatar">
           {% else %}
             <img src="http://paddocks.kwiksta.com/files/profile/default.jpg" class="img-rounded avatar">
           {% endif %}
