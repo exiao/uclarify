@@ -6,7 +6,8 @@ from django_resized import ResizedImageField
 # Create your models here.
 class Specialization(models.Model):
     name = models.CharField(max_length=100)
-    description = models.TextField()
+    description = models.TextField(null=True)
+
     def __unicode__(self):
         return self.name
 
@@ -92,6 +93,9 @@ class Analyst(models.Model):
     best_strength = models.CharField(choices=AnalystReview.STRENGTH_CHOICES, max_length=50, blank=True)
     recent_review = models.ForeignKey('AnalystReview', null=True, blank=True, related_name='+')
     photo = ResizedImageField(max_width=1024, max_length=1024, upload_to='analyst_images/', blank=True, null=True)
+    img_url = models.URLField()
+    customer = models.CharField(max_length=100, null=True, blank=True)
+    more_info_url = models.URLField()
 
     @property
     def full_name(self):

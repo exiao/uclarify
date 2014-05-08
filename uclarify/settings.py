@@ -192,6 +192,8 @@ LOGIN_REDIRECT_URL = '/?li_login=1'
 REGISTRATION_EMAIL_REGISTER_SUCCESS_URL = '/complete/'
 REGISTRATION_EMAIL_ACTIVATE_SUCCESS_URL = '/login/?activation=1'
 
+ACCOUNT_ACTIVATION_DAYS = 1
+
 SOCIAL_AUTH_PIPELINE = (
     'social.pipeline.social_auth.social_details',
     'social.pipeline.social_auth.social_uid',
@@ -208,3 +210,24 @@ SOCIAL_AUTH_PIPELINE = (
 AUTH_PROFILE_MODULE = 'li_registration.UserProfile'
 #AUTH_USER_MODEL = 'ucapp.UserProfile'
 #SOCIAL_AUTH_USER_MODEL = 'ucapp.UserProfile'
+
+################## HEROKU STUFF ########################
+# Parse database configuration from $DATABASE_URL
+import dj_database_url
+DATABASES['default'] =  dj_database_url.config()
+
+# Honor the 'X-Forwarded-Proto' header for request.is_secure()
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
+# Allow all host headers
+ALLOWED_HOSTS = ['*']
+
+# Static asset configuration
+#import os
+#BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+STATIC_ROOT = 'staticfiles'
+STATIC_URL = '/static/'
+
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'static'),
+)
