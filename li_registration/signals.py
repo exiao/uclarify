@@ -9,4 +9,9 @@ def create_user_profile(sender, instance, created, **kwargs):
     profile.user = instance
     profile.save()
 
+    user = profile.user
+    user.first_name = profile.first_name
+    user.last_name = profile.last_name
+    user.save()
+
 post_save.connect(create_user_profile, sender=User)
