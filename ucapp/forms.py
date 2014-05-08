@@ -40,8 +40,8 @@ class NewEmailRegistrationForm(forms.ModelForm):
         profile, created = UserProfile.objects.get_or_create(email=self.cleaned_data['email'])
 
         profile.alias = self.cleaned_data['alias']
-        profile.first_name = self.cleaned_data['first_name']
-        profile.last_name = self.cleaned_data['last_name']
+        #profile.first_name = self.cleaned_data['first_name']
+        #profile.last_name = self.cleaned_data['last_name']
         profile.company = self.cleaned_data['company']
         profile.job_title = self.cleaned_data['job_title']
 

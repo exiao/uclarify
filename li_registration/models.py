@@ -4,7 +4,6 @@ from django_resized import ResizedImageField
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User, blank=True, null=True, unique=True)
-    name = models.CharField(max_length=100)
     email = models.EmailField()
     company = models.CharField(max_length=150, blank=True)
     job_title = models.CharField(max_length=150, blank=True)
@@ -29,7 +28,7 @@ def social_auth_to_profile(backend, details, response, user=None, is_new=False, 
         profile = UserProfile.objects.get(user=user)
     # Some of the default user details given in the pipeline
     profile.email = details['email']
-    profile.name = details['fullname']
+
     # Now we also need the extra details, found in the `social_user` kwarg
     social_user = kwargs['social']
     #import json

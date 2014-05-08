@@ -15,7 +15,10 @@ def complete(request):
 def logout(request):
     """Logs out user"""
     auth_logout(request)
-    return HttpResponseRedirect('/')
+    next = '/'
+    if 'next' in request.GET:
+        next = request.GET['next']
+    return HttpResponseRedirect(next)
     
 def error(request):
     """Error view"""
