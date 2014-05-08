@@ -15,7 +15,7 @@
     <div id="title">Write a Review</div>
     <div id="sub">Provide some feedback to the community.</div>
   </div>
-
+    {{ form.errors }}
   <form id="review-form" action="{% url "review_analyst" analyst.id %}" method="post">
   {% csrf_token %}
     <div class="container">
@@ -45,6 +45,7 @@
 
   <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.12.0/jquery.validate.min.js"></script>
   <script type="text/javascript" src="{{ STATIC_URL }}plugins/raty-2.5.2/jquery.raty.min.js"></script>
+  <script type="text/javascript" src="{{ STATIC_URL }}chosen/chosen.jquery.min.js"></script>
   <script type="text/javascript" src="{{ STATIC_URL }}js/review_analyst.js"></script>
   <script type="text/javascript">
     {% for rating_text in rating_texts %}

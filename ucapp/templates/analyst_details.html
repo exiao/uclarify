@@ -116,7 +116,7 @@
                     {% endif %}
                     <div class="review-title">
                       <div class="strength-wrapper">Best used for
-                        <span class="strength" title="TO-DO Add strength description" data-toggle="tooltip">{{ review.best_strength }}</span>
+                        <span class="strength" title="{{ review.strength_description }}" data-toggle="tooltip">{{ review.best_strength }}</span>
                       </div>
                       <div class="review-by">
                         {% if review.is_anonymous %}

@@ -2,7 +2,7 @@
 
 body {
   //background-color: #FAFDFE;
-  background-color: #F6F6F6;
+  background-color: #F5F8FA;
 }
 
 #type-row {
@@ -44,7 +44,7 @@ body {
 }
 
 #results-wrapper {
-  $results-border: 2px solid #d0d8dc;
+  $results-border: 1px solid #d0d8dc;
   overflow: hidden; /* overflow hidden needed for bstrap col same heights */
   margin-top: 30px;
   margin-bottom: 30px;

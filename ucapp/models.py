@@ -41,6 +41,14 @@ class AnalystReview(Review):
         (WP, WP),
     )
 
+    STRENGTH_DESCRIPTION = {
+        CD: "One-on-one interactions with the analyst to give you advice.",
+        SD: "Defining objectives and methods to accomplish them.",
+        MP: "Influence on consumer perception of a brand or product.",
+        RH: "Ability to examine and share in-depth knowledge of the industry.",
+        WP: "Reports published by the analyst."
+    }
+
     SCORE_CHOICES = zip( range(1,6), range(1,6) )
     best_strength = models.CharField(choices=STRENGTH_CHOICES, max_length=50, null=True, blank=True)
     overall_rating = models.IntegerField(choices=SCORE_CHOICES, null=True)
@@ -49,6 +57,9 @@ class AnalystReview(Review):
 
     def __unicode__(self):
         return str(self.author) + ' reviewed ' + str(self.analyst)
+
+    def strength_description(self):
+        return self.STRENGTH_DESCRIPTION[self.best_strength]
 
 class HelpfulRating(models.Model):
     review = models.ForeignKey(Review)
